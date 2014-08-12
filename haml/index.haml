@@ -1,0 +1,93 @@
+!!!
+%html
+  %head
+    %meta{'charset' => 'utf-8'}
+    %meta{'http-equiv' => 'X-UA-Compatible', :content => 'chrome=1'}
+    %meta{'name' => 'description', :content => 'FED Wiki'}
+    %link{'rel' => 'stylesheet', 'type' => 'text/css', 'media' => 'screen', 'href' => '/stylesheets/css/screen.css'}
+    %link{'rel' => 'stylesheet', 'type' => 'text/css', 'media' => 'print', 'href' => '/stylesheets/css/print.css'}
+    %title FED Wiki
+
+  %body
+    / HEADER
+    #header_wrap.container
+      .row
+        %a{'href' => 'https://github.com/eriku/fed-wiki'}
+          %img{'style' => 'position: absolute; top: 0; right: 0; border: 0;', 'src' => 'https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png'}
+        %h1#page_title
+          %a{'href' => '/'} FED Wiki
+
+    / MAIN CONTENT
+    #main_content_wrap.container
+      %section#main_content.row
+        = Haml::Engine.new(File.read('haml/shared/sidebar.haml')).render
+        %h3
+          %a{'name' => 'welcome-to-github-pages.anchor', 'href' => '#welcome-to-github-pages'}
+            %span.octicon.octicon-link
+          Welcome to GitHub Pages.
+
+        %p
+          This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:
+
+        %pre
+          %code
+            $ cd your_repo_root/repo_name
+            $ git fetch origin
+            $ git checkout gh-pages
+
+        %p If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.
+
+        %h3
+          %a{'name' => 'designer-templates.anchor', 'href' => '#designer-templates'}
+            %span.octicon.octicon-link
+          Designer Templates
+
+        %p
+          We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.
+
+        %h3
+          %a{'name' => 'rather-drive-stick.anchor', 'href' => '#rather-drive-stick'}
+            %span.octicon.octicon-link
+          Rather Drive Stick?
+
+        %p
+          If you prefer to not use the automatic generator, push a branch named
+          %code gh-pages
+          to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.
+
+        %h3
+          %a{'name' => 'authors-and-contributors.anchor', 'href' => '#authors-and-contributors'}
+            %span.octicon.octicon-link
+          Authors and Contributors
+
+        %p
+          You can
+          %a.user-mention{'href' => 'https://github.com/blog/821'} @mention
+          a GitHub username to generate a link to their profile. The resulting
+          %code &lt;a&gt;
+          element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (
+          %a.user-mention{'href' => 'https://github.com/defunkt'} @defunkt
+          ), PJ Hyett (
+          %a.user-mention{'href' => 'https://github.com/pjhyett'} @pjhyett
+          ), and Tom Preston-Werner (
+          %a.user-mention{'href' => 'https://github.com/mojombo'}@mojombo
+          ) founded GitHub.
+
+        %h3
+          %a.anchor{'name' => 'support-or-contact', 'href' => '#support-or-contact'}
+            %span.octicon.octicon-link
+          Support or Contact
+
+        %p
+          Having trouble with Pages? Check out the documentation at
+          %a{'href' => 'http://help.github.com/pages'} http://help.github.com/pages
+          or contact
+          %a{'href' => 'mailto:support@github.com'} support@github.com
+          and we’ll help you sort it out.
+
+  / FOOTER
+  #footer_wrap.container
+    %footer.row
+      %p.copyright
+        Fed-wiki maintained byte
+        %a{'href' => 'https://github.com/eriku'} eriku

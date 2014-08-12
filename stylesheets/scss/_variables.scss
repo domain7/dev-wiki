@@ -1,0 +1,93 @@
+// Variables
+// + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+//	Note:
+//		+ Mixin names should describe what things ARE, not what they look like.
+
+//	For example, the following are good variable names:
+//	$font-base, $font-header, $color-brand, $color-accent, $breakpoint-midsize, $breakpoint-small
+
+//	These are bad variable names:
+//	$blue, $orange, $helvetica, $ipad, $iphone
+
+//	On naming conventions, a good convention is to use underscores for spaces, and dashes to indicate
+//	a subsidiary relationship. This allows you to easily group variables by type.
+
+//	The following are good examples of variable groups named with a dash to indicate descendency:
+
+//	$font-x
+//	$font_weight-x
+//	$color-x
+//	$icon-x
+//	$breakpoint-x
+
+// The following variables are needed by some of our mixins and can be adjust to meet the needs of the site.
+
+// + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+// colors
+$color_bg:            #ffffff; // white
+
+$color_brand:         #00a5ff; // blue
+$color_brand-dark:    #11639d; // darker blue
+
+$color_base-lighter:  #f9f9f9; // very light grey
+$color_base-light:    #f5f5f5; // light grey
+$color_base:          #6f6f6f;
+
+$color_light:         #ffffff; // white
+$color_dark:          #000000; // black
+
+$border_color:        #dddddd; // midrange neutral grey
+$border:              1px solid $border_color;
+
+// FONT SPECIFIC
+
+// Font colors
+$font_color-dark:     #181818;
+$font_color-base:     #222222;
+$font_color-light:    #555555;
+
+// Fonts
+$font_family-default:     'Helvetica Neue', 'HelveticaNeueLTStd', Arial, sans-serif;
+$font_family-secondary:   'Oswald', sans-serif;
+$font_family-script:      'Zeyada', cursive;
+
+// Font weights
+// Note that these are essential for the font_weight mixin in _mixins.scss
+$font_weight-light:   200;
+$font_weight-medium:  400;
+$font_weight-normal:  $font_weight-medium; // Basically an alias, for convenience
+$font_weight-bold:    700;
+$font_weight-black:   900;
+
+// Font sizes
+$font_size-smaller:   10px;
+$font_size-small:     11px;
+$font_size-base:      13px;
+$font_size-medium:    16px;
+$font_size-large:     18px;
+$font_size-larger:    24px;
+$font-size-largest:   30px;
+
+// Font Line Height
+$line_height-smaller: 14px;
+$line_height-small:   15px;
+$line_height-base:    18px;
+$line_height-medium:  20px;
+$line_height-large:   24px;
+$line_height-larger:  30px;
+$line_height-largest: 36px;
+
+// Media queries breakpoints
+// --------------------------------------------------
+
+$screen-xs:           480px;
+$screen-sm:           780px;
+$screen-md:           980px;
+$screen-fullwidth:    1100px;
+$screen-lg:           1400px;
+
+// Animation Stuff
+// --------------------------------------------------
+$speed: 0.3s;
