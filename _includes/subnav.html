@@ -1,0 +1,7 @@
+{% if page.submenu %}
+  <ul>
+    {% for item in page.submenu %}
+      <li><a href="#{{ item.anchor }}">{{ item.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endif %}

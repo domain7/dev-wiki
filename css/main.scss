@@ -1,3 +1,6 @@
+---
+---
+
 /* Base */
 /* ----------------------------------------------------------*/
 
@@ -28,10 +31,18 @@ a:visited { color: #205caa; }
 .wrap:after { content:""; display:table; }
 .wrap:after { clear: both; }
 .wrap {
-  max-width: 800px;
-  padding: 0 30px;
+  max-width: 920px;
+  padding: 0 40px;
   margin: 0 auto;
   zoom: 1;
+  .content {
+    float: right;
+    width: 75%;
+  }
+  .subnav {
+    float: left;
+    width: 20%;
+  }
 }
 
 

@@ -9,3 +9,4 @@ github_username:  eriku
 # Build settings
 highlighter: pygments
 permalink: pretty
+markdown: redcarpet
