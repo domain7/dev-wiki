@@ -1,7 +1,7 @@
 # Site settings
-title: Domain7 Front-End Developer Wiki
+title: Domain7 FED Wiki
 email: erik@domain7.com
-description: "A place for Domain7 front end developers to checkout out great resources as well as make sure that their coding stacks up."
+description: "A place for Domain7 front end developers to checkout out great resources & coding standards."
 baseurl: "/fed-wiki"
 twitter_username: euunila
 github_username:  eriku
@@ -10,3 +10,8 @@ github_username:  eriku
 highlighter: pygments
 permalink: pretty
 markdown: redcarpet
+
+gems:
+  - jekyll-mentions
+  - jekyll-sitemap
+  - jekyll-sass-converter

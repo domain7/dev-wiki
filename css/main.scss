@@ -36,11 +36,15 @@ a:visited { color: #205caa; }
   margin: 0 auto;
   zoom: 1;
   .content {
-    float: right;
+    float: left;
     width: 75%;
+    .no-subnav & {
+      float: none;
+      width: auto;
+    }
   }
   .subnav {
-    float: left;
+    float: right;
     width: 20%;
   }
 }
@@ -79,9 +83,15 @@ a:visited { color: #205caa; }
 .site-nav .menu-icon { display: none; }
 
 .site-nav .page-link {
-  margin-left: 20px;
+  display: inline-block;
   color: #727272;
   letter-spacing: -.5px;
+  margin: 0;
+  padding: 0 10px;
+  &:hover,
+  &.active {
+    background: #eee;
+  }
 }
 
 /* Site footer */
