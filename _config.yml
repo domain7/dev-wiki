@@ -2,7 +2,7 @@
 title: Domain7 FED Wiki
 email: erik@domain7.com
 description: "A place for Domain7 front end developers to checkout out great resources & coding standards."
-baseurl: "/fed-wiki"
+baseurl: "/fed-wiki/"
 twitter_username: euunila
 github_username:  eriku
 
