@@ -1,0 +1,23 @@
+---
+# this ensures Jekyll reads the file to be transformed into CSS later
+# only Main files contain this front matter, not partials.
+
+# partials are in the /root/_sass folder
+
+# TABLE OF CONTENTS
+#
+# SETTINGS
+# _sass/_variables.scss : Globally available variables
+#
+# TOOLS
+# _sass/_mixins.scss    : Useful mixins
+#
+# GENERIC
+#
+---
+
+@import 'variables';
+
+@import 'includes/header';
+
+@import 'styles';

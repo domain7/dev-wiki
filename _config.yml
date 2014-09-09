@@ -1,12 +1,13 @@
 # Site settings
 title: Domain7 FED Wiki
-email: erik@domain7.com
-description: "A place for Domain7 front end developers to checkout out great resources & coding standards."
-baseurl: "/fed-wiki"
-twitter_username: euunila
-github_username:  eriku
+tagline: A place for Domain7 front end developers to checkout out great resources & coding standards.
+author:
+  email: erik@domain7.com
+  twitter_username: euunila
+  github_username:  eriku
 
 # Build settings
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 highlighter: pygments
 permalink: pretty
 markdown: redcarpet
@@ -15,3 +16,11 @@ gems:
   - jekyll-mentions
   - jekyll-sitemap
   - jekyll-sass-converter
+
+sass:
+    sass_dir: _sass
+    style: :compressed
+
+production_url: http://eriku.github.io/fed-wiki
+
+baseurl: "/fed-wiki"
