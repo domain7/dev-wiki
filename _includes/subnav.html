@@ -2,7 +2,7 @@
   <h3>Submenu</h3>
   <ul>
     {% for item in page.submenu %}
-      <li><a href="{{ item.link }}">{{ item.title }}</a></li>
+      <li><a href="{{ item.link | prepend: site.baseurl | prepend: site.url}}">{{ item.title }}</a></li>
     {% endfor %}
   </ul>
 {% endif %}
