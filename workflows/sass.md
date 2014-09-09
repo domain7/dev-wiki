@@ -13,7 +13,7 @@ Link: [Compass Website](http://compass-style.org/)
 
 ---
 
-```
+```perl
 gem install compass
 compass create <myproject>
 ```

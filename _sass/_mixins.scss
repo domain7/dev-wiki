@@ -1,0 +1,44 @@
+@mixin background-rgba($color, $alpha) {
+  $rgba: rgba($color, $alpha);
+  $ie-hex-str: ie-hex-str($rgba);
+  background-color: transparent;
+  background-color: $rgba;
+  background-color: transparent9;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+  zoom: 1;
+}
+
+@mixin clearfix {
+  zoom: 1;  // Triggering "hasLayout" in IE
+  &:before,
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  } // before/after
+  &:after {
+    clear: both;
+  }
+} // @mixin clearfix
+
+@mixin font-size($size) {
+  font-size: $size+px;
+  font-size: $size/10+rem;
+} // @mixin font_size
+
+
+@mixin font-smoothing($value) {
+  -webkit-font-smoothing: $value;
+  -moz-osx-font-smoothing: $value;
+  font-smoothing: $value;
+}
+
+@mixin invisible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 0px;
+}

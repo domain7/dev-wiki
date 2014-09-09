@@ -1,5 +1,5 @@
 # Site settings
-title: Domain7 FED Wiki
+title: F.E.D. Wiki
 tagline: A place for Domain7 front end developers to checkout out great resources & coding standards.
 author:
   email: erik@domain7.com
@@ -19,7 +19,7 @@ gems:
 
 sass:
     sass_dir: _sass
-    style: :compressed
+    #style: :compressed
 
 production_url: http://eriku.github.io/fed-wiki
 

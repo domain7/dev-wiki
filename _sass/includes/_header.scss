@@ -1,0 +1,45 @@
+/* Site header */
+
+.site-header {
+  border-bottom: 4px solid #00a5ff;
+  background-color: $color_background-alt;
+}
+
+.site-title,
+.site-title:hover,
+.site-title:visited {
+  color: #fff;
+  @include font-size(16);
+  font-weight: bold;
+  float: left;
+  padding: 14px 0 12px;
+  position: relative;
+  z-index: 1;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+
+
+
+
+.site-nav {
+  float: right;
+  .menu-icon {
+    display: none;
+  }
+  .page-link {
+    display: inline-block;
+    color: #fff;
+    letter-spacing: -.5px;
+    margin: 0;
+    padding: 13px 10px 13px;
+    &:hover,
+    &.active {
+      @include background-rgba(#ffffff, 0.3);
+      text-decoration: none;
+    }
+  }
+}
