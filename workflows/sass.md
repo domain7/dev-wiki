@@ -1,7 +1,7 @@
 ---
 layout: page
 title: SASS
-permalink: /workflows/sass/
+permalink: workflows/sass/
 group: "workflows"
 anchors:
   - { anchor: "install-compass", title: "Installing Compass" }
