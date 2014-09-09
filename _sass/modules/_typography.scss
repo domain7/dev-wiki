@@ -1,0 +1,12 @@
+.page-title {
+  @include font-size(60);
+  letter-spacing: -1.75px;
+  line-height: 1;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.page-description {
+  @include font-size(24);
+  line-height: 1.4;
+}

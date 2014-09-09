@@ -19,7 +19,7 @@ gems:
 
 sass:
     sass_dir: _sass
-    #style: :compressed
+    style: :compressed
 
 production_url: http://eriku.github.io/fed-wiki
 

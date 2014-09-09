@@ -1,7 +1,6 @@
 /* Site header */
 
 .site-header {
-  border-bottom: 4px solid #00a5ff;
   background-color: $color_background-alt;
 }
 
@@ -27,9 +26,11 @@
 
 .site-nav {
   float: right;
+
   .menu-icon {
     display: none;
   }
+
   .page-link {
     @include transition(background 0.3s);
     display: inline-block;
@@ -37,10 +38,22 @@
     letter-spacing: -.5px;
     margin: 0;
     padding: 13px 10px 13px;
+
     &:hover,
     &.active {
       @include background-rgba(#ffffff, 0.3);
       text-decoration: none;
     }
   }
+}
+
+
+
+
+
+.page-heading {
+  background: $color_primary;
+  color: #fff;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }

@@ -19,7 +19,7 @@ body {
 
 body {
   @include font-smoothing(antialiased);
-  font-family: $font-family_primary;
+  font-family: $font_family-base;
   @include font-size($font_size-base);
   font-weight: normal;
   line-height: $line_height-base;
@@ -130,51 +130,44 @@ hr {
 
 .post-header { margin: 10px 0 30px; }
 
-.post-header h1 {
-  font-size: 42px;
-  letter-spacing: -1.75px;
-  line-height: 1;
-  font-weight: 300;
-}
-
-.post-header .meta {
+.meta {
   font-size: 15px;
   color: #818181;
   margin-top: 5px;
 }
 
-.post-content { margin: 0 0 30px; }
+.content { margin: 0 0 30px; }
 
-.post-content > * { margin: 20px 0; }
+.content > * { margin: 20px 0; }
 
 
-.post-content h1,
-.post-content h2,
-.post-content h3,
-.post-content h4,
-.post-content h5,
-.post-content h6 {
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
   line-height: 1;
   font-weight: 300;
   margin: 40px 0 20px;
 }
 
-.post-content h2 {
+.content h2 {
   font-size: 32px;
   letter-spacing: -1.25px;
 }
 
-.post-content h3 {
+.content h3 {
   font-size: 26px;
   letter-spacing: -1px;
 }
 
-.post-content h4 {
+.content h4 {
   font-size: 20px;
   letter-spacing: -1px;
 }
 
-.post-content blockquote {
+.content blockquote {
   border-left: 4px solid #e8e8e8;
   padding-left: 20px;
   font-size: 18px;
@@ -184,11 +177,11 @@ hr {
   margin: 30px 0;
 }
 
-.post-content ul,
-.post-content ol { padding-left: 20px; }
+.content ul,
+.content ol { padding-left: 20px; }
 
-.post pre,
-.post code {
+.content pre,
+.content code {
   border: 1px solid #d5d5e9;
   background-color: #eef;
   padding: 8px 12px;
@@ -199,19 +192,16 @@ hr {
   overflow:scroll;
 }
 
-.post code { padding: 1px 5px; }
+.content code { padding: 1px 5px; }
 
-.post ul,
-.post ol { margin-left: 1.35em; }
-
-.post pre code {
+.content pre code {
   border: 0;
   padding-right: 0;
   padding-left: 0;
 }
 
 /* terminal */
-.post pre.terminal {
+pre.terminal {
   border: 1px solid #000;
   background-color: #333;
   color: #FFF;
@@ -220,7 +210,7 @@ hr {
   border-radius: 3px;
 }
 
-.post pre.terminal code { background-color: #333; }
+pre.terminal code { background-color: #333; }
 
 /* Syntax highlighting styles */
 /* ----------------------------------------------------------*/
@@ -356,12 +346,12 @@ hr {
   }
 
   .post-header h1 { font-size: 36px; }
-  .post-content h2 { font-size: 28px; }
-  .post-content h3 { font-size: 22px; }
-  .post-content h4 { font-size: 18px; }
-  .post-content blockquote { padding-left: 10px; }
-  .post-content ul,
-  .post-content ol { padding-left: 10px; }
+  .content h2 { font-size: 28px; }
+  .content h3 { font-size: 22px; }
+  .content h4 { font-size: 18px; }
+  .content blockquote { padding-left: 10px; }
+  .content ul,
+  .content ol { padding-left: 10px; }
 
   .site-footer .column {
     float: none;

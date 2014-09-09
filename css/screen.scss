@@ -1,37 +1,6 @@
 ---
+#
 # SCSS partials are in the '_sass' folder
-#
-# TABLE OF CONTENTS
-#
-#
-# RESET
-# Eric Meyer css reset
-# _sass/_reset.scss
-#
-#
-# SETTINGS
-# _sass/_variables.scss
-#
-#
-# TOOLS
-# _sass/_mixins.scss
-#
-#
-# LAYOUT
-# Global layout overrides should be added here
-# _sass/layouts
-#
-#
-# MODULES
-# Here is where you would add stlying for all the different components
-# of a page.
-# Example: tables, forms, icons
-# _sass/modules
-#
-#
-# PARTIALS / SECTIONS
-# Example: _header.scss
-# _sass/partials
 #
 ---
 
@@ -41,6 +10,8 @@
 
 @import 'variables';
 @import 'mixins';
+
+@import 'modules/typography';
 
 @import 'partials/header';
 @import 'partials/footer';

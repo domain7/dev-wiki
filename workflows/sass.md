@@ -1,6 +1,7 @@
 ---
 layout: page
 title: SASS
+description: Some kind of page with something about SASS
 permalink: workflows/sass/
 group: "workflows"
 anchors:
