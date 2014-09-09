@@ -38,12 +38,12 @@ h1, h2, h3, h4, h5, h6 {
 
 
 a {
-  color: $color_primary;
+  color: $color_brand;
   text-decoration: none;
 
   &:hover,
   &:active {
-    color: darken($color_primary, 10%);
+    color: darken($color_brand, 10%);
     text-decoration: underline;
   }
 }

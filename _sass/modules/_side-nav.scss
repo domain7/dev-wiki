@@ -1,0 +1,20 @@
+.submenu {
+
+  li {
+
+    a {
+      @include transition(color 0.2s, border-color 0.2s);
+      border-left: 2px solid transparent;
+      color: $color_base-light;
+      display: block;
+      padding: 4px 20px;
+
+      &:hover,
+      &:active {
+        border-left-color: $color_brand;
+        color: $color_brand;
+        text-decoration: none;
+      }
+    }
+  }
+}

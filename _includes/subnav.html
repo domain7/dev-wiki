@@ -1,6 +1,5 @@
 {% if page.submenu %}
-  <h3>Submenu</h3>
-  <ul>
+  <ul class="submenu">
     {% for item in page.submenu %}
       <li><a href="{{ item.link | prepend: site.baseurl }}">{{ item.title }}</a></li>
     {% endfor %}
@@ -8,8 +7,7 @@
 {% endif %}
 
 {% if page.anchors %}
-  <h3>In Page Navigation</h3>
-  <ul>
+  <ul class="submenu anchor-nav">
     {% for item in page.anchors %}
       <li><a href="#{{ item.anchor | prepend: site.baseurl }}">{{ item.title }}</a></li>
     {% endfor %}
