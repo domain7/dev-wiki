@@ -7,39 +7,6 @@ mainmenu: true
 
 # Javascript
 
-## Table of Contents
-
-  1. [Types](#types)
-  1. [Objects](#objects)
-  1. [Arrays](#arrays)
-  1. [Strings](#strings)
-  1. [Functions](#functions)
-  1. [Properties](#properties)
-  1. [Variables](#variables)
-  1. [Hoisting](#hoisting)
-  1. [Conditional Expressions & Equality](#conditional-expressions--equality)
-  1. [Blocks](#blocks)
-  1. [Comments](#comments)
-  1. [Whitespace](#whitespace)
-  1. [Commas](#commas)
-  1. [Semicolons](#semicolons)
-  1. [Type Casting & Coercion](#type-casting--coercion)
-  1. [Naming Conventions](#naming-conventions)
-  1. [Accessors](#accessors)
-  1. [Constructors](#constructors)
-  1. [Events](#events)
-  1. [Modules](#modules)
-  1. [jQuery](#jquery)
-  1. [ECMAScript 5 Compatibility](#ecmascript-5-compatibility)
-  1. [Testing](#testing)
-  1. [Performance](#performance)
-  1. [Resources](#resources)
-  1. [In the Wild](#in-the-wild)
-  1. [Translation](#translation)
-  1. [The JavaScript Style Guide Guide](#the-javascript-style-guide-guide)
-  1. [Contributors](#contributors)
-  1. [License](#license)
-
 ## Types
 
   - **Primitives**: When you access a primitive type you work directly on its value
@@ -73,7 +40,7 @@ mainmenu: true
     console.log(foo[0], bar[0]); // => 9, 9
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 ## Objects
 
@@ -122,7 +89,7 @@ mainmenu: true
     };
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 ## Arrays
 
@@ -174,7 +141,7 @@ mainmenu: true
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Strings
@@ -193,25 +160,6 @@ mainmenu: true
 
     // good
     var fullName = 'Bob ' + this.lastName;
-    ```
-
-  - Strings longer than 80 characters should be written across multiple lines using string concatenation.
-  - Note: If overused, long strings with concatenation could impact performance. [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40)
-
-    ```javascript
-    // bad
-    var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
-
-    // bad
-    var errorMessage = 'This is a super long error that was thrown because \
-    of Batman. When you stop to think about how Batman had anything to do \
-    with this, you would get nowhere \
-    fast.';
-
-    // good
-    var errorMessage = 'This is a super long error that was thrown because ' +
-      'of Batman. When you stop to think about how Batman had anything to do ' +
-      'with this, you would get nowhere fast.';
     ```
 
   - When programmatically building up a string, use Array#join instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
@@ -258,7 +206,6 @@ mainmenu: true
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
 
 
 ## Functions
@@ -316,7 +263,7 @@ mainmenu: true
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 
@@ -352,7 +299,7 @@ mainmenu: true
     var isJedi = getProp('jedi');
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Variables
@@ -461,7 +408,7 @@ mainmenu: true
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Hoisting
@@ -550,7 +497,7 @@ mainmenu: true
 
   - For more information refer to [JavaScript Scoping & Hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting) by [Ben Cherry](http://www.adequatelygood.com/)
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 
@@ -599,7 +546,7 @@ mainmenu: true
 
   - For more information see [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Blocks
@@ -628,7 +575,7 @@ mainmenu: true
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Comments
@@ -721,7 +668,7 @@ mainmenu: true
     }
   ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Whitespace
@@ -836,7 +783,7 @@ mainmenu: true
         .call(tron.led);
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 ## Commas
 
@@ -898,7 +845,7 @@ mainmenu: true
     ];
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Semicolons
@@ -927,7 +874,7 @@ mainmenu: true
 
     [Read more](http://stackoverflow.com/a/7365214/1712802).
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Type Casting & Coercion
@@ -1010,7 +957,7 @@ mainmenu: true
     var hasAge = !!age;
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Naming Conventions
@@ -1125,7 +1072,7 @@ mainmenu: true
 
   - **Note:** IE8 and below exhibit some quirks with named function expressions.  See [http://kangax.github.io/nfe/](http://kangax.github.io/nfe/) for more info.
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Accessors
@@ -1179,7 +1126,7 @@ mainmenu: true
     };
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Constructors
@@ -1264,7 +1211,7 @@ mainmenu: true
     };
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Events
@@ -1295,38 +1242,55 @@ mainmenu: true
     });
     ```
 
-  **[⬆ back to top](#table-of-contents)**
+  
 
 
 ## Modules
 
-  - The module should start with a `!`. This ensures that if a malformed module forgets to include a final semicolon there aren't errors in production when the scripts get concatenated. [Explanation](https://github.com/airbnb/javascript/issues/44#issuecomment-13063933)
-  - The file should be named with camelCase, live in a folder with the same name, and match the name of the single export.
+  - The file should be named with camelCase.
   - Add a method called `noConflict()` that sets the exported module to the previous version and returns this one.
   - Always declare `'use strict';` at the top of the module.
+  - Pass in global vars like `jQuery` in as parameters.
+  - Return a public API that gives access to necessary vars and functions
 
     ```javascript
-    // fancyInput/fancyInput.js
+    // modules/myModule.js
 
-    !function(global) {
+    (function($) {
       'use strict';
 
-      var previousFancyInput = global.FancyInput;
+      //Some Private variables
+      var myThing = false,
+          toggled = true;
 
-      function FancyInput(options) {
-        this.options = options || {};
+      //Bind some jquery
+      $(document).on('ready', onReady);
+
+      //Some private function
+      function onReady(){
+        //Do the stuff
+      
       }
 
-      FancyInput.noConflict = function noConflict() {
-        global.FancyInput = previousFancyInput;
-        return FancyInput;
-      };
+      function toggleIt(){
+        toggled = !toggled;
+      }
 
-      global.FancyInput = FancyInput;
-    }(this);
+      //Use a function to return the value of a private variable
+      function isToggled() {
+        return toggled;
+      }
+
+      //Return a public API that 
+      return {
+        toggleIt: toggleIt,
+        isToggled: isToggled
+      };
+      
+    }(jQuery));
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## jQuery
@@ -1388,27 +1352,15 @@ mainmenu: true
     $sidebar.find('ul').hide();
     ```
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## ECMAScript 5 Compatibility
 
   - Refer to [Kangax](https://twitter.com/kangax/)'s ES5 [compatibility table](http://kangax.github.com/es5-compat-table/)
 
-**[⬆ back to top](#table-of-contents)**
 
 
-## Testing
-
-  - **Yup.**
-
-    ```javascript
-    function() {
-      return true;
-    }
-    ```
-
-**[⬆ back to top](#table-of-contents)**
 
 
 ## Performance
@@ -1422,7 +1374,7 @@ mainmenu: true
   - [Long String Concatenation](http://jsperf.com/ya-string-concat)
   - Loading...
 
-**[⬆ back to top](#table-of-contents)**
+
 
 
 ## Resources
@@ -1482,76 +1434,13 @@ mainmenu: true
   - [Dustin Diaz](http://dustindiaz.com/)
   - [nettuts](http://net.tutsplus.com/?s=javascript)
 
-**[⬆ back to top](#table-of-contents)**
-
-## In the Wild
-
-  This is a list of organizations that are using this style guide. Send us a pull request or open an issue and we'll add you to the list.
-
-  - **Aan Zee**: [AanZee/javascript](https://github.com/AanZee/javascript)
-  - **Airbnb**: [airbnb/javascript](https://github.com/airbnb/javascript)
-  - **American Insitutes for Research**: [AIRAST/javascript](https://github.com/AIRAST/javascript)
-  - **Avalara**: [avalara/javascript](https://github.com/avalara/javascript)
-  - **Compass Learning**: [compasslearning/javascript-style-guide](https://github.com/compasslearning/javascript-style-guide)
-  - **DailyMotion**: [dailymotion/javascript](https://github.com/dailymotion/javascript)
-  - **Digitpaint** [digitpaint/javascript](https://github.com/digitpaint/javascript)
-  - **Evernote**: [evernote/javascript-style-guide](https://github.com/evernote/javascript-style-guide)
-  - **ExactTarget**: [ExactTarget/javascript](https://github.com/ExactTarget/javascript)
-  - **Gawker Media**: [gawkermedia/javascript](https://github.com/gawkermedia/javascript)
-  - **GeneralElectric**: [GeneralElectric/javascript](https://github.com/GeneralElectric/javascript)
-  - **GoodData**: [gooddata/gdc-js-style](https://github.com/gooddata/gdc-js-style)
-  - **Grooveshark**: [grooveshark/javascript](https://github.com/grooveshark/javascript)
-  - **How About We**: [howaboutwe/javascript](https://github.com/howaboutwe/javascript)
-  - **Intent Media**: [intentmedia/javascript](https://github.com/intentmedia/javascript)
-  - **Mighty Spring**: [mightyspring/javascript](https://github.com/mightyspring/javascript)
-  - **MinnPost**: [MinnPost/javascript](https://github.com/MinnPost/javascript)
-  - **ModCloth**: [modcloth/javascript](https://github.com/modcloth/javascript)
-  - **Money Advice Service**: [moneyadviceservice/javascript](https://github.com/moneyadviceservice/javascript)
-  - **Muber**: [muber/javascript](https://github.com/muber/javascript)
-  - **National Geographic**: [natgeo/javascript](https://github.com/natgeo/javascript)
-  - **National Park Service**: [nationalparkservice/javascript](https://github.com/nationalparkservice/javascript)
-  - **Orion Health**: [orionhealth/javascript](https://github.com/orionhealth/javascript)
-  - **Peerby**: [Peerby/javascript](https://github.com/Peerby/javascript)
-  - **Razorfish**: [razorfish/javascript-style-guide](https://github.com/razorfish/javascript-style-guide)
-  - **reddit**: [reddit/styleguide/javascript](https://github.com/reddit/styleguide/tree/master/javascript)
-  - **REI**: [reidev/js-style-guide](https://github.com/reidev/js-style-guide)
-  - **Ripple**: [ripple/javascript-style-guide](https://github.com/ripple/javascript-style-guide)
-  - **SeekingAlpha**: [seekingalpha/javascript-style-guide](https://github.com/seekingalpha/javascript-style-guide)
-  - **Shutterfly**: [shutterfly/javascript](https://github.com/shutterfly/javascript)
-  - **TheLadders**: [TheLadders/javascript](https://github.com/TheLadders/javascript)
-  - **Userify**: [userify/javascript](https://github.com/userify/javascript)
-  - **VoxFeed**: [VoxFeed/javascript-style-guide](https://github.com/VoxFeed/javascript-style-guide)
-  - **Zillow**: [zillow/javascript](https://github.com/zillow/javascript)
-  - **ZocDoc**: [ZocDoc/javascript](https://github.com/ZocDoc/javascript)
-
-## Translation
-
-  This style guide is also available in other languages:
-
-  - :de: **German**: [timofurrer/javascript-style-guide](https://github.com/timofurrer/javascript-style-guide)
-  - :jp: **Japanese**: [mitsuruog/javacript-style-guide](https://github.com/mitsuruog/javacript-style-guide)
-  - :br: **Portuguese**: [armoucar/javascript-style-guide](https://github.com/armoucar/javascript-style-guide)
-  - :cn: **Chinese**: [adamlu/javascript-style-guide](https://github.com/adamlu/javascript-style-guide)
-  - :es: **Spanish**: [paolocarrasco/javascript-style-guide](https://github.com/paolocarrasco/javascript-style-guide)
-  - :kr: **Korean**: [tipjs/javascript-style-guide](https://github.com/tipjs/javascript-style-guide)
-  - :fr: **French**: [nmussy/javascript-style-guide](https://github.com/nmussy/javascript-style-guide)
-  - :ru: **Russian**: [uprock/javascript](https://github.com/uprock/javascript)
-  - :bg: **Bulgarian**: [borislavvv/javascript](https://github.com/borislavvv/javascript)
-
-## The JavaScript Style Guide Guide
-
-  - [Reference](https://github.com/airbnb/javascript/wiki/The-JavaScript-Style-Guide-Guide)
-
-## Contributors
-
-  - [View Contributors](https://github.com/airbnb/javascript/graphs/contributors)
 
 
 ## License
 
 (The MIT License)
 
-Copyright (c) 2014 Airbnb
+Copyright (c) 2014 Domain7 
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1572,6 +1461,6 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-**[⬆ back to top](#table-of-contents)**
+
 
 # };
