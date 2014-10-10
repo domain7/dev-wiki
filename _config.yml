@@ -13,7 +13,6 @@ permalink: pretty
 markdown: redcarpet
 
 gems:
-  - jekyll-mentions
   - jekyll-sitemap
   - jekyll-sass-converter
 
