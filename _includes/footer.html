@@ -8,3 +8,18 @@
     <p>Build by <a href="http://domain7.com" title="Domain7">Domain7</a></p>
   </section>
 </footer>
+
+<script>
+$(function() {
+  return $("h2, h3, h4, h5, h6").each(function(i, el) {
+    var $el, icon, id;
+    $el = $(el);
+    id = $el.text().replace(' ','-').toLowerCase();
+    icon = '<i class="fa fa-link"></i>';
+    if (id) {
+      $(this).attr('id',id);
+      return $el.prepend($("<a />").addClass("header-link").attr("href", "#" + id).html(icon));
+    }
+  });
+});
+</script>

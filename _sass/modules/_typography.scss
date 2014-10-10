@@ -31,15 +31,39 @@ em {
 
 /* HEADINGS
 ---------------------------------------- */
+
 h1, h2, h3, h4, h5, h6 {
   font-size: 100%;
+  position: relative;
 }
+
 .page-title {
   @include font-size(60);
   letter-spacing: -1.75px;
   line-height: 1;
   font-weight: 500;
   margin-bottom: 10px;
+}
+
+
+/* HEADER LINKS */
+.header-link {
+  @include font-size(18);
+
+  position: absolute;
+  left: -20px;
+  bottom: 15px;
+  opacity: 0;
+
+  @include transition(opacity 0.2s ease-in-out 0.1s);
+}
+
+h2:hover .header-link,
+h3:hover .header-link,
+h4:hover .header-link,
+h5:hover .header-link,
+h6:hover .header-link {
+  opacity: 1;
 }
 
 
