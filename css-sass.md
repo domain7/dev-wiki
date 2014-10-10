@@ -296,6 +296,11 @@ Separate stylesheets containing media queries should not be used. Doing so sever
 
 Breakpoints should be defined in _variables.scss using the $breakpoint-[name] pattern. Breakpoints shouldn't be named after specific devices or classes of device. $breakpoint-iphone is a really bad breakpoint name, as evident by there being 3 sizes of iPhone being sold at the time writing. More abstract names are encouraged.
 
+#### Don't build mobile first (sorry)
+
+Contrary to the cool kids, don't build your mobile layout first using media queries for desktop layouts. This creates a situation where you need to polyfill media query support for older browsers and end up with strange conflicts in things like harvey.js and enquire.js. This also creates unnecessary overhead. There's no need at all for IE8 to support media queries. You should build so your average sized desktop layout works without media queries, then use media queries to adapt smaller and larger, as the case may be. The only exception is in situations where you're only building for mobile, or only supporting browsers with media query support. Otherwise, take this approach.
+
+
 ### Modules and partials
 
 All styling code should be contained in modules and partials. These are stored in the /modules and /partials directories, and named with an underscore prefix, like `_buttons.scss`.
