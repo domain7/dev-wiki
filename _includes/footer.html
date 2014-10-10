@@ -28,7 +28,7 @@
         }
       });
 
-      $('.content h2').not(':first-child').each(function(){
+      $('.content h2').not(':first-of-type').each(function(){
         var backLink = '<a href="#top"><i class="fa fa-arrow-circle-up fa-before"></i>back to top</a>';
         $(this).before(backLink);
       });
