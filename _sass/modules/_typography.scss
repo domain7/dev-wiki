@@ -81,6 +81,10 @@ a {
     color: darken($color_brand, 10%);
     text-decoration: underline;
   }
+
+  &[href='#top'] {
+    font-weight: bold;
+  }
 }
 
 
@@ -105,4 +109,14 @@ hr {
 .page-description {
   @include font-size(24);
   line-height: 1.4;
+}
+
+
+
+
+
+/* ICONS
+---------------------------------------- */
+.fa-before {
+  margin-right: 1%;
 }

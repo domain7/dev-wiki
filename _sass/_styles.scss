@@ -111,7 +111,8 @@ body {
 .content h6 {
   line-height: 1;
   font-weight: 300;
-  margin: 40px 0 20px;
+  margin: 30px 0 20px;
+  padding-bottom: 10px;
 }
 
 .content h2 {
@@ -275,7 +276,8 @@ pre.terminal code { background-color: #333; }
   .site-nav {
     position: fixed;
     z-index: 10;
-    top: 14px; right: 8px;
+    top: 6px;
+    right: 8px;
     background-color: white;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -305,6 +307,7 @@ pre.terminal code { background-color: #333; }
 
   .site-nav .page-link {
     display: block;
+    color: black;
     text-align: right;
     line-height: 1.25;
     padding: 5px 10px;

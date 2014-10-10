@@ -5,21 +5,35 @@
   </section>
   <section>
     <p>{{ site.tagline }}</p>
-    <p>Built by <a href="http://domain7.com" title="Domain7">Domain7</a></p>
+    <p>Build by <a href="http://domain7.com" title="Domain7">Domain7</a></p>
+    <p>&nbsp;</p>
+    <p>Feel free to <a href="http://github.com/domain7/fedwiki">suggest improvements</a>.</p>
   </section>
 </footer>
 
 <script>
-$(function() {
-  return $("h2, h3, h4, h5, h6").each(function(i, el) {
-    var $el, icon, id;
-    $el = $(el);
-    id = $el.text().replace(' ','-').toLowerCase();
-    icon = '<i class="fa fa-link"></i>';
-    if (id) {
-      $(this).attr('id',id);
-      return $el.prepend($("<a />").addClass("header-link").attr("href", "#" + id).html(icon));
-    }
-  });
-});
+  (function ($) {
+    "use strict"; //You will be happier
+
+    $(document).ready(function(){
+
+      $(".content h2, .content h3, .content h4, .content h5, .content h6").each(function(i, el) {
+        var $el, icon, id;
+        $el = $(el);
+        id = $el.text().replace(' ','-').toLowerCase();
+        icon = '<i class="fa fa-link"></i>';
+        if (id) {
+          $(this).attr('id',id);
+          return $el.prepend($("<a />").addClass("header-link").attr("href", "#" + id).html(icon));
+        }
+      });
+
+      $('.content h2').not(':first-child').each(function(){
+        var backLink = '<a href="#top"><i class="fa fa-arrow-circle-up fa-before"></i>back to top</a>';
+        $(this).before(backLink);
+      });
+
+    });
+
+  }(jQuery));
 </script>
