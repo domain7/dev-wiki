@@ -1,3 +1,39 @@
+/* MAIN
+---------------------------------------- */
+body {
+  @include font-smoothing(antialiased);
+  font-family: $font_family-base;
+  @include font-size($font_size-base);
+  font-weight: normal;
+  line-height: $line_height-base;
+}
+
+.content p {
+  margin-bottom: $font_size-base+px;
+  margin-top: 0;
+}
+
+
+
+
+/* SIMPLE GLOBAL STYLES
+---------------------------------------- */
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}
+
+
+
+
+
+/* HEADINGS
+---------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+}
 .page-title {
   @include font-size(60);
   letter-spacing: -1.75px;
@@ -6,6 +42,42 @@
   margin-bottom: 10px;
 }
 
+
+
+
+
+/* LINKS
+---------------------------------------- */
+a {
+  color: $color_brand;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    color: darken($color_brand, 10%);
+    text-decoration: underline;
+  }
+}
+
+
+
+
+
+/* LINES
+---------------------------------------- */
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+}
+
+
+
+
+
+/* HEADINGS
+---------------------------------------- */
 .page-description {
   @include font-size(24);
   line-height: 1.4;

@@ -17,46 +17,6 @@ body {
   height: 100%;
 }
 
-body {
-  @include font-smoothing(antialiased);
-  font-family: $font_family-base;
-  @include font-size($font_size-base);
-  font-weight: normal;
-  line-height: $line_height-base;
-}
-
-
-
-
-
-h1, h2, h3, h4, h5, h6 {
-  font-size: 100%;
-}
-
-
-
-
-
-a {
-  color: $color_brand;
-  text-decoration: none;
-
-  &:hover,
-  &:active {
-    color: darken($color_brand, 10%);
-    text-decoration: underline;
-  }
-}
-
-
-hr {
-  border: 0;
-  height: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  margin: 10px 0;
-}
-
-
 
 
 
@@ -182,12 +142,9 @@ hr {
 
 .content pre,
 .content code {
-  border: 1px solid #d5d5e9;
-  background-color: #eef;
+  background-color: #f7f7f7;
   padding: 8px 12px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  @include border-radius(3px);
   font-size: 15px;
   overflow:scroll;
 }

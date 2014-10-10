@@ -1,0 +1,54 @@
+.content {
+
+  ul {
+
+    > li {
+      list-style-type: disc;
+
+      ul {
+        li {
+          list-style-type: circle;
+        }
+      } // ul
+
+      ol {
+
+        li {
+          list-style-type: lower-alpha;
+        }
+      } // ol
+
+    }
+  } // ul
+
+
+
+  ol {
+
+    > li {
+      list-style-type: decimal;
+
+      ol {
+
+        li {
+          list-style-type: lower-alpha;
+        }
+      } // ol
+
+      ul {
+
+        li {
+          list-style-type: circle;
+        }
+      } // ul
+
+    }
+  } // ol
+
+
+
+  li > p {
+    margin-top: $font_size-base+px;
+  }
+
+}
