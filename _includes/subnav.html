@@ -9,7 +9,7 @@
 {% if page.anchors %}
   <ul class="submenu anchor-nav">
     {% for item in page.anchors %}
-      <li><a href="#{{ item.anchor | prepend: site.baseurl }}">{{ item.title }}</a></li>
+      <li><a href="#{{ item.anchor }}">{{ item.title }}</a></li>
     {% endfor %}
   </ul>
 {% endif %}

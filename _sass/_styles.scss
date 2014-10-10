@@ -146,12 +146,13 @@ body {
 
 .content pre,
 .content code {
+  @include border-radius(3px);
+  font-size: 13px;
   background-color: #eee;
   padding: 8px 12px;
-  @include border-radius(3px);
-  @include font-size(15);
   line-height: 20px;
   overflow:scroll;
+  font-family: monospace;
 }
 
 .content code { padding: 1px 5px; }
