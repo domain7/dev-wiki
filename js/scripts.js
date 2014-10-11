@@ -6,7 +6,7 @@
     $('.content > h2').each(function(i, el) {
       var $el, icon, id;
       $el = $(el);
-      id = $el.text().replace(/\,/g, '').replace(/\&/g, 'n').replace(/\ /g, '-').toLowerCase();
+      id = $el.text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\--/g, '-').toLowerCase();
       icon = '<i class="fa fa-link"></i>';
 
       if (id) {
@@ -16,10 +16,10 @@
 
       // Create id's for child h3 elements prefixing the parent id
       $el.nextUntil('h2', 'h3').each( function() {
-        var subid = $(this).text().replace(/\,/g, '').replace(/\&/g, 'n').replace(/\ /g, '-').toLowerCase();
-        var subhref = id + '-' + subid;
+        var subid = $(this).text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\--/g, '-').toLowerCase();
+        var subhref = id + '--' + subid;
         console.log(subhref);
-        $(this).attr('id',subhref);
+        $(this).attr('id',subhref).prepend($("<a />").addClass("header-link").attr("href", "#" + subhref).html(icon));
       });
 
     });
@@ -64,7 +64,7 @@
 
       // Add to submenu Array
       $(this).nextUntil('h2', 'h3').each( function() {
-        var subhref = href + '-' + $(this).text().replace(/\,/g, '').replace(/\&/g, 'n').replace(/\ /g, '-').toLowerCase(),
+        var subhref = href + '--' + $(this).text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\--/g, '-').toLowerCase(),
             subtitle = $(this).text();
         submenu.push(subMenu(subhref, subtitle));
       });
