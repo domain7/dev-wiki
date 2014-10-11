@@ -6,6 +6,10 @@ $color_base-light: #999;
 $color_brand: #FF69B4;
 $color_background-alt: #222;
 
+$color_border: #ccc;
+
+$color_light: #eee;
+
 
 
 
@@ -16,3 +20,20 @@ $color_background-alt: #222;
 $font_family-base: 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, 'Lucida Grande', sans-serif;
 $font_size-base: 15;
 $line_height-base: 25px;
+
+
+
+
+
+/*------------------------------------*\
+   BREAKPOINTS
+\*------------------------------------*/
+$breakpoint-largest: 1281px; // large desktops - 1440 and up
+$breakpoint-larger: 1236px; // header dt collapse point
+$breakpoint-large: 1025px; // screens larger than a landscape tablet
+$breakpoint-medium: 960px; // landscape tablets
+$breakpoint-mid: 960px; // NOTE: this is the min breakpoint of non media query browsers
+$breakpoint-small: 768px; // portrait tablets
+$breakpoint-smaller: 767px; // phones
+$breakpoint-xs: 480px;
+$breakpoint-smallest: 320px; // phones

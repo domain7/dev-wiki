@@ -3,16 +3,16 @@
 
   {% include head.html %}
 
-    <body class="{% if page.submenu or page.anchors %}has-subnav{% else %}no-subnav{% endif %}">
+    <body class="has-subnav">
 
     {% include header.html %}
 
     <div class="page-content">
       <div class="container">
-        {{ content }}
-        {% if page.submenu or page.anchors %}
+        <div id="page">
+          {{ content }}
           <div class="subnav">{% include subnav.html %}</div>
-        {% endif %}
+        </div>
       </div>
     </div>
 

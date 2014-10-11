@@ -11,29 +11,6 @@
   </section>
 </footer>
 
-<script>
-  (function ($) {
-    "use strict"; //You will be happier
-
-    $(document).ready(function(){
-
-      $(".content h2, .content h3, .content h4, .content h5, .content h6").each(function(i, el) {
-        var $el, icon, id;
-        $el = $(el);
-        id = $el.text().replace(' ','-').toLowerCase();
-        icon = '<i class="fa fa-link"></i>';
-        if (id) {
-          $(this).attr('id',id);
-          return $el.prepend($("<a />").addClass("header-link").attr("href", "#" + id).html(icon));
-        }
-      });
-
-      $('.content h2').not(':first-of-type').each(function(){
-        var backLink = '<a href="#top"><i class="fa fa-arrow-circle-up fa-before"></i>back to top</a>';
-        $(this).before(backLink);
-      });
-
-    });
-
-  }(jQuery));
-</script>
+<script src="{{ "/js/plugins/affix.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/js/plugins/scrollspy.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "/js/scripts.js" | prepend: site.baseurl }}"></script>

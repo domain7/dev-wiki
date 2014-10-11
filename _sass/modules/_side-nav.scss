@@ -1,20 +1,56 @@
 .submenu {
 
+  &.affix {
+    position: fixed;
+    top: 20px;
+  }
+
   li {
 
     a {
       @include transition(color 0.2s, border-color 0.2s);
+      @include font-size(13);
       border-left: 2px solid transparent;
       color: $color_base-light;
       display: block;
-      padding: 4px 20px;
+      padding: 0 20px;
+    }
 
-      &:hover,
-      &:active {
+    ul {
+      display: none;
+
+      li {
+
+        a {
+          @include font-size(12);
+          padding-left: 30px;
+
+          &:hover {
+            border-left-width: 1px;
+            padding-left: 31px;
+          }
+        }
+      }
+    }
+
+    &:hover,
+    &:active,
+    &.active {
+      > a {
         border-left-color: $color_brand;
         color: $color_brand;
         text-decoration: none;
       }
     }
+
+    &.active {
+      ul {
+        display: block;
+      }
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-smaller) {
+    display: none;
   }
 }

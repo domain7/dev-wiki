@@ -35,6 +35,10 @@ em {
 h1, h2, h3, h4, h5, h6 {
   font-size: 100%;
   position: relative;
+  line-height: 1;
+  font-weight: bold;
+  margin: 20px 0 10px;
+  padding-bottom: 10px;
 }
 
 .page-title {
@@ -43,6 +47,10 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1;
   font-weight: 500;
   margin-bottom: 10px;
+}
+
+h2 {
+  text-transform: uppercase;
 }
 
 
@@ -75,6 +83,11 @@ h6:hover .header-link {
 a {
   color: $color_brand;
   text-decoration: none;
+  @include transition(all 0.3s);
+
+  i {
+    position: relative;
+  }
 
   &:hover,
   &:active {
@@ -83,7 +96,25 @@ a {
   }
 
   &[href='#top'] {
+    display: block;
     font-weight: bold;
+    margin-bottom: 60px;
+    background: $color_light;
+    padding: 5px 10px;
+    text-decoration: none;
+
+    &:hover {
+      background: $color_brand;
+      color: $color_light;
+    }
+
+    @media screen and (max-width: $breakpoint-small) {
+      margin-bottom: 40px;
+    }
+
+    @media screen and (max-width: $breakpoint-smaller) {
+      margin-bottom: auto;
+    }
   }
 }
 
@@ -118,5 +149,5 @@ hr {
 /* ICONS
 ---------------------------------------- */
 .fa-before {
-  margin-right: 1%;
+  margin-right: 10px;
 }
