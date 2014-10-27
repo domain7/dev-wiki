@@ -1351,6 +1351,14 @@ mainmenu: true
     ```
 
 
+## Tools, Libraries, and Plugins
+  To avoid having 3rd party JS accidentally modified, Vendor JS should be in an isolated directory from the app source directory. Great examples of directory names for this: 
+
+  - /vendor
+  - /includes
+  - or /bower_components
+
+  3rd party JS that needs to be modified should idealy be forked on github/bitbucket.
 
 
 ## ECMAScript 5 Compatibility
