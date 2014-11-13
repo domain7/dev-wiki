@@ -379,6 +379,7 @@ In order to keep sass code portable, use always use [Compass URL Helpers](http:/
 
     images_dir = "images"
     fonts_dir = "fonts"
+    relative_assets = true
 
 Bad:
 
