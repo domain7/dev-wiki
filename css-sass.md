@@ -352,7 +352,7 @@ Instead of this:
     .button {
         @include border-radius(3px);
         .lt-ie9 & {
-            background-image: url('../gross_gross_gross_rounded_corner_image.png');
+            background-image: image-url('gross_gross_gross_rounded_corner_image.png');
         }
     }
 
@@ -362,7 +362,7 @@ do this
     .button {
         @include border-radius(3px);
         .no-borderradius & {
-            background-image: url('../gross_gross_gross_rounded_corner_image.pns');
+            background-image: image-url('gross_gross_gross_rounded_corner_image.pns');
         }
     }
 
@@ -373,3 +373,32 @@ Compass’s spriting ability should be used over creating them manually. Creatin
 ### Font sizing
 
 Fonts can be defined using pixels, ems or rems (with a fallback). Since no modern browsers depend on ems for scaling, sizing with pixels has no practical consequence to the end user. Font sizing with rems is acceptable, but only if a fallback is provided in every instance. A utility mixin for this is provided in the SASS boilerplate.
+
+### Compass URL Helpers
+In order to keep sass code portable, use always use [Compass URL Helpers](http://compass-style.org/reference/compass/helpers/urls/).  Just make sure you have the following enabled in your compass config:
+
+    images_dir = "images"
+    fonts_dir = "fonts"
+    relative_assets = true
+
+Bad:
+
+    .hero {
+      background-image: url(../../images/hero/mountains.png);
+    }
+    @font-face {
+      ...
+      src:url('../../fonts/prpa-icons/fonts/prpa-icons.woff');
+      ...
+    }
+
+Good:
+
+    .hero {
+      background-image: image-url('hero/mountains.png');
+    }
+    @font-face {
+      ...
+      src:font-url('prpa-icons/fonts/prpa-icons.woff');
+      ...
+    }
