@@ -6,7 +6,7 @@
     $('.content > h2').each(function(i, el) {
       var $el, icon, id;
       $el = $(el);
-      id = $el.text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\--/g, '-').toLowerCase();
+      id = $el.text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\_/g, '-').toLowerCase();
       icon = '<i class="fa fa-link"></i>';
 
       if (id) {
@@ -16,9 +16,8 @@
 
       // Create id's for child h3 elements prefixing the parent id
       $el.nextUntil('h2', 'h3').each( function() {
-        var subid = $(this).text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\--/g, '-').toLowerCase();
-        var subhref = id + '--' + subid;
-        console.log(subhref);
+        var subid = $(this).text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\_/g, '-').toLowerCase();
+        var subhref = id + '_' + subid;
         $(this).attr('id',subhref).prepend($("<a />").addClass("header-link").attr("href", "#" + subhref).html(icon));
       });
 
@@ -64,7 +63,7 @@
 
       // Add to submenu Array
       $(this).nextUntil('h2', 'h3').each( function() {
-        var subhref = href + '--' + $(this).text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\--/g, '-').toLowerCase(),
+        var subhref = href + '_' + $(this).text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\_/g, '-').toLowerCase(),
             subtitle = $(this).text();
         submenu.push(subMenu(subhref, subtitle));
       });
@@ -93,7 +92,7 @@
 
   // ScrollSpy Activation
   function scrollSpy() {
-    $('.submenu > li:first-child').addClass('active');
+    $('.submenu > li').addClass('active');
     $('body').scrollspy({ target: '.subnav' })
   }
 

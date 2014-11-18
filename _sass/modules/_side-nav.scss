@@ -17,6 +17,16 @@
       padding: 0 20px;
     }
 
+    &:hover,
+    &:active,
+    &.active {
+      > a {
+        border-left-color: $color_brand;
+        color: $color_brand;
+        text-decoration: none;
+      }
+    }
+
     ul {
       display: none;
 
@@ -25,22 +35,16 @@
         a {
           @include font-size(12);
           padding-left: 30px;
+        }
 
-          &:hover {
+        &:hover,
+        &:active,
+        &.active {
+          >a {
             border-left-width: 1px;
             padding-left: 31px;
           }
         }
-      }
-    }
-
-    &:hover,
-    &:active,
-    &.active {
-      > a {
-        border-left-color: $color_brand;
-        color: $color_brand;
-        text-decoration: none;
       }
     }
 
