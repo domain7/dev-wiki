@@ -280,9 +280,82 @@ To make it easier to type these, setup a snipped in your editor. The following s
 
 I have mine setup with `d` as the tab trigger.
 
-### extends vs mixins
+### @extends vs @mixins
 
-If you can use an extend instead of a mixin, do so. This often results in a smaller compiled CSS file.
+Use @extend when you want to store multiple static properties and pass them to selectors.
+If you can use an @extend instead of a @mixin, do so. This often results in a smaller compiled CSS file.
+
+```scss
+.module { 
+  background: $color_main-background;
+  color: $color_brand; 
+}
+
+.main_module { 
+  @extend .module;
+  min-height: 3em;
+}
+
+.sidebar_module { 
+  @extend .module;
+  min-height: 2em;
+}
+```
+
+This compiles to
+
+```scss
+.module, .main_module, .sidebar_module {
+  background: #fff;
+  color: #444; 
+}
+
+.main_module { 
+  min-height: 3em;
+}
+
+.sidebar_module { 
+  min-height: 2em;
+} 
+```
+
+If you want to use a set of rules and @extend them, but don't want the base class to show up anywhere, use the "%" operator.
+
+```scss
+%module { 
+  background: $color_main-background;
+  color: $color_brand; 
+}
+
+.main_module { 
+  @extend .module;
+  min-height: 3em;
+}
+
+.sidebar_module { 
+  @extend .module;
+  min-height: 2em;
+}
+```
+
+This compiles to
+
+```scss
+.main_module, .sidebar_module {
+  background: #fff;
+  color: #444; 
+}
+
+.main_module { 
+  min-height: 3em;
+}
+
+.sidebar_module { 
+  min-height: 2em;
+} 
+```
+
+One limitation with @extend that applies to placeholder selectors as well is that it doesn't work between rules in different @media blocks.
 
 ### Commenting
 
