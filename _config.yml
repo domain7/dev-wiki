@@ -20,6 +20,6 @@ sass:
     sass_dir: _sass
     style: :compressed
 
-production_url: http://eriku.github.io/fed-wiki
+production_url: http://eriku.github.io/dev-wiki
 
-baseurl: "/fed-wiki"
+baseurl: "/dev-wiki"
