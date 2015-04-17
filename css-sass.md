@@ -68,7 +68,7 @@ Note that the modifier is on the item. Another example could be
 
 	<a href="button button--secondary">Do the thing!</a>
 
-You can read more about BEM here: http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax, but not the different syntax used than the Domain7 standard of `.block_name-element--modifier`
+You can read more about BEM here: [http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax), but not the different syntax used than the Domain7 standard of `.block_name-element--modifier`
 
 #### Reuse and context specifics
 
