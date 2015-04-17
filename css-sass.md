@@ -32,13 +32,43 @@ Class names should only use lowercase letters.
 
 #### Hyphens and underscores
 
-Underscores should be used in place of spaces, and hyphens should be used to indicate a subordinate relationship. For example, `link_list-item` could be a descendant of `.link-list`.
+Underscores should be used in place of spaces, and hyphens should be used to indicate a subordinate relationship. By using the underscore in place of spaces, you free up the dash to communicate meaning, creating more self documenting class names. For example, `link_list-item` could be a descendant of `.link_list`.
 
 The following are bad class names: `link-list`, `linkList`, `LiNkLiSt`, `LINKLIST`, and so forth.
+
 
 #### Abbreviations
 
 All SASS should be written with an emphasis on readability over shorter names. For example, use `button` instead of `btn`.
+
+#### BEM
+
+BEM is a fantastic naming strategy for creating more self documenting class names. By using BEM you can allow every class name to tel you where it belongs and how it functions. Refactoring is far simpler knowing which classes are needed, and at a glance you know where classes are defined and what their purposes is. With nested modules BEM can really shed a lot of light on an otherwise complex class name soup. Although BEM isn't a standard at Domain7, it is a fantastic naming strategy and worth trying on your projects. When BEM _is_ used, the following structure is the standard:
+
+	.block_name-element--modifier
+
+This differs from the common `.block__element--modifier` to be more consistent with our already standard `.module_name-child` naming pattern. This allows for BEM and non-BEM code to coexist more easily, and to smooth the transition to BEM should developers chose to.
+
+An example of BEM could be this:
+
+	<ul class="social_links">
+		<li><a href="#" class="social_links-item social_links-item--facebook">Facebook</a></li>
+	</ul>
+
+	.social_links {
+		&-link {
+			... 
+			&--facebook { ... }
+		}
+	}
+
+which compiles to
+
+Note that the modifier is on the item. Another example could be
+
+	<a href="button button--secondary">Do the thing!</a>
+
+You can read more about BEM here: http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax, but not the different syntax used than the Domain7 standard of `.block_name-element--modifier`
 
 #### Reuse and context specifics
 
