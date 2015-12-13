@@ -57,4 +57,4 @@ Things we use grunt for:
   - Create custom modernizr builds
   - compile compass
 
-To keep grunt workflow consistent accross projects, use [gruntyplate](https://bitbucket.org/domain7/gruntyplate) as a starting point. 
+To keep grunt workflow consistent accross projects, use [gruntyplate](https://github.com/domain7/gruntyplate) as a starting point. 
