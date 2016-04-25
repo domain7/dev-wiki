@@ -165,12 +165,11 @@ Style rules should be placed in the following order. Note that anything bringing
 
 1.  includes
 2.  regular styles grouped by type:
-
-1.  Positioning
-2.  Display & Box Model
-3.  Color
-4.  Text
-5.  Other
+    1.  Positioning
+    2.  Display & Box Model
+    3.  Color
+    4.  Text
+    5.  Other
 
 Example:
 
@@ -261,7 +260,6 @@ Using variables creates easily maintainable code. Any value that’s used more t
 *   Font weights
 *   Font sizes
 *   Colour schemes
-*   Breakpoints
 
 ### Variable naming
 
@@ -295,7 +293,7 @@ The following variables are in the boilerplate and should be used:
 
 ### Maps
 
-[Sass maps are awesome!](http://viget.com/extend/sass-maps-are-awesome). If you use them, the only naming principle to change is that you no longer need [category]-[modifier] as the map itself is the category with your items being modifiers.
+[Sass maps are awesome!](http://viget.com/extend/sass-maps-are-awesome) and we use them for our breakpoints. If you use them for anything else, the only naming principle to change is that you no longer need [category]-[modifier] as the map itself is the category with your items being modifiers.
 
 ## Nesting
 
@@ -304,30 +302,40 @@ Nesting is one of the best things in SASS. It saves a lot of time, but can also 
 *   Only nest as much as you need to and as little as you can get away with. Nest enough to save typing long selectors, but not so much that your compiled CSS is so complicated overriding is difficult. Over nesting precludes your ability to create variations on modules easily based on context, creates bloated compiled CSS, and a host of other issues. If you need to compile to `.sidebar .widget`, _don't_ nest your `.sidebar` declaration block inside of any others.
 *   Never nest inside of the `body` or `html` elements unless you have a really good reason to do so.
 *   Just because you have modules inside the sidebar in your DOM _doesn't_ mean you need to reflect that in your nesting. You probably shouldn't do this. The only styles in the `.sidebar` declaration block should be related directly to the sidebar itself, not the content.
-*   There should be no spaces between nested declaration blocks.
+*   There should be a line break before and after nest declaration blocks.
 
 ### Use the ampersand
 
 The ampersand in SASS is just great, and you should use it for neat nesting. Some examples:
 
     .button {
+
         &.secondary { ... }
+
     }
 
 compiles to
 
     .button.secondary { ... }
+ 
+<!-- separator -->
 
     .button {
+
         .no-opacity & { ... }
+
     }
 
 compiles to
 
     .no-opacity .button { ... }
 
+<!-- separator -->
+
     .button {
+
         &:hover { ... }
+
     }
 
 compiles to
@@ -353,21 +361,29 @@ When nesting declaration blocks you should match the selector in a SASS style co
 Instead of
 
     .button {
+
         &.secondary {
+
             .sidebar & {
 
             }
+
         }
+
     }
 
 You should have
 
     .button {
+
         &.secondary {
+
             .sidebar & {
 
             } // .sidebar &
+
         } // &.secondary
+
     } // .button
 
 With long, deeply nested blocks, this makes a huge difference for readability.
@@ -408,17 +424,15 @@ Know that CSS comments are included in compiled CSS whereas [SASS style comments
 
 Separate stylesheets containing media queries should not be used. Doing so severs context, removing variations from the element that is being altered. Rather they should be [nested in your declaration blocks](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#media) for the element you wish to alter.
 
-Breakpoints should be defined in _variables.scss using the $breakpoint-[name] pattern. Breakpoints shouldn't be named after specific devices or classes of device. $breakpoint-iphone is a really bad breakpoint name, as evident by there being 3 sizes of iPhone being sold at the time writing. More abstract names are encouraged.
+Breakpoints should be defined in _variables.scss under the $breakpoints map and can be called in scss files with the `breakpoint` function in _functions.scss. Breakpoints shouldn't be named after specific devices or classes of device. $breakpoints(iphone) is a really bad breakpoint name, as evident by there being 3 sizes of iPhone being sold at the time writing. More abstract names are encouraged.
 
 ### Don't build mobile first (sorry)
 
 Contrary to the cool kids, don't build your mobile layout first using media queries for desktop layouts. This creates a situation where you need to polyfill media query support for older browsers and end up with strange conflicts in things like harvey.js and enquire.js. This also creates unnecessary overhead. There's no need at all for IE8 to support media queries. You should build so your average sized desktop layout works without media queries, then use media queries to adapt smaller and larger, as the case may be. The only exception is in situations where you're only building for mobile, or only supporting browsers with media query support. Otherwise, take this approach.
 
-## Modules and partials
+## Modules
 
-All styling code should be contained in modules and partials. These are stored in the /modules and /partials directories, and named with an underscore prefix, like `_buttons.scss`.
-
-### Modules
+All styling code should be contained in modules. These are stored in the /modules directory, and named with an underscore prefix, like `_buttons.scss`.
 
 Modules are self contained pieces of styling that can be reused. Modules should have the following characteristics:
 
@@ -433,12 +447,6 @@ Each module should be contained in its own file. You shouldn't have a file calle
 
 Buttons are a good example of a potential module, as are forms.
 
-### Partials
-
-Partials are pieces of code that aren't modular in nature, but are broken off for easier maintainability. Good examples of potential partials are headers, footers, and specifically designed un-reusable items.
-
-Each partial should be contained in its own file. You shouldn't have a file called `parials.scss`, rather each module should be individually named, prefixed with an underscore, in the partials directory. For example `/partials/_header.scss`.
-
 ## Including third party libraries and utilities
 
 Most third party code you're likely to use will either installed via a gem and included in the config.rb file or an .scss file included and used via mixins.
@@ -446,8 +454,6 @@ Most third party code you're likely to use will either installed via a gem and i
 For libraries included with a gem, make sure to include a url to the webpage with info on downloading the gem as a comment in config.rb near where the library is included.
 
 For .scss files, store them in the includes directory.
-
-Don't include third party code that replicates the functionality of Compass unless the new library provides something specifically needed that Compass doesn't provide.
 
 ## Modernizr, Internet Explorer, and backwards compatibility
 
@@ -463,23 +469,37 @@ Instead of this:
 
     .button {
         @include border-radius(3px);
+
         .lt-ie9 & {
             background-image: image-url('gross_gross_gross_rounded_corner_image.png');
         }
+
     }
 
 do this
 
     .button {
         @include border-radius(3px);
+
         .no-borderradius & {
             background-image: image-url('gross_gross_gross_rounded_corner_image.pns');
         }
+
     }
 
-## Sprites
+## SVG Sprites
 
-Compass’s spriting ability should be used over creating them manually. Creating sprites in this manner makes them easier to maintain, and eliminates the need for maintaining a sprite .psd. When creating sprites, 2x versions should be created simultaneously for high pixel density displays. The background-sprite mixin from the SASS boilerplate should be used for this purpose. Sprites should be created in includes/_sprites.scss
+We use SVG sprites for any icons a site need. To add a new sprite, just create an `.svg` file of the icon and add it in the /images/svg-icons/ folder. Gruntyplate has an `svg` task that will compile all the icons into a single file. This will work on all modern browsers and there is even a polyfill that will take care of IE9, 10 and 11. Use the following code to reference an icon:
+
+    <a href="http://facebook.com" class="icon facebook">
+        <svg class="facebook">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-facebook"></use>
+        </svg>
+    </a>
+
+### IE8 Supported Sites
+
+For sites that need to support IE8, instead of using SVG, use icon fonts such as [Font Awesome](https://fortawesome.github.io/Font-Awesome/).
 
 ## Font sizing
 
