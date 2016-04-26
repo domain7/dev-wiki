@@ -468,7 +468,7 @@ Don't use separate IE stylesheets unless the amount of IE specific code is subst
 Instead of this:
 
     .button {
-        border-radius(3px);
+        border-radius: 3px;
 
         .lt-ie9 & {
             background-image: image-url('gross_gross_gross_rounded_corner_image.png');
@@ -479,7 +479,7 @@ Instead of this:
 do this
 
     .button {
-        border-radius(3px);
+        border-radius: 3px;
 
         .no-borderradius & {
             background-image: image-url('gross_gross_gross_rounded_corner_image.pns');
