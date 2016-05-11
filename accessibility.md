@@ -6,17 +6,17 @@ permalink: /accessibility/
 mainmenu: true
 ---
 
-### Semantic Markup
+## Semantic Markup
 Coding standards for semantic markup and accessibility
 
-## Figure and Figcaption
+### Figure and Figcaption
 We don't see any real benefit to figure and figcaption for screen readers.  Some minor semantic SEO benefits.  More of an optional element.  Don't break your back to get this one to work. 
 Links:
 
 - [The right way to use figure and figcaption](http://www.sitepoint.com/quick-tip-the-right-way-to-use-figure-and-figcaption-elements/)
 
 
-## Article 
+### Article 
 
 - Similar to `<section>`
 - Self contained article
@@ -40,7 +40,7 @@ Links:
 ```
 
 
-## Header and Footer 
+### Header and Footer 
 
 - Similar to `<section>`
 - Header - introduction content for it’s nearest sectional content
@@ -48,7 +48,7 @@ Links:
 - https://www.w3.org/TR/html5/sections.html#the-header-element
 - Best use case is if it has navigational aids
 
-### Why use it instead of `div`?
+#### Why use it instead of `div`?
 
 For accessibility.  By default, header has aria-role=”banner”
 Footer - 
@@ -69,4 +69,13 @@ Default aria role=”contentinfo”
   </section>
 </body>
 ```
+
+## Screen Readers
+
+ To see what people are using, check out the [Read the Screen Reader Survey](http://webaim.org/projects/screenreadersurvey6/).
+
+- [Jaws](http://www.freedomscientific.com/Products/Blindness/JAWS) (windows)
+- [NVDA](http://www.nvaccess.org/) (windows)
+- [Voiceover](http://www.apple.com/ca/accessibility/osx/voiceover/) (mac)
+- [chromevox](http://www.chromevox.com/) (chrome extension)
 
