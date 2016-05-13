@@ -251,6 +251,17 @@ PostCSS is a tool for transforming styles with JS plugins. Here are the lists of
 
 Since we don't use libraries anymore, we use autoprefixer to add vendor prefixes to CSS3 properties (i.e border-radius, box-shadow, etc.). It uses data from Can I Use to determine which are necessary and can be customized to use only the ones we want. In your scss file, you only need to write the property as you would any other.
 
+### Source Maps
+
+Source maps will allow to see which sass file your styles are coming from when inspecting an element in the developer tools, instead of your compiled css file. This is great for development but can removed when pushing to production. 
+
+### Sorting
+
+Sorting is a Sublime Text plugin that will automatically sort CSS properties based on your configuration when you save your file or run the command.
+
+* [Plugin Repo](https://github.com/hudochenkov/sublime-postcss-sorting)
+* [Base Configuration](https://gist.github.com/igorbarbashin/40d38320635bcc3620a9b519fea8abcc)
+
 ## Variables
 
 Using variables creates easily maintainable code. Any value that’s used more than once or is difficult to remember should have a variable created for it. The following, amongst other items, should use variables:
@@ -430,7 +441,9 @@ Breakpoints should be defined in _variables.scss under the $breakpoints map and 
 
 Contrary to the cool kids, don't build your mobile layout first using media queries for desktop layouts. This creates a situation where you need to polyfill media query support for older browsers and end up with strange conflicts in things like harvey.js and enquire.js. This also creates unnecessary overhead. There's no need at all for IE8 to support media queries. You should build so your average sized desktop layout works without media queries, then use media queries to adapt smaller and larger, as the case may be. The only exception is in situations where you're only building for mobile, or only supporting browsers with media query support. Otherwise, take this approach.
 
-## Modules
+## Modules, Includes &amp; Vendors
+
+### Modules 
 
 All styling code should be contained in modules. These are stored in the /modules directory, and named with an underscore prefix, like `_buttons.scss`.
 
@@ -447,13 +460,26 @@ Each module should be contained in its own file. You shouldn't have a file calle
 
 Buttons are a good example of a potential module, as are forms.
 
-## Including third party libraries and utilities
+### Incudes
 
-Most third party code you're likely to use will either installed via a gem and included in the config.rb file or an .scss file included and used via mixins.
+All base files necessary for your stylesheets should in Includes. This includes but not limited to:
 
-For libraries included with a gem, make sure to include a url to the webpage with info on downloading the gem as a comment in config.rb near where the library is included.
+* _base.scss which are your default tag definitions
+* _fonts.scss to declare your custom fonts
+* _functions.scss for sass functions
+* _layouts.scss for any layout styling. Tags are usually prefixed with `.l-`
+* _mixins.scss for sass mixins
+* _normalize.scss (we use Eric Meyer's CSS reset)
+* _print.scss for all print styles
+* _typography.scss for all common font styles that can be reused throughout the site
+* _utility.scss for any utility classes (such as a screen reader only class). Tags are prefixed with `.u-`
+* _variables.scss for all variables used on the site. 
 
-For .scss files, store them in the includes directory.
+### Vendors
+
+Any third party library, plugin or utility stylesheets should go in the Vendors folder, for example: carousel, lightbox, video player, etc. 
+
+For any change to the base styling of the vendor: if it's possible to create a subtheme, create a stylesheet with the same name in the Includes folder with your custom styles. If it's a small change, you can do it directly in the vendors file, but leave a comment at the top of the file so the change won't get erased if there's a update. 
 
 ## Modernizr, Internet Explorer, and backwards compatibility
 
@@ -504,3 +530,41 @@ For sites that need to support IE8, instead of using SVG, use icon fonts such as
 ## Font sizing
 
 Fonts can be defined using pixels, ems or rems (with a fallback). Since no modern browsers depend on ems for scaling, sizing with pixels has no practical consequence to the end user. Font sizing with rems is acceptable, but only if a fallback is provided in every instance. A utility mixin for this is provided in the SASS boilerplate.
+
+## Folder Structure
+
+We use the following file structure for our sites. When working on a feature branch, do no commit the compressed CSS file. This will avoid unnecessary conflicts when merging or during a rebase. If the commit goes directly to production, you can then commit the sstylesheet. 
+
+CSS Structure
+
+    /stylesheets
+      
+      /css
+        style.css
+      
+      /scss
+        
+        /includes
+        
+        /modules
+        
+        /vendors
+        
+        style.scss
+
+Javascript Structure
+
+    /js
+
+      /dist
+        application.js
+
+      /src
+
+        /modules
+
+        /vendors
+
+        app.js
+
+
