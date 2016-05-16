@@ -11,6 +11,12 @@ Coding standards for semantic markup and accessibility
 
 ### Figure and Figcaption
 We don't see any real benefit to figure and figcaption for screen readers.  Some minor semantic SEO benefits.  More of an optional element.  Don't break your back to get this one to work. 
+
+But if you decide to use it, know that: 
+
+- You can nest `<figure>` inside `<figure>`
+- `<figcaption>` must be the first or last element inside `<figure>`
+
 Links:
 
 - [The right way to use figure and figcaption](http://www.sitepoint.com/quick-tip-the-right-way-to-use-figure-and-figcaption-elements/)
