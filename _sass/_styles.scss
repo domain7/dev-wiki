@@ -132,7 +132,10 @@ body {
 }
 
 .content ul,
-.content ol { padding-left: 20px; }
+.content ol { 
+  padding-left: 20px; 
+  margin-bottom: 10px;
+}
 
 .content pre,
 .content code {

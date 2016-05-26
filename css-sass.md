@@ -8,20 +8,11 @@ mainmenu: true
 
 This document outlines the standards and best practices for CSS and SASS for Domain7.
 
-## SASS & Compass
+## SASS
 
-We use SASS with the SCSS syntax as a standard at Domain7. All new stylesheets
-are written with with SCSS. Stylesheets written in vanilla CSS inherited from legacy projects can be maintained with vanilla CSS, but if possible you should change the file extensions to .scss so you can incorporate SASS into the project. Assess if time permits refactoring the existing CSS to fit into Domain7's SASS boilerplate structure (to be discussed later) and continued as such.
+We use SASS with the SCSS syntax as a standard at Domain7\. All new stylesheets are written with with SCSS. Stylesheets written in vanilla CSS inherited from legacy projects can be maintained with vanilla CSS, but if possible you should change the file extensions to .scss so you can incorporate SASS into the project. Assess if time permits refactoring the existing CSS to fit into Domain7's SASS boilerplate structure (to be discussed later) and continued as such.
 
 For more info and full documentation on SASS, visit [sass-lang.com](http://sass-lang.com/).
-
-### Compass
-
-Compass is standard at Domain7 and all projects should be built with Compass.
-Compass offers helpers for many things including CSS3 and saves a lot of time.
-Other similar tools like Bourbon shouldn't be used in place of Compass.
-
-For more info and full documentation on Compass, visit [compass-style.org](http://compass-style.org/).
 
 ## CSS basics
 
@@ -35,8 +26,7 @@ Class names should only use lowercase letters.
 
 ## BEM + SMACSS prefixes
 
-BEM (Block Element Modifier) with a few SMACSS prefixes is standard. New
-projects are written with this style.
+BEM (Block Element Modifier) with a few SMACSS prefixes is standard. New projects are written with this style.
 
 ### BEM
 
@@ -44,23 +34,27 @@ The following naming pattern is used for BEM:
 
     .block-name__element--modifier
 
-BEM is a fantastic naming strategy for creating more self documenting class names. By using BEM you can allow every class name to tel you where it belongs and how it functions. Refactoring is far simpler knowing which classes are needed, and at a glance you know where classes are defined and what their purposes is. With nested modules BEM can really shed a lot of light on an otherwise complex class name soup. 
+BEM is a fantastic naming strategy for creating more self documenting class names. By using BEM you can allow every class name to tel you where it belongs and how it functions. Refactoring is far simpler knowing which classes are needed, and at a glance you know where classes are defined and what their purposes is. With nested modules BEM can really shed a lot of light on an otherwise complex class name soup.
 
 This differs from the common `.block__element--modifier` to be more consistent with our already standard `.module_name-child` naming pattern. This allows for BEM and non-BEM code to coexist more easily, and to smooth the transition to BEM should developers chose to.
 
 An example of BEM could be this:
 
-	<ul class="social-links">
-		<li><a href="#" class="social-links__item
+    <ul class="social-links">
+        <li><a href="#" class="social-links__item
         social-links__item--facebook">Facebook</a></li>
-	</ul>
+    </ul>
 
-	.social-links {
-		&__item {
-			... 
-			&--facebook { ... }
-		}
-	}
+    .social-links {
+
+        &__item {
+            ... 
+
+            &--facebook { ... }
+
+        }
+
+    }
 
 which compiles to
 
@@ -70,18 +64,17 @@ which compiles to
 
 Note that the modifier is on the item. Another example could be
 
-	<a href="button button--secondary">Do the thing!</a>
-
+    <a href="button button--secondary">Do the thing!</a>
 
 ### Prefixes
 
 In addition to BEM naming, Domain7 uses the following CSS namespace prefixes:
 
-* `.is-` and `.has-` State classes
-* `.l-` Layout specific classes
-* `.u-` Utility classes, like `.u-clearfix`
-* `.js-` For JavaScript binding, to keep styling and JavaScript separate
-* `.t-` For theme specific classes
+*   `.is-` and `.has-` State classes
+*   `.l-` Layout specific classes
+*   `.u-` Utility classes, like `.u-clearfix`
+*   `.js-` For JavaScript binding, to keep styling and JavaScript separate
+*   `.t-` For theme specific classes
 
 #### Other state prefixes
 
@@ -89,17 +82,15 @@ Other useful state prefixes can be added, like, `.can-` and `.did-`.
 
 ##### Some reading:
 
-* [http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
-* [http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/](http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/)
-* [https://smacss.com/](https://smacss.com/)
-* [http://webdesign.tutsplus.com/articles/an-introduction-to-the-bem-methodology--cms-19403](http://webdesign.tutsplus.com/articles/an-introduction-to-the-bem-methodology--cms-19403)
-* [https://css-tricks.com/bem-101/](https://css-tricks.com/bem-101/)
-
+*   [http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
+*   [http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/](http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/)
+*   [https://smacss.com/](https://smacss.com/)
+*   [http://webdesign.tutsplus.com/articles/an-introduction-to-the-bem-methodology--cms-19403](http://webdesign.tutsplus.com/articles/an-introduction-to-the-bem-methodology--cms-19403)
+*   [https://css-tricks.com/bem-101/](https://css-tricks.com/bem-101/)
 
 ## Hyphens and underscores
 
-Hyphens should be used in place of spaces, and BEM syntax should be used to
-communicate relationship
+Hyphens should be used in place of spaces, and BEM syntax should be used to communicate relationship
 
 The following are bad class names: `link-list`, `linkList`, `LiNkLiSt`, `LINKLIST`, and so forth.
 
@@ -111,16 +102,17 @@ The following is a good class name:
 
 All SASS should be written with an emphasis on readability over shorter names. For example, use `button` instead of `btn`.
 
-
 ## Reuse and context specifics
 
 We try to build and design with a modular approach. Pages are broken into smaller component pieces, which should be self contained. This should be reflected in class names. For example, rather than having a class called `sidebar-linklist`, you should just use `link-list`, or whatever your module is called, and let the context determine the specifics. For example, `.sidebar .link-list` could be your selector.
 
-	.link-list {
-		.sidebar & {
-			...
-		}
-	}
+    .link-list {
+
+        .sidebar & {
+            ...
+        }
+
+    }
 
 In general, plan for reuse as much as possible, across pages and in various contexts on the same page.
 
@@ -128,9 +120,22 @@ In general, plan for reuse as much as possible, across pages and in various cont
 
 ### Indentation
 
-Indentation in your stylesheets should follow the standard of the framework in use. If the project isn't using a larger framework (e.g. Rails, Drupal, WordPress), this can be left to developer preference. However, when you inherit a project you must conform to whatever indentation style is currently in place.
+For any Domain7 specific project, we use 2 spaces as our indentation. If ever you were to contribute code to the community, follow the standard of that community e.g. Wordpress uses tabs for indentation.
 
-Be consistent in your indentation.
+### Braces
+
+There should be a space after the selector and the opening brace `{` and a closing brace `}` should be on a new line.
+
+    // Do this
+    .sidebar {
+      padding-bottom: 1em;
+      margin-bottom: 1em;
+    }
+
+    // Don't do this
+    .sidebar{
+      padding-bottom: 1em;
+      margin-bottom: 1em;}
 
 ### One selector per line, one rule per line.
 
@@ -154,13 +159,61 @@ For example:
     // And definitely don't do this
     .sidebar .widget, .site_footer .widget { border-bottom: 1px solid #333;padding-bottom: 1em;margin-bottom: 1em;}
 
-### Group like rules
+### Rule order
 
-Group your CSS rules in similar chunks. For example, put everything to do with fonts together, as with box model, positioning, and so forth.
+Style rules should be placed in the following order. Note that anything bringing in rules not declared presently are placed first so you know what you're bringing in.
+
+1.  includes
+2.  regular styles grouped by type:
+    1.  Positioning
+    2.  Display & Box Model
+    3.  Color
+    4.  Text
+    5.  Other
+
+Example:
+
+    .selector {
+      /* includes */
+      @include clearfix;
+
+      /* Positioning */
+      transition: 1s opacity ease-out;
+      transform: rotateY(10deg);
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      right: 0;
+
+      /* Display & Box Model */
+      display: inline-block;
+      overflow: hidden;
+      box-sizing: border-box;
+      width: 100px;
+      height: 100px;
+      padding: 10px;
+      border: 10px solid #333;
+      margin: 10px;
+      border-radius: 5px;
+
+      /* Color */
+      background: #000;
+      color: #fff;
+      opacity: 0.5;
+
+      /* Text */
+      font-family: sans-serif;
+      font-size: 16px;
+      line-height: 1.4;
+      text-align: right;
+
+      /* Other */
+      cursor: pointer;
+    }
 
 ### Spacing of declaration blocks
 
-With vanilla CSS, declaration blocks should have a single line space between them. The style is a little different with SASS. Nested declaration blocks shouldn't have a space under them. You should put a space between the outermost declaration blocks only.
+There should be a single line space between declaration blocks. This also goes for nested declaration blocks.
 
 ## SASS style guide
 
@@ -184,37 +237,51 @@ It's not really important for your compiled CSS to be easy to read since only .s
 
 As a reoccurring topic, readable, maintainable SASS is of the utmost importance. This should be reflected in readable variable and mixin names, logical file organization, compartmentalized code, and so forth. Files should be broken into small, maintainable pieces, as will be discussed.
 
-### Compass
+### Node Sass and Mixin Libraries
 
-Use it. On every project. It's great.
+We have moved away from using mixin libraries such as Compass or Bourbon and away from Ruby Sass as our compiler. We now use a combination of Node Sass, a few selected mixins and PostCSS (see below for more information) to compile our Sass files. This removes bloat from the compiled stylesheet and improves compile time drastically (over 10 seconds with Ruby vs 1 second with Node).
 
-## CSS3
+If legacy projects still use either Compass or Ruby Sass, just use what is in place. There is no need to refactor the workflow.
 
-All CSS3 and vendor prefixed new features should be used with Compass. This gives you mixins for the vendor prefixes and allows for more configuration and flexibility.
+## PostCSS
 
-Don't reproduce the features of Compass with other libraries like Bourbon unless there are features in these libraries which you need and Compass doesn't provide.
+PostCSS is a tool for transforming styles with JS plugins. Here are the lists of plugins that we use:
+
+### Autoprefixer
+
+Since we don't use libraries anymore, we use autoprefixer to add vendor prefixes to CSS3 properties (i.e border-radius, box-shadow, etc.). It uses data from Can I Use to determine which are necessary and can be customized to use only the ones we want. In your scss file, you only need to write the property as you would any other.
+
+### Source Maps
+
+Source maps will allow to see which sass file your styles are coming from when inspecting an element in the developer tools, instead of your compiled css file. This is great for development but can removed when pushing to production. 
+
+### Sorting
+
+Sorting is a Sublime Text plugin that will automatically sort CSS properties based on your configuration when you save your file or run the command.
+
+* [Plugin Repo](https://github.com/hudochenkov/sublime-postcss-sorting)
+* [Base Configuration](https://gist.github.com/igorbarbashin/40d38320635bcc3620a9b519fea8abcc)
 
 ## Variables
 
 Using variables creates easily maintainable code. Any value that’s used more than once or is difficult to remember should have a variable created for it. The following, amongst other items, should use variables:
 
-* Font names
-* Font stacks
-* Font weights
-* Font sizes
-* Colour schemes
-* Breakpoints
+*   Font names
+*   Font stacks
+*   Font weights
+*   Font sizes
+*   Colour schemes
 
 ### Variable naming
 
 In general variables are named with the some guidelines as class names.
 
-* Variable names should follow the [category]-[modifier] pattern. For example, all font variables should be prefixed with `$font-`, resulting in `$font-base`, `$font-body`, `$font-feature`, and so forth.
-* Variable names should observe the same underscore and hyphen pattern as with class names: underscores in place of spaces, hyphens to indicate a modifier.
-* Variable names should be all lowercase.
-* Variable names should focus on readability and specificity over saving space. For example, use `background` instead of `bkg`.
-* Variables should be named after what they are, not what they look like. For example, don’t have a variable called `$green`, but use something like `$color-brand` instead.
-* The word colour should be spelled the American way (color) for consistency with CSS, even if you're a Canadian that absolutely can't stand spelling it that way.
+*   Variable names should follow the [category]-[modifier] pattern. For example, all font variables should be prefixed with `$font-`, resulting in `$font-base`, `$font-body`, `$font-feature`, and so forth.
+*   Variable names should observe the same underscore and hyphen pattern as with class names: underscores in place of spaces, hyphens to indicate a modifier.
+*   Variable names should be all lowercase.
+*   Variable names should focus on readability and specificity over saving space. For example, use `background` instead of `bkg`.
+*   Variables should be named after what they are, not what they look like. For example, don’t have a variable called `$green`, but use something like `$color-brand` instead.
+*   The word colour should be spelled the American way (color) for consistency with CSS, even if you're a Canadian that absolutely can't stand spelling it that way.
 
 The following are bad variable names:
 
@@ -237,69 +304,64 @@ The following variables are in the boilerplate and should be used:
 
 ### Maps
 
-[Sass maps are awesome!](http://viget.com/extend/sass-maps-are-awesome). If you use them, the only naming principle to change is that you no longer need [category]-[modifier] as the map itself is the category with your items being modifiers.
-
-## Rule order
-
-Style rules should be placed in the following order. Note that anything bringing in rules not declared presently are placed first so you know what you're bringing in. 
-
-1. extends
-2. includes
-3. regular styles grouped by type
-
-Sometimes you'll need to change this order if you need to overwrite a rule in an extend or include. 
+[Sass maps are awesome!](http://viget.com/extend/sass-maps-are-awesome) and we use them for our breakpoints. If you use them for anything else, the only naming principle to change is that you no longer need [category]-[modifier] as the map itself is the category with your items being modifiers.
 
 ## Nesting
 
 Nesting is one of the best things in SASS. It saves a lot of time, but can also create some nightmares in your compiled CSS. These guidelines help alleviate those concerns:
 
-* Only nest as much as you need to and as little as you can get away with. Nest enough to save typing long selectors, but not so much that your compiled CSS is so complicated overriding is difficult. Over nesting precludes your ability to create variations on modules easily based on context, creates bloated compiled CSS, and a host of other issues. If you need to compile to `.sidebar .widget`, _don't_ nest your `.sidebar` declaration block inside of any others.
-* Never nest inside of the `body` or `html` elements unless you have a really good reason to do so.
-* Just because you have modules inside the sidebar in your DOM _doesn't_ mean you need to reflect that in your nesting. You probably shouldn't do this. The only styles in the `.sidebar` declaration block should be related directly to the sidebar itself, not the content.
-* There should be no spaces between nested declaration blocks.
+*   Only nest as much as you need to and as little as you can get away with. Nest enough to save typing long selectors, but not so much that your compiled CSS is so complicated overriding is difficult. Over nesting precludes your ability to create variations on modules easily based on context, creates bloated compiled CSS, and a host of other issues. If you need to compile to `.sidebar .widget`, _don't_ nest your `.sidebar` declaration block inside of any others.
+*   Never nest inside of the `body` or `html` elements unless you have a really good reason to do so.
+*   Just because you have modules inside the sidebar in your DOM _doesn't_ mean you need to reflect that in your nesting. You probably shouldn't do this. The only styles in the `.sidebar` declaration block should be related directly to the sidebar itself, not the content.
+*   There should be a line break before and after nest declaration blocks.
 
 ### Use the ampersand
 
 The ampersand in SASS is just great, and you should use it for neat nesting. Some examples:
 
     .button {
+
         &.secondary { ... }
+
     }
 
 compiles to
 
     .button.secondary { ... }
-
+ 
 <!-- separator -->
 
     .button {
+
         .no-opacity & { ... }
+
     }
-    
+
 compiles to
-    
+
     .no-opacity .button { ... }
 
 <!-- separator -->
 
     .button {
+
         &:hover { ... }
+
     }
 
 compiles to
 
     .button:hover { ... }
 
-
 ### Order of nested declaration blocks
 
 Declaration blocks should be nested in this order:
 
-1. First come all style rules that apply to the parent declaration block itself. This is your present nesting context.
-2. All fallbacks for old browsers using Modernizr or IE classes, like such `.no-opacity & { ... }`.
-3. Any variations for the current declaration block. For example, if you're in a `.button` block, your variation might be `&.secondary { ... }` for a button with both the `button` and `secondary` classes.
-4. Media queries. Instead of separate media query blocks or files, they should be [nested inside declaration blocks](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#media).
-5. Nested declaration blocks.
+1.  First come all style rules that apply to the parent declaration block itself. This is your present nesting context.
+2.  All fallbacks for old browsers using Modernizr or IE classes, like such `.no-opacity & { ... }`.
+3.  Any variations for the current declaration block. For example, if you're in a `.button` block, your variation might be `&.secondary { ... }` for a button with both the `button` and `secondary` classes.
+4.  Media queries. Instead of separate media query blocks or files, they should be [nested inside declaration blocks](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#media).
+5.  Nested declaration blocks.
 
 Note that your nested declaration blocks always go last.
 
@@ -310,85 +372,58 @@ When nesting declaration blocks you should match the selector in a SASS style co
 Instead of
 
     .button {
+
         &.secondary {
+
             .sidebar & {
-                
+
             }
+
         }
+
     }
 
 You should have
 
     .button {
+
         &.secondary {
+
             .sidebar & {
-            
+
             } // .sidebar &
+
         } // &.secondary
+
     } // .button
 
 With long, deeply nested blocks, this makes a huge difference for readability.
 
 Try looking at this in a long file and try to find the right block you need for nesting:
 
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 To make it easier to type these, setup a snipped in your editor. The following snipped works in Sublime Text and TextMate:
 
     $1 {
-    	$2
+        $2
     } // $1 $0
 
 I have mine setup with `d` as the tab trigger.
 
-## @extends vs @mixins
+## @extends
 
-Use @extend when you want to store multiple static properties and pass them to selectors.
-If you can use an @extend instead of a @mixin, do so. This often results in a smaller compiled CSS file. Also by using a `%` operator instead of a `.` you can designate a style block to be specifically for `@extend`.
+**Don't use them.**
 
-**Example:**
+They usually end up making the code brittle and confusing. Mixins actually end up making the file smaller and create less css selector rules (potential IE issue).
 
-```scss
-%module { 
-  background: $color_main-background;
-  color: $color_brand; 
-}
-
-.main_module { 
-  @extend .module;
-  min-height: 3em;
-}
-
-.sidebar_module { 
-  @extend .module;
-  min-height: 2em;
-}
-```
-
-**Compiles to:**
-
-```scss
-.main_module, .sidebar_module {
-  background: #fff;
-  color: #444; 
-}
-
-.main_module { 
-  min-height: 3em;
-}
-
-.sidebar_module { 
-  min-height: 2em;
-} 
-```
-
-One limitation with @extend that applies to placeholder selectors as well is that it doesn't work between rules in different @media blocks.
+For more reasons, checkout this article titled: [Why You Should Avoid Sass @extend](http://www.sitepoint.com/avoid-sass-extend/).
 
 ## Commenting
 
@@ -400,52 +435,55 @@ Know that CSS comments are included in compiled CSS whereas [SASS style comments
 
 Separate stylesheets containing media queries should not be used. Doing so severs context, removing variations from the element that is being altered. Rather they should be [nested in your declaration blocks](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#media) for the element you wish to alter.
 
-Breakpoints should be defined in _variables.scss using the $breakpoint-[name] pattern. Breakpoints shouldn't be named after specific devices or classes of device. $breakpoint-iphone is a really bad breakpoint name, as evident by there being 3 sizes of iPhone being sold at the time writing. More abstract names are encouraged.
+Breakpoints should be defined in _variables.scss under the $breakpoints map and can be called in scss files with the `breakpoint` function in _functions.scss. Breakpoints shouldn't be named after specific devices or classes of device. $breakpoints(iphone) is a really bad breakpoint name, as evident by there being 3 sizes of iPhone being sold at the time writing. More abstract names are encouraged.
 
 ### Don't build mobile first (sorry)
 
 Contrary to the cool kids, don't build your mobile layout first using media queries for desktop layouts. This creates a situation where you need to polyfill media query support for older browsers and end up with strange conflicts in things like harvey.js and enquire.js. This also creates unnecessary overhead. There's no need at all for IE8 to support media queries. You should build so your average sized desktop layout works without media queries, then use media queries to adapt smaller and larger, as the case may be. The only exception is in situations where you're only building for mobile, or only supporting browsers with media query support. Otherwise, take this approach.
 
+## Modules, Includes &amp; Vendors
 
-## Modules and partials
+### Modules 
 
-All styling code should be contained in modules and partials. These are stored in the /modules and /partials directories, and named with an underscore prefix, like `_buttons.scss`.
+All styling code should be contained in modules. These are stored in the /modules directory, and named with an underscore prefix, like `_buttons.scss`.
 
-### Modules
+Modules are self contained pieces of styling that can be reused. Modules should have the following characteristics:
 
-Modules are self contained pieces of styling that can be reused. Modules should have the following characteristics: 
-
-* Contain reusable styling constructs
-* Be context independent so they can be used anywhere (ie, not necessarily needing to be in a sidebar or main column, although sometimes that can’t be avoided).
-* Defined within a mixin or a group of mixins so that they can be used easily, anywhere.
-* Be applied to a class that describes what the element is, not what it looks like.
-* Depend on simple selectors, like a single class.
-* Contain their own variations, fallbacks, and possibly media queries
+*   Contain reusable styling constructs
+*   Be context independent so they can be used anywhere (ie, not necessarily needing to be in a sidebar or main column, although sometimes that can’t be avoided).
+*   Defined within a mixin or a group of mixins so that they can be used easily, anywhere.
+*   Be applied to a class that describes what the element is, not what it looks like.
+*   Depend on simple selectors, like a single class.
+*   Contain their own variations, fallbacks, and possibly media queries
 
 Each module should be contained in its own file. You shouldn't have a file called `modules.scss` or anything of the like. Rather each module should be individually named, prefixed with an underscore, in the modules directory. For example `/modules/_hero.scss`.
 
 Buttons are a good example of a potential module, as are forms.
 
-### Partials
+### Incudes
 
-Partials are pieces of code that aren't modular in nature, but are broken off for easier maintainability. Good examples of potential partials are headers, footers, and specifically designed un-reusable items.
+All base files necessary for your stylesheets should in Includes. This includes but not limited to:
 
-Each partial should be contained in its own file. You shouldn't have a file called `parials.scss`, rather each module should be individually named, prefixed with an underscore, in the partials directory. For example `/partials/_header.scss`.
+* _base.scss which are your default tag definitions
+* _fonts.scss to declare your custom fonts
+* _functions.scss for sass functions
+* _layouts.scss for any layout styling. Tags are usually prefixed with `.l-`
+* _mixins.scss for sass mixins
+* _normalize.scss (we use Eric Meyer's CSS reset)
+* _print.scss for all print styles
+* _typography.scss for all common font styles that can be reused throughout the site
+* _utility.scss for any utility classes (such as a screen reader only class). Tags are prefixed with `.u-`
+* _variables.scss for all variables used on the site. 
 
-## Including third party libraries and utilities
+### Vendors
 
-Most third party code you're likely to use will either installed via a gem and included in the config.rb file or an .scss file included and used via mixins.
+Any third party library, plugin or utility stylesheets should go in the Vendors folder, for example: carousel, lightbox, video player, etc. 
 
-For libraries included with a gem, make sure to include a url to the webpage with info on downloading the gem as a comment in config.rb near where the library is included.
-
-For .scss files, store them in the includes directory.
-
-Don't include third party code that replicates the functionality of Compass unless the new library provides something specifically needed that Compass doesn't provide.
+For any change to the base styling of the vendor: if it's possible to create a subtheme, create a stylesheet with the same name in the Includes folder with your custom styles. If it's a small change, you can do it directly in the vendors file, but leave a comment at the top of the file so the change won't get erased if there's a update. 
 
 ## Modernizr, Internet Explorer, and backwards compatibility
 
 For all CSS3 and HTML5 fallbacks, Modernizr should be used to perform tests. Modernizr should be used on all projects. Fallbacks for CSS3 properties shouldn’t be served to IE exclusively. Rather, Modernizr tests should be used. For example, don’t serve a fallback for CSS3 gradients to IE, but rather use Modernizr to serve a fallback to all browsers that don’t support the feature. User-agent string sniffing shouldn’t be used if avoidable.
-
 
 ### IE classes
 
@@ -456,55 +494,77 @@ Don't use separate IE stylesheets unless the amount of IE specific code is subst
 Instead of this:
 
     .button {
-        @include border-radius(3px);
+        border-radius: 3px;
+
         .lt-ie9 & {
             background-image: image-url('gross_gross_gross_rounded_corner_image.png');
         }
-    }
 
+    }
 
 do this
 
     .button {
-        @include border-radius(3px);
+        border-radius: 3px;
+
         .no-borderradius & {
             background-image: image-url('gross_gross_gross_rounded_corner_image.pns');
         }
+
     }
 
-## Sprites
+## SVG Sprites
 
-Compass’s spriting ability should be used over creating them manually. Creating sprites in this manner makes them easier to maintain, and eliminates the need for maintaining a sprite .psd. When creating sprites, 2x versions should be created simultaneously for high pixel density displays. The background-sprite mixin from the SASS boilerplate should be used for this purpose. Sprites should be created in includes/_sprites.scss
+We use SVG sprites for any icons a site need. To add a new sprite, just create an `.svg` file of the icon and add it in the /images/svg-icons/ folder. Gruntyplate has an `svg` task that will compile all the icons into a single file. This will work on all modern browsers and there is even a polyfill that will take care of IE9, 10 and 11. Use the following code to reference an icon:
+
+    <a href="http://facebook.com" class="icon facebook">
+        <svg class="facebook">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-facebook"></use>
+        </svg>
+    </a>
+
+### IE8 Supported Sites
+
+For sites that need to support IE8, instead of using SVG, use icon fonts such as [Font Awesome](https://fortawesome.github.io/Font-Awesome/).
 
 ## Font sizing
 
 Fonts can be defined using pixels, ems or rems (with a fallback). Since no modern browsers depend on ems for scaling, sizing with pixels has no practical consequence to the end user. Font sizing with rems is acceptable, but only if a fallback is provided in every instance. A utility mixin for this is provided in the SASS boilerplate.
 
-## Compass URL Helpers
-In order to keep sass code portable, use always use [Compass URL Helpers](http://compass-style.org/reference/compass/helpers/urls/).  Just make sure you have the following enabled in your compass config:
+## Folder Structure
 
-    images_dir = "images"
-    fonts_dir = "fonts"
-    relative_assets = true
+We use the following file structure for our sites. When working on a feature branch, do no commit the compressed CSS file. This will avoid unnecessary conflicts when merging or during a rebase. If the commit goes directly to production, you can then commit the sstylesheet. 
 
-Bad:
+CSS Structure
 
-    .hero {
-      background-image: url(../../images/hero/mountains.png);
-    }
-    @font-face {
-      ...
-      src:url('../../fonts/prpa-icons/fonts/prpa-icons.woff');
-      ...
-    }
+    /stylesheets
+      
+      /css
+        style.css
+      
+      /scss
+        
+        /includes
+        
+        /modules
+        
+        /vendors
+        
+        style.scss
 
-Good:
+Javascript Structure
 
-    .hero {
-      background-image: image-url('hero/mountains.png');
-    }
-    @font-face {
-      ...
-      src:font-url('prpa-icons/fonts/prpa-icons.woff');
-      ...
-    }
+    /js
+
+      /dist
+        application.js
+
+      /src
+
+        /modules
+
+        /vendors
+
+        app.js
+
+
