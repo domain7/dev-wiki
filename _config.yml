@@ -8,9 +8,9 @@ author:
 
 # Build settings
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-highlighter: pygments
+highlighter: rouge
 permalink: pretty
-markdown: redcarpet
+markdown: kramdown
 
 gems:
   - jekyll-sitemap
