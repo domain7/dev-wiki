@@ -9,6 +9,32 @@ mainmenu: true
 ## Semantic Markup
 Coding standards for semantic markup and accessibility
 
+### Main
+
+- The content inside the `<main>` element should be unique to the document. It should not contain any content that is repeated across documents such as sidebars, navigation links, copyright information, site logos, and search forms.
+There must not be more than one `<main>` element in a document. 
+- The `<main>` element must NOT be a descendant of an `<article>`, `<aside>`, `<footer>`, `<header>`, or `<nav>` element.
+- The `<main>` element is widely supported, however for Internet Explorer 11 and below, it is suggested that an aria role of "main" be added to the <main> element to ensure it is accessible (screen readers like JAWS, used in combination with older versions of Internet Explorer will be able to understand the semantic meaning of the `<main>` element once this role attribute is included).
+
+Links:
+
+- http://webaim.org/techniques/skipnav/
+- http://codepen.io/reubenmoes/full/Wxbrmv/
+
+Example: 
+
+```
+  <header>...</header>
+  <main role="main">
+    <h1>News</h1>
+    <article>... </article>
+    <article>... </article>
+    <article>... </article>
+  </main>
+  <footer></footer>
+```
+
+
 ### Figure and Figcaption
 We don't see any real benefit to figure and figcaption for screen readers.  Some minor semantic SEO benefits.  More of an optional element.  Don't break your back to get this one to work. 
 
