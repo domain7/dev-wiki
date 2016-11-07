@@ -53,6 +53,16 @@ Get pro version from ACF website (account credentials are in Keypunch):
 
 `wp plugin install timber-library --active`
 
+## Includes
+
+A number of handy functions exist in the /includes directory of the theme. They include:
+
+* image_sizes.php - customize WP image sizes
+* menus.php - Register WP menu positions
+* sidebars.php - Register WP sidebar positions
+* login_page.php - Customize or brand the default WP login screen
+ 
+
 
 ## Tools
 
@@ -64,8 +74,7 @@ If another dev has added fields to the repo, and you would like to edit those fi
 
 #### Script Localization
 
-By default, the timberplate theme offers a number of localized vars. These can be seen in includes/assets.php. To access them, 
-`D7WP.templateUrl` is equivalent to get_bloginfo('template_url')
+By default, the timberplate theme offers a number of localized vars. These can be seen in includes/assets.php. All localized vars are prefixed with `D7WP`. For example, the equivalent of `get_bloginfo('template_url')` would be `D7WP.templateUrl`.
 
 ## Git Flow
 
@@ -75,3 +84,12 @@ We commit the entire wordpress site to the git repo. We exclude the wp-content/u
 
 We do not share a DB between the staging site and local dev environment. We consider the staging site to be the source of truth for content while the project is in development. 
 
+To export a copy of the DB on the staging site, SSH in and run `wp db export`, and then either download the db through the browser, or from the command line using scp: `scp username@remotehost.net:current/db_name.sql .`
+
+## Licensed Plugins
+
+D7 has developer licenses for a number of plugins. Access credentials are stored in keypunch. The plugins include:
+
+[Facet WP](facetwp.com/demo/)
+[ACF Pro](https://www.advancedcustomfields.com/my-account)
+[WPML](https://wpml.org/account)
