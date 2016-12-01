@@ -66,11 +66,25 @@ A number of handy functions exist in the /includes directory of the theme. They 
 
 ## Tools
 
-#### ACF Local JSON
+#### ACF Local JSON and wp-cli acf
 
 We use the [ACF Local JSON](https://www.advancedcustomfields.com/resources/local-json/) feature to keep ACF fields in the repo instead of the database. The D7 plugin boilerplate sets the local json directory to a directory in the plugin boilerplate.
 
-If another dev has added fields to the repo, and you would like to edit those fields on your local instance, you'll need to import the fields. To import them, run `wp acf import`
+If you're created some new ACF fields through WP admin, use the wp-cli acf tool to export fields that you create in wp-admin, to the json files, before creating a pull request for your branch:
+
+`wp acf export`
+
+Select your new field group (or all field groups)
+
+Select option 2, to save the json in /wp-content/plugins/PLUGIN-BOILERPLATE/includes/acf_fields
+
+If another developer created a field group, and you'd like to edit or add to those fields through WP admin, import the fields from JSON to your database like so:
+
+`wp acf clean` (will wipe all fields from your wp-admin)
+
+`wp acf import` (will import clean copies of all fields from json)
+
+Then, when you're done adding or editing the field group, do the wp acf export step again. 
 
 #### Script Localization
 
