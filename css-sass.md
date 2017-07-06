@@ -48,7 +48,7 @@ An example of BEM could be this:
     .social-links {
 
         &__item {
-            ... 
+            ...
 
             &--facebook { ... }
 
@@ -253,7 +253,7 @@ Since we don't use libraries anymore, we use autoprefixer to add vendor prefixes
 
 ### Source Maps
 
-Source maps will allow to see which sass file your styles are coming from when inspecting an element in the developer tools, instead of your compiled css file. This is great for development but can removed when pushing to production. 
+Source maps will allow to see which sass file your styles are coming from when inspecting an element in the developer tools, instead of your compiled css file. This is great for development but can removed when pushing to production.
 
 ### Sorting
 
@@ -328,7 +328,7 @@ The ampersand in SASS is just great, and you should use it for neat nesting. Som
 compiles to
 
     .button.secondary { ... }
- 
+
 <!-- separator -->
 
     .button {
@@ -451,13 +451,43 @@ Separate stylesheets containing media queries should not be used. Doing so sever
 
 Breakpoints should be defined in _variables.scss under the $breakpoints map and can be called in scss files with the `breakpoint` function in _functions.scss. Breakpoints shouldn't be named after specific devices or classes of device. $breakpoints(iphone) is a really bad breakpoint name, as evident by there being 3 sizes of iPhone being sold at the time writing. More abstract names are encouraged.
 
-### Don't build mobile first - sorry
 
-Contrary to the cool kids, don't build your mobile layout first using media queries for desktop layouts. This creates a situation where you need to polyfill media query support for older browsers and end up with strange conflicts in things like harvey.js and enquire.js. This also creates unnecessary overhead. There's no need at all for IE8 to support media queries. You should build so your average sized desktop layout works without media queries, then use media queries to adapt smaller and larger, as the case may be. The only exception is in situations where you're only building for mobile, or only supporting browsers with media query support. Otherwise, take this approach.
+### Build Mobile First
+Use min-width media queries over max-width.  In general you are probably adding more style rules as the screen gets bigger.  You might get desktop designs first, but you should still develop mobile first. _However, if IE8 support is needed, you may need to build desktop first_
+
+Good:
+
+```
+ .some-module {
+   padding: 10px;
+
+   @media (min-width: breakpoint(large)) {
+     padding: 30px;
+     float: right;
+     width: 70%;
+   }
+ }//.some-module
+```
+
+Bad
+
+```
+ .some-module {
+   padding: 30px;
+   float: right;
+   width: 70%;
+
+   @media (max-width: breakpoint(large)) {
+     padding: 10px;
+     float: none;
+     width: 100%;
+   }
+ }//.some-module
+```
 
 ## Modules, Includes &amp; Vendors
 
-### Modules 
+### Modules
 
 All styling code should be contained in modules. These are stored in the /modules directory, and named with an underscore prefix, like `_buttons.scss`.
 
@@ -487,13 +517,13 @@ All base files necessary for your stylesheets should in Includes. This includes 
 * _print.scss for all print styles
 * _typography.scss for all common font styles that can be reused throughout the site
 * _utility.scss for any utility classes (such as a screen reader only class). Tags are prefixed with `.u-`
-* _variables.scss for all variables used on the site. 
+* _variables.scss for all variables used on the site.
 
 ### Vendors
 
-Any third party library, plugin or utility stylesheets should go in the Vendors folder, for example: carousel, lightbox, video player, etc. 
+Any third party library, plugin or utility stylesheets should go in the Vendors folder, for example: carousel, lightbox, video player, etc.
 
-For any change to the base styling of the vendor: if it's possible to create a subtheme, create a stylesheet with the same name in the Includes folder with your custom styles. If it's a small change, you can do it directly in the vendors file, but leave a comment at the top of the file so the change won't get erased if there's a update. 
+For any change to the base styling of the vendor: if it's possible to create a subtheme, create a stylesheet with the same name in the Includes folder with your custom styles. If it's a small change, you can do it directly in the vendors file, but leave a comment at the top of the file so the change won't get erased if there's a update.
 
 ## Modernizr, Internet Explorer, and backwards compatibility
 
@@ -543,6 +573,7 @@ Fonts can be defined using pixels, ems or rems (with a fallback). Since no moder
 
 We use the following file structure for our sites. When working on a feature branch, do no commit the compressed (`/dist`) CSS file. This will avoid unnecessary conflicts when merging or during a rebase. If the commit goes directly to production, you can then commit the stylesheet in the develop branch. 
 
+
     /dist
 
       /js
@@ -558,6 +589,7 @@ We use the following file structure for our sites. When working on a feature bra
 
         /modules
 
+
         /vendor
 
         app.js
@@ -571,6 +603,5 @@ We use the following file structure for our sites. When working on a feature bra
         /vendor
 
         styles.scss
-
 
 
