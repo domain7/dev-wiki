@@ -44,13 +44,17 @@ indent_style = tab
 ###Configuration with your editor
 There are plugins for [Vim](https://github.com/editorconfig/editorconfig-vim#readme), [Sublime Text](https://github.com/sindresorhus/editorconfig-sublime#readme), [Textmate](https://github.com/Mr0grog/editorconfig-textmate#readme) and [a few others](http://editorconfig.org/#download).  Once you have the plugin installed, things should just take over.  To test if it is working, add the example `.editorconfig` file above to your project, open up a file within the project and add a few spaces at the end of a line.  After saving the file, the trailing spaces should go away.
 
-## Grunt
+## Preprocessors
 
-Things we use grunt for: 
+Things we use preprocessors for: 
 
   - Concatenate and minify javascript
   - Lint javascript
   - Create custom modernizr builds
-  - compile compass
+  - Compile sass
+  - Create SVG sprites
 
-To keep grunt workflow consistent accross projects, use [gruntyplate](https://github.com/domain7/gruntyplate) as a starting point. 
+We have two different preprocessors boilerplate:
+
+* [Gruntyplate](https://github.com/domain7/gruntyplate) for Grunt which is the one we currently use on most projects
+* [Sevenpack](https://github.com/domain7/sevenpack) for Webpack which will eventually move to

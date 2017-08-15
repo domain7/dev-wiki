@@ -137,7 +137,7 @@ There should be a space after the selector and the opening brace `{` and a closi
       padding-bottom: 1em;
       margin-bottom: 1em;}
 
-### One selector per line, one rule per line.
+### One selector per line - one rule per line
 
 You should use one selector per line, and one rule per line.
 
@@ -417,7 +417,7 @@ To make it easier to type these, setup a snipped in your editor. The following s
 
 I have mine setup with `d` as the tab trigger.
 
-## @extends
+## Extends
 
 **Don't use them.**
 
@@ -431,11 +431,26 @@ You should comment as much as is useful. Be liberal with your comments. If you h
 
 Know that CSS comments are included in compiled CSS whereas [SASS style comments](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#comments) are not, and consider this when writing them. If the comment is needed in the compiled CSS use a CSS style comment, otherwise use a SASS one.
 
+## Important
+
+As a general rule, you should never use `!important` in your stylesheet. However, in practice, sometimes you just have to! Whether it be inline styles or due to a vendor specific stylesheet, please be sure to use it as a last resort. And if you do use it, leave a short comment after your declaration explaining why you are using it.
+
+    // Bad
+    .module {
+      width: 100% !imporant;
+    }
+
+    // Good
+    .module {
+      width: 100% !important; // Important is used to override inline-styles cause by library.js
+    }
+
 ## Media queries
 
 Separate stylesheets containing media queries should not be used. Doing so severs context, removing variations from the element that is being altered. Rather they should be [nested in your declaration blocks](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#media) for the element you wish to alter.
 
 Breakpoints should be defined in _variables.scss under the $breakpoints map and can be called in scss files with the `breakpoint` function in _functions.scss. Breakpoints shouldn't be named after specific devices or classes of device. $breakpoints(iphone) is a really bad breakpoint name, as evident by there being 3 sizes of iPhone being sold at the time writing. More abstract names are encouraged.
+
 
 ### Build Mobile First
 Use min-width media queries over max-width.  In general you are probably adding more style rules as the screen gets bigger.  You might get desktop designs first, but you should still develop mobile first. _However, if IE8 support is needed, you may need to build desktop first_
@@ -542,19 +557,13 @@ do this
 
     }
 
-## SVG Sprites
+### Adding to the Modernizr build
 
-We use SVG sprites for any icons a site need. To add a new sprite, just create an `.svg` file of the icon and add it in the /images/svg-icons/ folder. Gruntyplate has an `svg` task that will compile all the icons into a single file. This will work on all modern browsers and there is even a polyfill that will take care of IE9, 10 and 11. Use the following code to reference an icon:
+We use a custom build of Modernizr based on the classes in our sass and javascript. After you've added a Modernizr class (eg. `borderradius`) to your stylesheet, make sure to run the `modernizr` task in the project's task runner.
 
-    <a href="http://facebook.com" class="icon facebook">
-        <svg class="facebook">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-facebook"></use>
-        </svg>
-    </a>
+    grunt modernizr
 
-### IE8 Supported Sites
-
-For sites that need to support IE8, instead of using SVG, use icon fonts such as [Font Awesome](https://fortawesome.github.io/Font-Awesome/).
+This will parse through all the code and look for those classes and add them to the Modernizr build. 
 
 ## Font sizing
 
@@ -562,36 +571,37 @@ Fonts can be defined using pixels, ems or rems (with a fallback). Since no moder
 
 ## Folder Structure
 
-We use the following file structure for our sites. When working on a feature branch, do no commit the compressed CSS file. This will avoid unnecessary conflicts when merging or during a rebase. If the commit goes directly to production, you can then commit the sstylesheet.
+We use the following file structure for our sites. When working on a feature branch, do no commit the compressed (`/dist`) CSS file. This will avoid unnecessary conflicts when merging or during a rebase. If the commit goes directly to production, you can then commit the stylesheet in the develop branch. 
 
-CSS Structure
 
-    /stylesheets
+    /dist
 
-      /css
+      /js
+        application-head.js
+        application.js
+
+      /styles
         style.css
 
-      /scss
+    /src
+
+      /js
+
+        /modules
+
+
+        /vendor
+
+        app.js
+
+      /styles
 
         /includes
 
         /modules
 
-        /vendors
+        /vendor
 
-        style.scss
+        styles.scss
 
-Javascript Structure
 
-    /js
-
-      /dist
-        application.js
-
-      /src
-
-        /modules
-
-        /vendors
-
-        app.js

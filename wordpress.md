@@ -61,9 +61,15 @@ A number of handy functions exist in the /includes directory of the theme. They 
 * menus.php - Register WP menu positions
 * sidebars.php - Register WP sidebar positions
 * login_page.php - Customize or brand the default WP login screen
+
+## Timber
+
+We've recently added timber and twig into our recent themes. It allows to separate your pages into two files: a `.php` file with all your back-end logic and a `.twig` file where all your front-end code. It makes looping through posts a lot easier.
+
+* [Timber website](https://www.upstatement.com/timber/)
+* [Timber documentation](http://timber.github.io/timber/)
+* [Twig documentation](https://twig.sensiolabs.org/doc/2.x/)
  
-
-
 ## Tools
 
 #### ACF Local JSON and wp-cli acf
