@@ -6,11 +6,11 @@ permalink: /react/
 mainmenu: true
 ---
 
-## **Overview**
+## Overview
 
 FTC was based on [React Boilerplate](https://github.com/react-boilerplate/react-boilerplate), which has changed a bit since we started using it. [Introduction into the boilerplate](https://github.com/react-boilerplate/react-boilerplate/blob/master/docs/general/introduction.md) is a great place to start.
 
-## **Project structure**
+## Project structure
 
   Example of the project structure:
 
@@ -144,11 +144,11 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   }
   ```
 
-## **Mixins**
+## Mixins
 - [Do not use mixins](https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html).
 > Why? Mixins introduce implicit dependencies, cause name clashes, and cause snowballing complexity. Most use cases for mixins can be accomplished in better ways via components, higher-order components, or utility modules.
 
-## **Naming**
+## Naming
 - **Extensions**: Use `.js` extension for React components.
 - **Filename**: Use PascalCase for folder names. E.g., `ReservationCard/index.js`.
 - **Reference Naming**: Use PascalCase for React components and camelCase for their instances. eslint: `[react/jsx-pascal-case](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md)`
@@ -215,7 +215,7 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   <MyComponent variant="fancy" />
   ```
 
-### **Declaration**
+### Declaration
 - Do not use `displayName` for naming components. Instead, name the component by reference.
 
   ```javascript
@@ -230,7 +230,7 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   }
   ```
 
-### **Alignment**
+### Alignment
 - Follow these alignment styles for JSX syntax. eslint: `[react/jsx-closing-bracket-location](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)`
   ```javascript
   // bad
@@ -256,7 +256,7 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   ```
 
 - Use `[prettier-atom](https://atom.io/packages/prettier-atom)` to handle the formatting
-### **Quotes**
+### Quotes
 - Always use double quotes (`"`) for JSX attributes, but single quotes (`'`) for all other JS. eslint: `[jsx-quotes](http://eslint.org/docs/rules/jsx-quotes)`
   > Why? Regular HTML attributes also typically use double quotes instead of single, so JSX attributes mirror this convention.
 
@@ -274,7 +274,7 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   <Foo style={{ left: '20px' }} />
   ```
 
-### **Spacing**
+### Spacing
 - Always include a single space in your self-closing tag. eslint: `[no-multi-spaces](http://eslint.org/docs/rules/no-multi-spaces)`, `[react/jsx-space-before-closing](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-space-before-closing.md)`
 
   ```javascript
@@ -301,7 +301,7 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   <Foo bar={baz} />
   ```
 
-### **Props**
+### Props
 - Always use camelCase for prop names.
 
   ```javascript
@@ -477,7 +477,7 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   export default SFC;
   ```
 
-### **Refs**
+### Refs
 - Always use ref callbacks. eslint: `[react/no-string-refs](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md)`
 
   ```javascript
@@ -492,7 +492,7 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   />
   ```
 
-### **Parentheses**
+### Parentheses
 - Wrap JSX tags in parentheses when they span more than one line. eslint: `[react/jsx-wrap-multilines](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-wrap-multilines.md)`
 
   ```javascript
@@ -519,7 +519,7 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   }
   ```
 
-### **Tags**
+### Tags
 - Always self-close tags that have no children. eslint: `[react/self-closing-comp](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)`
 
   ```javascript
@@ -545,7 +545,7 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   />
   ```
 
-### **Methods**
+### Methods
 - Use arrow functions to close over local variables.
 
   ```javascript
@@ -632,7 +632,7 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   }
   ```
 
-### **Ordering**
+### Ordering
 - Ordering for `class extends React.Component`:
 1. optional `static` methods
 2. `constructor`
@@ -677,7 +677,7 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   ```
 
 
-## **Redux**
+## Redux
 
 Refer to official Redux guide
 http://redux.js.org/
@@ -750,7 +750,7 @@ Example of our duck file:
   // The format is being defined
   ```
 
-## **ImmutableJS**
+## ImmutableJS
 
 To add:
 
@@ -764,38 +764,38 @@ To add:
 https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/immutablejs.md
 
 
-## **Normalizr/Denormalizr/Schemas**
+## Normalizr/Denormalizr/Schemas
 
 http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html
 
-## **Reselect**
+## Reselect
 
 https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/reselect.md
 
-## **Redux Saga**
+## Redux Saga
 
 https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/redux-saga.md
 
-## **Routing**
+## Routing
 
 https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/routing.md
 
-## **Styling**
+## Styling
 
 We’re using SCSS syntax with CSS being loaded by webpack as CSS modules.
 
-## **Unit Testing**
+## Unit Testing
 
 We’re using [Jest](https://facebook.github.io/jest/) for unit testing
 https://github.com/react-boilerplate/react-boilerplate/blob/master/docs/testing/unit-testing.md
 
 
-## **E2E Testing**
+## E2E Testing
 
 We’re using [Cypress](https://www.cypress.io/). Ask Igor about how to get an invite to create projects.
 
 
-## **Linting**
+## Linting
 
 We’re using [Airbnb ESLint config](https://www.npmjs.com/package/eslint-config-airbnb) with a few modifications.
 
@@ -805,7 +805,7 @@ We encourage to use `[lint-staged](https://github.com/okonet/lint-staged)` on al
 > Note: `lint-staged` might not work on projects with git submodules. In this case use `[husky](https://github.com/typicode/husky)` to set up pre-commit hooks.
 
 
-## **Code editor**
+## Code editor
 
 Most of the devs in our team use Atom for React development.
 
@@ -842,7 +842,7 @@ Prettier-atom configuration:
 - Print Width: 100
 
 
-## **Browser setup**
+## Browser setup
 
 Extensions to install:
 
@@ -851,7 +851,7 @@ Extensions to install:
 - [Immutable.js Object Formatter](https://chrome.google.com/webstore/detail/immutablejs-object-format/hgldghadipiblonfkkicmgcbbijnpeog?hl=en) - inspect immutable objects in console or in react props/state
 
 
-## **More things to cover and other ideas:**
+## More things to cover and other ideas:
 - Add info about `yarn`
 - Add info about `redux-form`?
 - Add info about webpack
