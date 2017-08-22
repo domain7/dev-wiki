@@ -59,6 +59,7 @@ We have two different preprocessors boilerplate:
 * [Gruntyplate](https://github.com/domain7/gruntyplate) for Grunt which is the one we currently use on most projects
 * [Sevenpack](https://github.com/domain7/sevenpack) for Webpack which will eventually move to
 
+<<<<<<< HEAD
 
 
 ## Prettier
@@ -106,3 +107,18 @@ Linting makes more sense when running before committing your code. By doing that
 Now change a few files, `git add` some of them to your commit and try to `git commit` them.
 
 Read more at the [project's repo](https://github.com/okonet/lint-staged)
+
+## Google API Keys
+
+When you need google maps or any other google api keys in a project, create the project with your own account and give access to others so you are not the only one who can make changes.
+- Login at [Google Developer Console](https://console.cloud.google.com/cloud-resource-managerCreate)
+- Create new project
+- Menu > IAM & Admin
+  - Give `Project Editor` access to ops@, fed@ and any other developers on the project
+  - Give `Project Owner` access to the technical contact for the client (so they can pay if limits are exceeded)
+- Menu > Apis & Services
+  - Add any keys needed (google maps, autocomplete, etc)
+
+## Webfont Keys
+For smaller projects, set up webfonts using our main account You'll find credentials for typekit, fonts.com (and maybe others) in keypunch.  For any larger project, the client should set up webfont config and send us the code snippet
+
