@@ -7,7 +7,7 @@ mainmenu: true
 
 ## .editorconfig
 
-An [`.editorconfig`](http://editorconfig.org/) file can be used to ensure code is formatted the same way when working with multiple contributors.  Things such as `tab` or `space` indentation, and trimming whitespace are the major reason for using this.  To get started, you need to: 
+An [`.editorconfig`](http://editorconfig.org/) file can be used to ensure code is formatted the same way when working with multiple contributors.  Things such as `tab` or `space` indentation, and trimming whitespace are the major reason for using this.  To get started, you need to:
 
   1. Add an `.editorconfig` file to your project
   2. Configure your editor
@@ -46,7 +46,7 @@ There are plugins for [Vim](https://github.com/editorconfig/editorconfig-vim#rea
 
 ## Preprocessors
 
-Things we use preprocessors for: 
+Things we use preprocessors for:
 
   - Concatenate and minify javascript
   - Lint javascript
@@ -58,3 +58,51 @@ We have two different preprocessors boilerplate:
 
 * [Gruntyplate](https://github.com/domain7/gruntyplate) for Grunt which is the one we currently use on most projects
 * [Sevenpack](https://github.com/domain7/sevenpack) for Webpack which will eventually move to
+
+
+
+## Prettier
+
+[Prettier](https://github.com/prettier/prettier) is an opinionated code formatter with support for:
+* JavaScript, including [ES2017](https://github.com/tc39/proposals/blob/master/finished-proposals.md)
+* [JSX](https://facebook.github.io/jsx/)
+* [Flow](https://flow.org/)
+* [TypeScript](https://www.typescriptlang.org/)
+* CSS, [LESS](http://lesscss.org/), and [SCSS](http://sass-lang.com)
+* [JSON](http://json.org/)
+* [GraphQL](http://graphql.org/)
+
+The reasoning behind Prettier is well described in the project's readme [Why Prettier](https://github.com/prettier/prettier/blob/master/README.md#why-prettier).
+
+There's a number of ways you can use Prettier:
+- [Editor plugin](https://github.com/prettier/prettier#editor-integration) (recommended)
+- [Command line](https://github.com/prettier/prettier#cli)
+- [Pre-commit hook](https://github.com/prettier/prettier#pre-commit-hook)
+- [Node module](https://github.com/prettier/prettier#api)
+
+Prettier has built-in [options](https://github.com/prettier/prettier#options) or it can integrated with the existing [ESLint config](https://github.com/prettier/prettier#eslint).
+
+
+## lint-staged
+
+Linting makes more sense when running before committing your code. By doing that you can ensure no errors are going into repository and enforce code style. But running a lint process on a whole project could be slow on a large project and linting results can be irrelevant. Ultimately you only want to lint files that will be committed.
+
+### Installation and setup
+
+1. `npm install --save-dev lint-staged husky`
+1. Install and setup your linters just like you would do normally. Add appropriate `.eslintrc`, `.stylelintrc`, etc.
+1. Update your `package.json` like this:
+  ```json
+  {
+    "scripts": {
+      "precommit": "lint-staged"
+    },
+    "lint-staged": {
+      "*.js": ["eslint --fix", "git add"]
+    }
+  }
+  ```
+
+Now change a few files, `git add` some of them to your commit and try to `git commit` them.
+
+Read more at the [project's repo](https://github.com/okonet/lint-staged)
