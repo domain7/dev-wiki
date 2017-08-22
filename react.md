@@ -268,10 +268,10 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   <Foo bar="bar" />
 
   // bad
-  <Foo style={{ left: "20px" }} />
+  {% raw  %}<Foo style={{ left: "20px" }} />{% endraw  %}
 
   // good
-  <Foo style={{ left: '20px' }} />
+  {% raw  %}<Foo style={{ left: '20px' }} />{% endraw  %}
   ```
 
 ### Spacing
@@ -679,11 +679,10 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
 
 ## Redux
 
-Refer to official Redux guide
-http://redux.js.org/
+Refer to official [Redux guide](http://redux.js.org/)
 
 Great article about Redux principles:
-http://blog.isquaredsoftware.com/2017/05/idiomatic-redux-tao-of-redux-part-2/
+[http://blog.isquaredsoftware.com/2017/05/idiomatic-redux-tao-of-redux-part-2/](http://blog.isquaredsoftware.com/2017/05/idiomatic-redux-tao-of-redux-part-2/)
 
 The only thing we do differently is we don’t split redux-related stuff in multiple files and adopted [**ducks**](https://github.com/erikras/ducks-modular-redux)**.**
 
@@ -763,26 +762,42 @@ To add:
 
 https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/immutablejs.md
 
-
 ## Normalizr/Denormalizr/Schemas
 
-http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html
+`normalizr` flattens JSON into the redux store and makes working with deeply nested data easier.
+[Normalizing State Shape](http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html)
 
 ## Reselect
 
-https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/reselect.md
+`reselect` makes redux selectors faster through caching. You can combine multiple selectors and use selectors to filter state before handing it off to React.
+[Documentation](https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/reselect.md)
 
 ## Redux Saga
 
-https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/redux-saga.md
+`redux-saga` "manages side effects in your application." We use sagas for handling asynchronous actions in our applications, particularly network requests.
+[Documentation](https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/redux-saga.md)
 
 ## Routing
 
-https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/routing.md
+[Documentation](https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/routing.md)
+
+## Generating HTML head content
+
+Use [React Helmet](https://github.com/nfl/react-helmet) to add content to page `<head>` (site meta, og tags, titles, etc.)
+
+```js
+  <Helmet>
+    <title>Page Title!</title>
+  </Helmet>
+```
+
+Format titles according to [our guide.](/dev-wiki/accessibility/#semantic-markup_title)
 
 ## Styling
 
-We’re using SCSS syntax with CSS being loaded by webpack as CSS modules.
+We’re using SCSS syntax with CSS being loaded by webpack as [CSS modules](https://github.com/css-modules/css-modules).
+
+SCSS builtins are available, as are most language features like variables. Mixins are provided by CSS Modules using composiion and work differently from SCSS mixins. Refer to the [css-modules documentation](https://github.com/css-modules/css-modules#dependencies) for examples.
 
 ## Unit Testing
 
