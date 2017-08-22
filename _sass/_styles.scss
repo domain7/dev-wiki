@@ -81,7 +81,7 @@ body {
 
 .posts .post-link {
   font-size: 24px;
-  letter-spacing: -1px;
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 
@@ -107,18 +107,18 @@ body {
 
 .content h2 {
   font-size: 32px;
-  letter-spacing: -1.25px;
+  letter-spacing: -0.02em;
   border-bottom: 1px solid $color_border;
 }
 
 .content h3 {
   font-size: 26px;
-  letter-spacing: -1px;
+  letter-spacing: -0.02em;
 }
 
 .content h4 {
   font-size: 20px;
-  letter-spacing: -1px;
+  letter-spacing: -0.02em;
 }
 
 .content blockquote {
@@ -126,14 +126,14 @@ body {
   padding-left: 20px;
   font-size: 18px;
   opacity: .6;
-  letter-spacing: -1px;
+  letter-spacing: -0.02em;
   font-style: italic;
   margin: 30px 0;
 }
 
 .content ul,
-.content ol { 
-  padding-left: 20px; 
+.content ol {
+  padding-left: 20px;
   margin-bottom: 10px;
 }
 

@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .page-title {
   @include font-size(60);
-  letter-spacing: -1.75px;
+  letter-spacing: -0.02em;
   line-height: 1;
   font-weight: 500;
   margin-bottom: 10px;
