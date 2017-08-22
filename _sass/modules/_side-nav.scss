@@ -4,6 +4,9 @@
     position: fixed;
     top: 20px;
     width: 200px;
+    overflow-y: auto;
+    max-height: calc(100vh - 60px);
+    background: white;
   }
 
   li {
