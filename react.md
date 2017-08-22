@@ -268,10 +268,10 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   <Foo bar="bar" />
 
   // bad
-  <Foo style={{ left: "20px" }} />
+  {% raw  %}<Foo style={{ left: "20px" }} />{% endraw  %}
 
   // good
-  <Foo style={{ left: '20px' }} />
+  {% raw  %}<Foo style={{ left: '20px' }} />{% endraw  %}
   ```
 
 ### Spacing
@@ -779,6 +779,18 @@ https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538d
 ## Routing
 
 https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/routing.md
+
+## Generating HTML head content
+
+Use [React Helmet](https://github.com/nfl/react-helmet) to add content to page `<head>` (site meta, og tags, titles, etc.)
+
+```js
+  <Helmet>
+    <title>Page Title!</title>
+  </Helmet>
+```
+
+Format titles according to [our guide.](/dev-wiki/accessibility/#semantic-markup_title)
 
 ## Styling
 
