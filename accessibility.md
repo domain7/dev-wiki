@@ -11,6 +11,41 @@ HTML5 introduced a number of new semantic tags. You should use them as much as p
 
 This is a small list of tags to use. There's plenty more out there.
 
+### Title
+When configuring `<title>` tags, consider: 
+  - Search result listings
+  - User sharing on Facebook, etc
+  - User may have multiple tabs open
+
+#### Title - Homepage
+Good: 
+```
+<title>Green Bean University</title>
+```
+
+Bad: 
+```
+<title>GBU</title>
+<title>Homepage</title>
+```
+
+
+#### Title - Sub Pages
+The page title should show before the site name so that the first few words of the page title can be read when the user has multiple browser tabs open.
+Consider using the abbreviated version of the project.
+
+Good: 
+```
+<title>Admission Requirements | GBU</title>
+```
+Bad: 
+```
+<title>GBU - Admission Requirements</title>
+<title>Green Bean University - Admission Requirements</title>
+```
+
+
+
 ### Address
 The `address` tag should have contact information relevant to its nearest article or body ancestor. It's usually found in the footer of a document or section.
 
