@@ -59,8 +59,6 @@ We have two different preprocessors boilerplate:
 * [Gruntyplate](https://github.com/domain7/gruntyplate) for Grunt which is the one we currently use on most projects
 * [Sevenpack](https://github.com/domain7/sevenpack) for Webpack which will eventually move to
 
-<<<<<<< HEAD
-
 
 ## Prettier
 
