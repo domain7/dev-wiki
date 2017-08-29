@@ -1,9 +1,44 @@
 ---
 layout: page
 title: Tools
+description: Tools and workflows we use for every project
 permalink: /tools/
 mainmenu: true
 ---
+
+## .README files
+
+.README files are extremely important to have. They should provide all the information necessary for a new developer to jump into the project and start coding and deploying to staging/production. Here's a high-level boilerplate:
+
+```
+#Name of project
+Short description
+
+#Team
+Name, Role, Email
+
+#Setup
+How to setup local
+How to sync up local database from staging/production
+How to sync up files from staging/production
+
+#Run
+How to run it locally
+How to run it in docker
+
+#Deploy
+Deploy to Staging
+Staging Link
+Deploy to Production
+Production Link
+
+#Routine tasks
+How to add translations
+How to create new routes
+
+#ACF workflow (wordpress)
+Link to wiki
+```
 
 ## .editorconfig
 
@@ -12,7 +47,7 @@ An [`.editorconfig`](http://editorconfig.org/) file can be used to ensure code i
   1. Add an `.editorconfig` file to your project
   2. Configure your editor
 
-###Add an `.editorconfig` file to your project
+### Add an `.editorconfig` file to your project
 Generally this file should be added to the root of your project, alongside `.gitignore`.
 
 This example is from the [Yeoman AngularJS Generator](https://github.com/yeoman/generator-angular).  
@@ -41,7 +76,7 @@ For projects that require you to use `tab` characters for indentation (Wordpress
 indent_style = tab
 ```
 
-###Configuration with your editor
+### Configuration with your editor
 There are plugins for [Vim](https://github.com/editorconfig/editorconfig-vim#readme), [Sublime Text](https://github.com/sindresorhus/editorconfig-sublime#readme), [Textmate](https://github.com/Mr0grog/editorconfig-textmate#readme) and [a few others](http://editorconfig.org/#download).  Once you have the plugin installed, things should just take over.  To test if it is working, add the example `.editorconfig` file above to your project, open up a file within the project and add a few spaces at the end of a line.  After saving the file, the trailing spaces should go away.
 
 ## Preprocessors
