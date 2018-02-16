@@ -3,22 +3,22 @@
 
   // Add anchor link to all .content > h2 elements
   function h2Anchors() {
-    $('.content > h2').each(function(i, el) {
+    $('.content > h2').each(function (i, el) {
       var $el, icon, id;
       $el = $(el);
       id = $el.text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\_/g, '-').toLowerCase();
       icon = '<i class="fa fa-link"></i>';
 
       if (id) {
-        $(this).attr('id',id);
+        $(this).attr('id', id);
         $el.prepend($("<a />").addClass("header-link").attr("href", "#" + id).html(icon));
       }
 
       // Create id's for child h3 elements prefixing the parent id
-      $el.nextUntil('h2', 'h3').each( function() {
+      $el.nextUntil('h2', 'h3').each(function () {
         var subid = $(this).text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\_/g, '-').toLowerCase();
         var subhref = id + '_' + subid;
-        $(this).attr('id',subhref).prepend($("<a />").addClass("header-link").attr("href", "#" + subhref).html(icon));
+        $(this).attr('id', subhref).prepend($("<a />").addClass("header-link").attr("href", "#" + subhref).html(icon));
       });
 
     });
@@ -28,7 +28,7 @@
 
   // Add 'back to top' before all .content > h2:NOT:first-of-type
   function backToTop() {
-    $('.content > h2').not(':first-of-type').each(function(){
+    $('.content > h2').not(':first-of-type').each(function () {
       var backLink = '<a href="#top"><i class="fa fa-arrow-circle-up fa-before"></i>back to top</a>';
       $(this).before(backLink);
     });
@@ -46,25 +46,25 @@
 
 
     // Create parent submenu items
-    $('.content > h2').each(function(){
+    $('.content > h2').each(function () {
       var href = $(this).attr('id'),
-          title = $(this).text(),
-          link = '<a href="#'+href+'">'+title+'</a>',
-          items = '',
-          submenu = [];
+        title = $(this).text(),
+        link = '<a href="#' + href + '">' + title + '</a>',
+        items = '',
+        submenu = [];
 
       //
       function subMenu(id, title) {
         return {
-          id:id,
-          title:title
+          id: id,
+          title: title
         }
       }
 
       // Add to submenu Array
-      $(this).nextUntil('h2', 'h3').each( function() {
+      $(this).nextUntil('h2', 'h3').each(function () {
         var subhref = href + '_' + $(this).text().replace(/\,/g, '').replace(/\&/g, '').replace(/\ /g, '-').replace(/\_/g, '-').toLowerCase(),
-            subtitle = $(this).text();
+          subtitle = $(this).text();
         submenu.push(subMenu(subhref, subtitle));
       });
 
@@ -73,10 +73,10 @@
       // Create child submenu items (2nd level)
       if (submenu.length) {
         items += '<ul class="nav">';
-        submenu.forEach(function(item){
+        submenu.forEach(function (item) {
           var itemHref = item['id'];
           var itemTitle = item['title'];
-          var submenuItem = '<li><a href="#'+itemHref+'">'+itemTitle+'</a></li>';
+          var submenuItem = '<li><a href="#' + itemHref + '">' + itemTitle + '</a></li>';
           items += submenuItem;
         });
         items += '</ul>';
@@ -98,13 +98,21 @@
 
 
 
+  // Toggles site-nav
+  function toggleSiteNavEvent() {
+    $('.site-nav').on('click', function () {
+      $('.site-nav').toggleClass('active');
+    });
+  }
 
 
-  $(document).ready(function(){
+
+  $(document).ready(function () {
     h2Anchors();
     backToTop();
     buildSubmenu();
     scrollSpy();
+    toggleSiteNavEvent();
   });
 
 }(jQuery));
