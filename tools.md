@@ -36,7 +36,7 @@ Production Link
 How to add translations
 How to create new routes
 
-#ACF workflow (wordpress)
+#ACF workflow (WordPress)
 Link to wiki
 ```
 
@@ -70,7 +70,7 @@ insert_final_newline = true
 trim_trailing_whitespace = false
 ```
 
-For projects that require you to use `tab` characters for indentation (Wordpress), can add the following link to your `.editorconfig` file:
+For projects that require you to use `tab` characters for indentation (WordPress), can add the following link to your `.editorconfig` file:
 
 ```
 indent_style = tab
