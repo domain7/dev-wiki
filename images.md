@@ -8,9 +8,9 @@ mainmenu: true
 ## Srcset
 Using srcset is great since it allows the browser to make the choice on the most appropriate size of image to use basing on the screen size and type.
 
-### Srcset in Wordpress
+### Srcset in WordPress
 
-In order to add srcset to our Wordpress project, we add the image sizes based on image_id and class.
+In order to add srcset to our WordPress project, we add the image sizes based on image_id and class.
 
 To print image object:
 ```timber
@@ -49,4 +49,4 @@ You will need to add all your responsive image styles to Drupal configuration.
 
 ### IE Fallback
 
-Both Wordpress and Drupal are equipped to output the fallback image, however you need to make sure that the biggest image size is uploaded.
+Both WordPress and Drupal are equipped to output the fallback image, however you need to make sure that the biggest image size is uploaded.

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Wordpress
+title: WordPress
 permalink: /wordpress/
 mainmenu: true
 ---
@@ -10,7 +10,7 @@ mainmenu: true
 If not already installed, install [WP Cli](http://wp-cli.org/)
 
 #### WP Core
-Install wordpress core:
+Install WordPress core:
 
 `wp core install`
 

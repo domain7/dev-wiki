@@ -120,7 +120,7 @@ In general, plan for reuse as much as possible, across pages and in various cont
 
 ### Indentation
 
-For any Domain7 specific project, we use 2 spaces as our indentation. If ever you were to contribute code to the community, follow the standard of that community e.g. Wordpress uses tabs for indentation.
+For any Domain7 specific project, we use 2 spaces as our indentation. If ever you were to contribute code to the community, follow the standard of that community e.g. WordPress uses tabs for indentation.
 
 ### Braces
 
