@@ -219,7 +219,7 @@ There should be a single line space between declaration blocks. This also goes f
 
 ### Boilerplate
 
-We [have a boilerplate for SASS/Compass projects](https://bitbucket.org/domain7/sassyplate). All projects should be created with it, and follow the file structure used in the boilerplate. Documentation on the boilerplate is found [in the project's readme](https://bitbucket.org/domain7/sassyplate), with more information available in screen.scss.
+We [have a boilerplate for SASS/Compass projects](https://github.com/domain7/sassyplate). All projects should be created with it, and follow the file structure used in the boilerplate. Documentation on the boilerplate is found [in the project's readme](https://github.com/domain7/sassyplate), with more information available in screen.scss.
 
 ### Syntax
 
