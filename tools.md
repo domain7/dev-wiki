@@ -77,7 +77,31 @@ indent_style = tab
 ```
 
 ### Configuration with your editor
-There are plugins for [Vim](https://github.com/editorconfig/editorconfig-vim#readme), [Sublime Text](https://github.com/sindresorhus/editorconfig-sublime#readme), [Textmate](https://github.com/Mr0grog/editorconfig-textmate#readme) and [a few others](http://editorconfig.org/#download).  Once you have the plugin installed, things should just take over.  To test if it is working, add the example `.editorconfig` file above to your project, open up a file within the project and add a few spaces at the end of a line.  After saving the file, the trailing spaces should go away.
+
+There are plugins / extensions we recommend for different editors.
+Once you have the plugin installed, things should just take over.  To test if it is working, add the example `.editorconfig` file from the sections below to your project, open up a file within the project and add a few spaces at the end of a line.  After saving the file, the trailing spaces should go away.
+
+#### VS Code: Plugins/Extensions
+[VS Code Extensions](https://marketplace.visualstudio.com/vscode)
+* Npm Intellisense
+* SVG Preview
+* Git Lens
+* ESLint
+* EditorConfig
+* Bracket Pair Colorier
+* Atom One Dark Theme - for former Atom users
+* Atom Keymap - for former Atom users
+* Sublime Text Keyboard Shortcuts - for former Sublime users
+
+#### Sublime: Plugins/Extensions
+Example `.editorconfig`: [Sublime Text](https://github.com/sindresorhus/editorconfig-sublime#readme)
+
+#### Vim: Plugins/Extensions
+Example `.editorconfig`: [Vim](https://github.com/editorconfig/editorconfig-vim#readme)
+
+#### Textmate: Plugins/Extensions
+Example `.editorconfig`: [Textmate](https://github.com/Mr0grog/editorconfig-textmate#readme)
+
 
 ## Preprocessors
 
