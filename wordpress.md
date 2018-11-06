@@ -113,3 +113,15 @@ D7 has developer licenses for a number of plugins. Access credentials are stored
 [Facet WP](facetwp.com/demo/)
 [ACF Pro](https://www.advancedcustomfields.com/my-account)
 [WPML](https://wpml.org/account)
+
+## WordPress Plugins we love
+[Timber](https://wordpress.org/plugins/timber-library/)
+[ACF](https://wordpress.org/plugins/advanced-custom-fields/)
+[Tiny Compress Image](https://wordpress.org/plugins/tiny-compress-images/)
+[Query Monitor](https://en-ca.wordpress.org/plugins/query-monitor/)
+[Hyper-Cache](https://wordpress.org/plugins/hyper-cache/)
+[Regenerate Thumbnails](https://wordpress.org/plugins/regenerate-thumbnails/)
+[Gravity Forms](https://www.gravityforms.com/)
+[Jetpack](https://jetpack.com)
+
+
