@@ -11,33 +11,37 @@ mainmenu: true
 .README files are extremely important to have. They should provide all the information necessary for a new developer to jump into the project and start coding and deploying to staging/production. Here's a high-level boilerplate:
 
 ```
-#Name of project
+# Name of project
 Short description
 
-#Team
+# Team
 Name, Role, Email
 
-#Setup
+# Setup
 How to setup local
 How to sync up local database from staging/production
 How to sync up files from staging/production
 
-#Run
+# Run
 How to run it locally
 How to run it in docker
 
-#Deploy
+# Deploy
 Deploy to Staging
 Staging Link
 Deploy to Production
 Production Link
 
-#Routine tasks
+# Routine tasks
 How to add translations
 How to create new routes
 
-#ACF workflow (WordPress)
+# ACF workflow (WordPress)
 Link to wiki
+
+# API Keys
+Google Maps api key - Project Owner: sam@jones-company.com
+
 ```
 
 ## .editorconfig
@@ -167,12 +171,25 @@ Read more at the [project's repo](https://github.com/okonet/lint-staged)
 
 ## Google API Keys
 
-When you need google maps or any other google api keys in a project, create the project with your own account and give access to others so you are not the only one who can make changes.
-- Login at [Google Developer Console](https://console.cloud.google.com/cloud-resource-managerCreate)
-- Create new project
-- Menu > IAM & Admin
-  - Give `Project Editor` access to ops@, fed@ and any other developers on the project
-  - Give `Project Owner` access to the technical contact for the client (so they can pay if limits are exceeded)
+Clients should own their api keys.  This is key for managing of quotas and billing, should their map every get a lot of usage. When you go to `Admin > IAM` or https://console.cloud.google.com/iam-admin?project=YOUR_PROJECT_ID it should look like this: 
+
+```
+| Member                   | Name      | Role   |
+|--------------------------|-----------|--------|
+| client@clientdomain7.com | Sam Jones | Owner  |
+| fed@domain7.com          |           | Editor |
+| ops@domain7.com          |           | Editor |
+| yourname@domain7.com     |           | Editor |
+```
+
+### Client Steps: 
+- Create api key https://developers.google.com/maps/documentation/embed/get-api-key
+- Give domain7 access: https://www.youtube.com/watch?v=WKm_8ss-9HI 
+  - Give 'Project editor' to ops@domain7.com and fed@domain7.com and any other developer that may need access
+  - `Project Owner` should be the client 
+
+### Developer Steps: 
+- Include in readme the email the user who is the `Product Owner` for the google cloud project.
 - Menu > Apis & Services
   - Add any keys needed (google maps, autocomplete, etc)
 
