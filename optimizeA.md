@@ -8,9 +8,11 @@ mainmenu: true
 
 ## 101 Questions for Your One-On-One
 
-[Article Source](https://jasonevanish.com/2014/05/29/101-questions-to-ask-in-1-on-1s/)
-
 So you’re having one on ones with your team. Awesome. But are you making the most of them?
+
+<a href="http://domain7.github.io/dev-wiki/" target="_blank">
+    The 13 best places in the world to work remotely
+</a>
 
 ### How's your day-to-day ?
 0. How is [project] going? What could we do to make it better?
@@ -35,3 +37,6 @@ So you’re having one on ones with your team. Awesome. But are you making the m
 0. Could you see yourself making progress on more of your goals here? What would need to change to do so?
 0. What work are you doing here that you feel is most in line with your long term goals?
 0. As a kid, what did you want to be when you grew up?
+
+
+[Source:](https://jasonevanish.com/2014/05/29/101-questions-to-ask-in-1-on-1s/)
