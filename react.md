@@ -8,9 +8,60 @@ mainmenu: true
 
 ## Overview
 
-FTC was based on [React Boilerplate](https://github.com/react-boilerplate/react-boilerplate), which has changed a bit since we started using it. [Introduction into the boilerplate](https://github.com/react-boilerplate/react-boilerplate/blob/master/docs/general/introduction.md) is a great place to start.
+We implement a standard set of React libraries and tools in order to:
 
-## Project structure
+- reduce onboarding time for developers
+- reduce complexity & time required for context switching between projects
+- increase number of developers who can assist on more projects, if developers know the same libraries and tools
+
+## React: State Management
+
+### Preferred: Redux
+
+- Recommended as state management by React
+- Supports most middleware
+- Works well with most REST APIs & GraphQL
+- Easy to read official documentation
+- Robust debugging tools available
+ 
+### Secondary: Freactal
+
+### Other Choices?
+
+If considering implementing another state management solution, we'd recommend clearing it by one of the team leads. There may be existing solutions that most of our team will already know how to implement, and be able to build, debug and help with.
+
+
+## React: Forms
+
+### Preferred: Formik
+
+- Recommended by React
+- Built in validation, error handling
+- Supports most commonly built form field types, and custom build form fields
+- Seamless integration with YUP Validation
+- Large community support online, both in official documentation and stack overflow
+ 
+### Secondary: Redux Forms
+
+### Other Choices?
+
+If considering implementing another form library, we'd recommend clearing it by one of the team leads. There may be existing solutions that most of our team will already know how to implement, and be able to build, debug and help with.
+
+
+## React: Routing
+
+### Preferred: React Router
+
+- Very few bugs, we've found
+- Easy to read official documentation
+- Large community support online, both in official documentation and stack overflow
+ 
+### Secondary: ?? 
+
+### Other Choices?
+
+
+## React: Application Structure 
 
   Example of the project structure:
 
@@ -86,17 +137,73 @@ FTC was based on [React Boilerplate](https://github.com/react-boilerplate/react-
   // Webpack config, generators etc.
   internals
   ```
+  
+## React: Boilerplate
 
-## Style Guide
+Need to get up and running, and want more than just `create-react-app?` FTC was based on [React Boilerplate](https://github.com/react-boilerplate/react-boilerplate), which has changed a bit since we started using it. [Introduction into the boilerplate](https://github.com/react-boilerplate/react-boilerplate/blob/master/docs/general/introduction.md) is a great place to start.
 
-The following guide is based on [Airbnb’s styleguide](https://github.com/airbnb/javascript/tree/master/react) and adapted for Domain7.
+
+
+## React: Styling
+
+### Preferred: CSS Modules
+ 
+#### CSS Modules Resources
+
+We’re using SCSS syntax with CSS being loaded by webpack as [CSS modules](https://github.com/css-modules/css-modules).
+
+SCSS builtins are available, as are most language features like variables. Mixins are provided by CSS Modules using composiion and work differently from SCSS mixins. Refer to the [css-modules documentation](https://github.com/css-modules/css-modules#dependencies) for examples.
+
+### Secondary: SASS 
+
+### Other Choices?
+
+- *Radium* is a popular choice with React, but team members have found it difficult to work with for larger apps. Radium works by injecting styling directly inline, as `style={}`, which can be difficult to override, even using the `!important` modifier. Often we've run into conflicting styles competing on one component.
+
+- *Semantic UI React* is a popular, quick styling solution. It's a library that comes with most styled components out of the box. However, any customization or deviation from their styles are very hard to implement well, to override their styling.
+
+## React: Testing
+
+### Preferred: Jest and Cypress
+
+[Jest](https://facebook.github.io/jest/) for unit testing
+https://github.com/react-boilerplate/react-boilerplate/blob/master/docs/testing/unit-testing.md
+
+[Cypress](https://www.cypress.io/)
+ 
+### Secondary: ??
+
+### Other Choices?
+
+
+## React: Linting Tools
+
+### Preferred ??
+
+### Secondary: ??
+
+### Other Choices?
+
+We’re using [Airbnb ESLint config](https://www.npmjs.com/package/eslint-config-airbnb) with a few modifications.
+
+We encourage use of `[lint-staged](https://github.com/okonet/lint-staged)` on all projects.
+
+> Note: `lint-staged` might not work on projects with git submodules. In this case use `[husky](https://github.com/typicode/husky)` to s
+
+
+
+## React: Style building
+
+The following guide below is based on [Airbnb’s styleguide](https://github.com/airbnb/javascript/tree/master/react) and adapted for Domain7.
 
 ### Basic Rules
+
 - Only include one React component per file.
 - Always use JSX syntax.
 - Do not use `React.createElement` unless you're initializing the app from a file that is not JSX.
 
 ### Component vs PureComponent vs React.createClass vs stateless function
+
 - On the projects with `Immutable.js` prefer to use `[React.PureComponent](https://facebook.github.io/react/docs/react-api.html#react.purecomponent)` for both stateless and stateful components. Otherwise use `React.Component` for stateful components and functions for stateless ones.
 > Why? `PureComponent` implements `shouldComponentUpdate` with shallow comparison of the props. Immutable props are very fast to compare which results in performance improvement by reducing rerendering of your components.
 > Other benefits:
@@ -145,10 +252,12 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
   ```
 
 ## Mixins
+
 - [Do not use mixins](https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html).
 > Why? Mixins introduce implicit dependencies, cause name clashes, and cause snowballing complexity. Most use cases for mixins can be accomplished in better ways via components, higher-order components, or utility modules.
 
 ## Naming
+
 - **Extensions**: Use `.js` extension for React components.
 - **Filename**: Use PascalCase for folder names. E.g., `ReservationCard/index.js`.
 - **Reference Naming**: Use PascalCase for React components and camelCase for their instances. eslint: `[react/jsx-pascal-case](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md)`
@@ -679,14 +788,16 @@ The following guide is based on [Airbnb’s styleguide](https://github.com/airbn
 
 ## Redux
 
-Refer to official [Redux guide](http://redux.js.org/)
+How we build with Redux, a state management library for React.
 
-Great article about Redux principles:
-[http://blog.isquaredsoftware.com/2017/05/idiomatic-redux-tao-of-redux-part-2/](http://blog.isquaredsoftware.com/2017/05/idiomatic-redux-tao-of-redux-part-2/)
 
-The only thing we do differently is we don’t split redux-related stuff in multiple files and adopted [**ducks**](https://github.com/erikras/ducks-modular-redux)**.**
+### Redux: Resources
 
-Example of our duck file:
+- [Redux guide](http://redux.js.org/)
+
+- Great article about Redux principles: [http://blog.isquaredsoftware.com/2017/05/idiomatic-redux-tao-of-redux-part-2/](http://blog.isquaredsoftware.com/2017/05/idiomatic-redux-tao-of-redux-part-2/)
+
+### Redux: Boilerplate
 
   ```javascript
   // 1. Import statements
@@ -748,8 +859,25 @@ Example of our duck file:
   // 6. Sagas (API calls)
   // The format is being defined
   ```
+## Redux Saga
+
+This is not a recommended package for new builds. 
+
+`redux-saga` "manages side effects in your application." We use sagas for handling asynchronous actions in our applications, particularly network requests.
+[Documentation](https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/redux-saga.md)
+
 
 ## ImmutableJS
+
+Writing React in ImmutableJS. 
+
+```
+Immutable data encourages pure functions (data-in, data-out) and lends itself to much simpler application development and enabling techniques from functional programming such as lazy evaluation.
+
+While designed to bring these powerful functional concepts to JavaScript, it presents an Object-Oriented API familiar to Javascript engineers and closely mirroring that of Array, Map, and Set. It is easy and efficient to convert to and from plain Javascript types.
+```
+
+### ImmutableJS: Adding to React
 
 To add:
 
@@ -762,24 +890,11 @@ To add:
 
 https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/immutablejs.md
 
-## Normalizr/Denormalizr/Schemas
-
-`normalizr` flattens JSON into the redux store and makes working with deeply nested data easier.
-[Normalizing State Shape](http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html)
 
 ## Reselect
 
 `reselect` makes redux selectors faster through caching. You can combine multiple selectors and use selectors to filter state before handing it off to React.
 [Documentation](https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/reselect.md)
-
-## Redux Saga
-
-`redux-saga` "manages side effects in your application." We use sagas for handling asynchronous actions in our applications, particularly network requests.
-[Documentation](https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/redux-saga.md)
-
-## Routing
-
-[Documentation](https://github.com/react-boilerplate/react-boilerplate/blob/3fdad6a888b68e2c538dfcd52f4594fea7b9e4d4/docs/js/routing.md)
 
 ## Generating HTML head content
 
@@ -793,36 +908,13 @@ Use [React Helmet](https://github.com/nfl/react-helmet) to add content to page `
 
 Format titles according to [our guide.](/dev-wiki/accessibility/#semantic-markup_title)
 
-## Styling
 
-We’re using SCSS syntax with CSS being loaded by webpack as [CSS modules](https://github.com/css-modules/css-modules).
-
-SCSS builtins are available, as are most language features like variables. Mixins are provided by CSS Modules using composiion and work differently from SCSS mixins. Refer to the [css-modules documentation](https://github.com/css-modules/css-modules#dependencies) for examples.
-
-## Unit Testing
-
-We’re using [Jest](https://facebook.github.io/jest/) for unit testing
-https://github.com/react-boilerplate/react-boilerplate/blob/master/docs/testing/unit-testing.md
+et up pre-commit hooks.
 
 
-## E2E Testing
+## React: Code Editor Config
 
-We’re using [Cypress](https://www.cypress.io/). Ask Igor about how to get an invite to create projects.
-
-
-## Linting
-
-We’re using [Airbnb ESLint config](https://www.npmjs.com/package/eslint-config-airbnb) with a few modifications.
-
-We encourage to use `[lint-staged](https://github.com/okonet/lint-staged)` on all projects.
-
-
-> Note: `lint-staged` might not work on projects with git submodules. In this case use `[husky](https://github.com/typicode/husky)` to set up pre-commit hooks.
-
-
-## Code editor
-
-Most of the devs in our team use Atom for React development.
+### Atom 
 
 Required plugins:
 
@@ -857,16 +949,17 @@ Prettier-atom configuration:
 - Print Width: 100
 
 
-## Browser setup
+## React: Browser setup
 
-Extensions to install:
+Recommended extensions for easier development and debugging.
 
 - [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) - inspect react component tree (state, props), debug rerenderings
 - [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) - track dispatched actions, inspect state at any action, track action payload
 - [Immutable.js Object Formatter](https://chrome.google.com/webstore/detail/immutablejs-object-format/hgldghadipiblonfkkicmgcbbijnpeog?hl=en) - inspect immutable objects in console or in react props/state
 
 
-## More things to cover and other ideas:
+## React: More things to cover and other ideas:
+
 - Add info about `yarn`
 - Add info about `redux-form`?
 - Add info about webpack
