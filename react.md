@@ -57,8 +57,8 @@ Use `create-react-app`
 ## React: Forms
 
 ### Formik
-- Most often, when building forms in React we only need to store values in local component state. Then, we typically submit those values from that component to an API or other endpoint. 
-- We recommend Formik as a simple, readable and extendable solution. Formik does not force state re-rendering, as Redux Forms does, and is a reliable solution for both very few form fields and/or many form fields in one component. 
+- Most often, when building forms in React we only need to store values in local component state. Then, we typically submit those values from that component to an API or other endpoint.
+- We recommend Formik as a simple, readable and extendable solution. Formik does not force state re-rendering, as Redux Forms does, and is a reliable solution for both very few form fields and/or many form fields in one component.
 - Formik is recommended by the React team as a complete solution and can handle validation, input bindings, as well as errors and state changes.
 - Common form challenges solved by Formik include:
   - Getting values in and out of form state
@@ -66,7 +66,7 @@ Use `create-react-app`
   - Handling form submission
 
 #### Formik: Standards
-- TODO: How do we build Formik here? 
+- TODO: How do we build Formik here?
 
 #### Formik: Documentation
 - [(Quick Overview) React Form Validation with Formik and Yup](https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10)
@@ -74,12 +74,12 @@ Use `create-react-app`
 
 ### Yup
 - Validating form fields is often a multiple choice scenario. We often need to be able to chain requirements for 1 form field.
-- Validating data is also often required, like an object, before we send it to an API endpoint, so that we know it will pass that APIs requirements. 
+- Validating data is also often required, like an object, before we send it to an API endpoint, so that we know it will pass that APIs requirements.
 - Yup, along with Formik, works like this:
   ```
   With Yup, we create a Yup formatted object that resembles our intended schema for an object, and then use Yup utility functions to check if our data objects match this schema — hence validating them.
   ```
-- We build a schema / object, for each form field we wish to validate, and then chain requirements to meet our needs. Here's an example: 
+- We build a schema / object, for each form field we wish to validate, and then chain requirements to meet our needs. Here's an example:
     ```
      const SignupSchema = Yup.object().shape({
       first_name: Yup.string()
@@ -111,7 +111,7 @@ Use `create-react-app`
     ```
 
 #### Yup: Standards
-- TODO: How do we build Yup here? 
+- TODO: How do we build Yup here?
 
 #### Yup: Documenation
 - [Official Yup Docs](https://github.com/jquense/yup)
@@ -120,7 +120,7 @@ Use `create-react-app`
 
 ### React Router
 - TODO: Docs/standards
- 
+
 ## React: Styling
 
 ### CSS Modules
@@ -134,13 +134,13 @@ Use `create-react-app`
 - TODO: What is a complex CSS use case?
 - TODO: Docs on node-sass, how to add Sass to CSS Modules (I think this is supported by create-react-app)
 - TODO: Standards
- 
+
 ## React: UI Kits / Frameworks
 - TODO: When they're appropriate?
   - ie. when building a back-end system that won't require heavy custom design
 -TODO: When to just build your own
   - ie. consumer-facing apps with custom design
-    
+
 ### Aside on Semantic UI React
 We use this on a lot of older projects but have had a lot of issues with customizing. It's good to be familiar, but do not use this on new work.
 - TODO: Documentation
