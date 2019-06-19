@@ -26,10 +26,10 @@ If considering implementing another solution than our standard approach below, i
 ### Package management
 Use `npm`, this is a solved problem
 
-## React: Project Setup
+## Project Setup
 Use `create-react-app`
 
-## React: Project Structure
+## Project structure
 - TODO: How to set up folder structure
 
 ### Components
@@ -40,7 +40,7 @@ Use `create-react-app`
 ### Design Patterns
 - TODO: What component styles to use, when to use local state vs global state
 
-## React: State Management
+## State Management
 
 ### Simple
 - TODO: Describe what simple state needs are
@@ -54,7 +54,7 @@ Use `create-react-app`
 - TODO: Standard Redux practices, ie. action names, organization, format of action bodies
 - TODO: How do we handle redux & async? redux-saga, redux-thunk, plain ol' async/await
 
-## React: Forms
+## Forms
 
 ### Formik
 - Most often, when building forms in React we only need to store values in local component state. Then, we typically submit those values from that component to an API or other endpoint.
@@ -116,13 +116,12 @@ Use `create-react-app`
 #### Yup: Documenation
 - [Official Yup Docs](https://github.com/jquense/yup)
 
-## React: Routing
+## Routing
 
 ### React Router
 - TODO: Docs/standards
 
-## React: Styling
-
+## Styling
 ### CSS Modules
 - TODO: Docs/standards
 
@@ -135,7 +134,7 @@ Use `create-react-app`
 - TODO: Docs on node-sass, how to add Sass to CSS Modules (I think this is supported by create-react-app)
 - TODO: Standards
 
-## React: UI Kits / Frameworks
+## UI Kits / Frameworks
 - TODO: When they're appropriate?
   - ie. when building a back-end system that won't require heavy custom design
 -TODO: When to just build your own
@@ -145,7 +144,7 @@ Use `create-react-app`
 We use this on a lot of older projects but have had a lot of issues with customizing. It's good to be familiar, but do not use this on new work.
 - TODO: Documentation
 
-## React: Testing
+## Testing
 
 ### Unit Testing
 
@@ -158,7 +157,7 @@ https://github.com/react-boilerplate/react-boilerplate/blob/master/docs/testing/
 ### Integration/Functional Testing
 [Cypress](https://www.cypress.io/)
 
-## React: Linting Tools
+## Linting Tools
 Linting is *mandatory*
 - TODO: Document this
 
@@ -177,11 +176,11 @@ Immutable data encourages pure functions (data-in, data-out) and lends itself to
 While designed to bring these powerful functional concepts to JavaScript, it presents an Object-Oriented API familiar to Javascript engineers and closely mirroring that of Array, Map, and Set. It is easy and efficient to convert to and from plain Javascript types.
 ```
 
-## React: Code Editor Config
+## Code Editor Config
 - TODO: Recommend a couple editors for onboarding
 - TODO: Essential plugins (editorconfig, eslint)
 
-## React: Browser dev tools
+## Browser dev tools
 - [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) - inspect react component tree (state, props), debug rerenderings
 - [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) - track dispatched actions, inspect state at any action, track action payload
 - [Immutable.js Object Formatter](https://chrome.google.com/webstore/detail/immutablejs-object-format/hgldghadipiblonfkkicmgcbbijnpeog?hl=en) - inspect immutable objects in console or in react props/state
