@@ -15,8 +15,7 @@ We implement a standard set of React libraries and tools in order to:
 - increase number of developers who can assist on more projects, if developers know the same libraries and tools
 
 ### Other Choices?
-
-If considering implementing another state management solution, we'd recommend clearing it by one of the team leads. There may be existing solutions that most of our team will already know how to implement, and be able to build, debug and help with.
+If considering implementing another solution than our standard approach below, in a section, we recommend clearing it by one of the team leads. There may be an existing solution that most of our team will already know how to implement, build, debug and help with.
 
 ## Contents
 
@@ -73,12 +72,64 @@ Use `create-react-app`
 ## React: Forms
 
 ### Formik
-- TODO: Documentation
-- TODO: Any standards?
+- Most often, when building forms in React we only need to store values in local component state. Then, we typically submit those values from that component to an API or other endpoint. 
+- We recommend Formik as a simple, readable and extendable solution. Formik does not force state re-rendering, as Redux Forms does, and is a reliable solution for both very few form fields and/or many form fields in one component. 
+- Formik is recommended by the React team as a complete solution and can handle validation, input bindings, as well as errors and state changes.
+- Common form challenges solved by Formik include:
+  - Getting values in and out of form state
+  - Validation and error messages
+  - Handling form submission
+
+#### Formik: Standards
+- TODO: How do we build Formik here? 
+
+#### Formik: Documentation
+- [(Quick Overview) React Form Validation with Formik and Yup](https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10)
+- [Official Formik Docs](https://jaredpalmer.com/formik/docs/overview)
 
 ### Yup
-- TODO: Documentation
-- TODO: Standards
+- Validating form fields is often a multiple choice scenario. We often need to be able to chain requirements for 1 form field.
+- Validating data is also often required, like an object, before we send it to an API endpoint, so that we know it will pass that APIs requirements. 
+- Yup, along with Formik, works like this:
+  ```
+  With Yup, we create a Yup formatted object that resembles our intended schema for an object, and then use Yup utility functions to check if our data objects match this schema — hence validating them.
+  ```
+- We build a schema / object, for each form field we wish to validate, and then chain requirements to meet our needs. Here's an example: 
+    ```
+     const SignupSchema = Yup.object().shape({
+      first_name: Yup.string()
+        .min(2, 'Please enter a valid first name')
+        .required('Please enter a valid first name'),
+      email: Yup.string()
+        .email('Please enter a valid email')
+        .required('Please enter a valid email'),
+      password: Yup.string()
+        .min(8, 'Please enter a valid password')
+        .max(128, 'Please enter a valid password')
+        .matches(/[a-z]/, 'Please enter a valid password')
+        .matches(/[A-Z]/, 'Please enter a valid password')
+        .matches(/[0-9]/, 'Please enter a valid password')
+        .matches(/[!@#\$%\^&\*]/, 'Please enter a valid password')
+        .required('Please enter a valid password'),
+      password_confirm: Yup.string()
+        .required('Those two passwords do not match. Please try again.')
+        .oneOf(
+          [Yup.ref('password'), null],
+          'Those two passwords do not match. Please try again.'
+        ),
+      phone_number: Yup.string()
+        .matches(
+          /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/,
+          'Please enter a valid phone number'
+        )
+        .required('Please enter a valid phone number'),
+    ```
+
+#### Yup: Standards
+- TODO: How do we build Yup here? 
+
+#### Yup: Documenation
+- [Official Yup Docs](https://github.com/jquense/yup)
 
 ## React: Routing
 
