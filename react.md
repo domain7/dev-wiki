@@ -19,7 +19,19 @@ We implement a standard set of React libraries and tools in order to:
 If considering implementing another state management solution, we'd recommend clearing it by one of the team leads. There may be existing solutions that most of our team will already know how to implement, and be able to build, debug and help with.
 
 ## Contents
-TODO: When this is ready (can we make this dynamic?)
+
+- [Node](##node)
+- [React: Project Setup](##react-project-setup)
+- [React: Project Structure](##react-project-structure)
+- [React: State Management](##react-state-management)
+- [React: Forms](##react-forms)
+- [React: Routing](##react-routing)
+- [React: Styling](##react-styling)
+- [React: Testing](##react-testing)
+- [React: Linting Tools](##react-linting-tools)
+- [Other JS Tools](##other-js-tools)
+- [React: Code Editor Config](##react-code-editor-config)
+- [React: Browser dev tools](##react-browser-dev-tools)
 
 ## Node
 
@@ -33,7 +45,7 @@ Use `npm`, this is a solved problem
 ## React: Project Setup
 Use `create-react-app`
 
-## React: Project structure
+## React: Project Structure
 - TODO: How to set up folder structure
 
 ### Components
@@ -74,6 +86,7 @@ Use `create-react-app`
 - TODO: Docs/standards
  
 ## React: Styling
+
 ### CSS Modules
 - TODO: Docs/standards
 
