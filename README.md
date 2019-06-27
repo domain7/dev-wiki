@@ -9,7 +9,7 @@ Maintainer:
 Contributors:
 
 * [Colin Calnan](https://github.com/colincalnan)
-* [Joe Flynn](https://github.com/joeflynn)
+* [Jo Flynn](https://github.com/jo-flynn)
 * [Lance Janocha](https://github.com/lancejanocha)
 * [Igor Barbashin](https://github.com/igorbarbashin)
 * [Nicholas Monfils](https://github.com/nmwd)
