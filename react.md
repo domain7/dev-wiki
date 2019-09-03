@@ -303,64 +303,114 @@ Contains Jest configuration. If you're adding Jest plugins or configuring Enzyme
 - TODO: Standard Redux practices, ie. action names, organization, format of action bodies
 - TODO: How do we handle redux & async? redux-saga, redux-thunk, plain ol' async/await
 
-## Forms
+## Forms & Validation
+Nearly every React application has to deal with forms & form state management at some point. Building forms with React's built-in component state works great for many simple use cases, but we've found that delivering robust forms with client side validation can quickly outgrow the state management tools.
 
 ### Formik
-- Most often, when building forms in React we only need to store values in local component state. Then, we typically submit those values from that component to an API or other endpoint.
-- We recommend Formik as a simple, readable and extendable solution. Formik does not force state re-rendering, as Redux Forms does, and is a reliable solution for both very few form fields and/or many form fields in one component.
-- Formik is recommended by the React team as a complete solution and can handle validation, input bindings, as well as errors and state changes.
-- Common form challenges solved by Formik include:
-  - Getting values in and out of form state
-  - Validation and error messages
-  - Handling form submission
+[Formik](https://jaredpalmer.com/formik/) provides a set of components for form state management, rendering, and validation, and will work with any application state management library. If you're building anything more complex than a basic one field search form, add Formik to your project with a quick `npm install formik`. Their documentation is pretty robust so we won't duplicate it here, but we do have some general recommendations on how to work with Formik.
 
-#### Formik: Standards
-- TODO: How do we build Formik here?
+Prefer creating separate form components & passing them into the `Formik` component instead of inlining them. This makes it easier to use the same form in multiple contexts (i.e. building a single form for both your create and edit pages.)
+```js
+import { Formik } from 'formik';
+import YourFormComponent from './YourFormComponent';
+
+<Formik
+  component={YourFormComponent}
+/>
+```
+
+Pass your `components/form` and `components/form-partials` components into Formik's `<Field />` component instead of inlining them or using `'input', 'select', etc`. All of our custom form element components should be compatible with `<Field />` without additional implementation work.
+```js
+import { Field } from 'formik';
+
+import Input from 'components/form/Input';
+
+<Field
+  name="firstName"
+  component={Input}
+/>
+```
 
 #### Formik: Documentation
 - [(Quick Overview) React Form Validation with Formik and Yup](https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10)
 - [Official Formik Docs](https://jaredpalmer.com/formik/docs/overview)
 
 ### Yup
-- Validating form fields is often a multiple choice scenario. We often need to be able to chain requirements for 1 form field.
-- Validating data is also often required, like an object, before we send it to an API endpoint, so that we know it will pass that APIs requirements.
-- Yup, along with Formik, works like this:
-  ```
-  With Yup, we create a Yup formatted object that resembles our intended schema for an object, and then use Yup utility functions to check if our data objects match this schema — hence validating them.
-  ```
-- We build a schema / object, for each form field we wish to validate, and then chain requirements to meet our needs. Here's an example:
-    ```
-     const SignupSchema = Yup.object().shape({
-      first_name: Yup.string()
-        .min(2, 'Please enter a valid first name')
-        .required('Please enter a valid first name'),
-      email: Yup.string()
-        .email('Please enter a valid email')
-        .required('Please enter a valid email'),
-      password: Yup.string()
-        .min(8, 'Please enter a valid password')
-        .max(128, 'Please enter a valid password')
-        .matches(/[a-z]/, 'Please enter a valid password')
-        .matches(/[A-Z]/, 'Please enter a valid password')
-        .matches(/[0-9]/, 'Please enter a valid password')
-        .matches(/[!@#\$%\^&\*]/, 'Please enter a valid password')
-        .required('Please enter a valid password'),
-      password_confirm: Yup.string()
-        .required('Those two passwords do not match. Please try again.')
-        .oneOf(
-          [Yup.ref('password'), null],
-          'Those two passwords do not match. Please try again.'
-        ),
-      phone_number: Yup.string()
-        .matches(
-          /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/,
-          'Please enter a valid phone number'
-        )
-        .required('Please enter a valid phone number'),
-    ```
+Yup.js is an object schema validator that integrates seamlessly with Formik. With Yup, you build a schema describing the expected shape of your form's data and Formik will take care of running validation on change and propagating errors to your fields. Yup provides a plethora of built-in validators and allows the addition of custom validations using `yup.addMethod`.
 
-#### Yup: Standards
-- TODO: How do we build Yup here?
+Here's a quick example of a custom validator and a signup form schema.
+
+#### utils.yup.js
+```js
+// in a utils/yup.js file
+import * as yup from 'yup';
+
+// Set a custom default required message
+yup.setLocale({
+  mixed: {
+    required: ({ path: label }) => `Please enter a valid ${label}`,
+  }
+})
+
+yup.addMethod(yup.string, 'password', function validatePassword(length, message) {
+  return this.test('password', message, function testPassword(value) {
+    const { path, createError } = this;
+    const valid = value.match(yourPasswordRegexHere);
+
+    return new Promise((resolve, reject) => {
+      if (valid) {
+        resolve(true);
+      } else {
+        reject(createError({
+          path,
+          message: message || `${path} must have ${length} at least one number, one letter, and one symbol`,
+        }));
+      }
+    });
+  });
+});
+
+export default yup;
+```
+
+#### FormComponent.js
+```js
+import { PHONE_NUMBER } from 'utils/regex';
+import yup from 'utils/yup';
+
+const SignupSchema = yup.object({
+  first_name: yup.string()
+    .label('first name')
+    .min(2)
+    .required(),
+  email: yup.string()
+    .email()
+    .required(),
+  password: yup.string()
+    .min(8)
+    .max(128)
+    .password(),
+  password_confirm: yup.string()
+    .label('password')
+    .required(({ path: label }) => `Those two ${label}s do not match. Please try again.`)
+    .oneOf(
+      [yup.ref('password'), null],
+      ({ path: label }) => `Those two ${label}s do not match. Please try again.`
+    ),
+  phone_number: yup.string()
+    .label('phone number')
+    .matches(
+      PHONE_NUMBER,
+    )
+    .required(),
+});
+```
+
+#### Yup: Best Practices
+- Make liberal use of `yup.addMethod` & descriptive validator names to avoid repeating validation code. ie. `birthDate.string().isAdult()` is always easier to understand at a glance than a series of min/max validations full of date parsing code. Additionally, custom validators are easily unit testable, while one-off custom validation rules in a schema are not.
+- Any regexes used with `matches` should be named constants, even if you think it's obvious what the regex does.
+- Make use of `label()` to give your fields human-friendly names in error messages, if necessary.
+- Use `yup.setLocale` to customize default messages instead of passing the same message to multiple validators.
 
 #### Yup: Documenation
 - [Official Yup Docs](https://github.com/jquense/yup)
