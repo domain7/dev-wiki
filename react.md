@@ -421,17 +421,320 @@ const SignupSchema = yup.object({
 - TODO: Docs/standards
 
 ## Styling
+We recognize that a one-size-fits-all approach to CSS isn't really possible and that overcomplicating styling for smaller apps can lead to unnecessary complexity. Knowing that, we make use of two approaches for styling: vanilla CSS, and CSS Modules.
+
+### Vanilla CSS
+CRA compiles `.css` files into a single style bundle using Webpack, and automatically runs your code through Autoprefixer. Please refer to our general CSS style guide for information on structuring and naming your selectors.
+
+If you find yourself writing a lot of CSS or getting heavily into complex BEM selectors, you might want to move along to CSS Modules.
+
 ### CSS Modules
-- TODO: Docs/standards
+While a traditional CSS approach can work well with simple React apps, we prefer making use of CSS Modules for styling more complex applications. CSS Modules support is built into CRA, all you have to do is use the `.module.css` extension instead of `.css`, and co-locate it with your React component. This tells Webpack a couple things:
 
-### Simple
-- TODO: What is a simple CSS use case? ie. I just need to style some stuff
-- TODO: postcss-icss-values for basic variable support without Sass, but use css vars if IE support isn't necessary
+1. Affix some additional text to your selectors post-compilation to make sure they're unique across your entire project. i.e. `.container` in `styles.modules.css` is transformed to something like `.styles__container_v23fn2`.
+2. Allow importing of this stylesheet as a JS object. This is how you associate the randomly generated unique class name to your component without knowing it in advance. In practice, this looks like this:
 
-### Complex
-- TODO: What is a complex CSS use case?
-- TODO: Docs on node-sass, how to add Sass to CSS Modules (I think this is supported by create-react-app)
-- TODO: Standards
+#### `components/ui/YourComponent/styles.module.css`
+```css
+.yourComponent {
+  color: #fff;
+}
+```
+
+#### `components/ui/YourComponent/index.js`
+```js
+import styles from './styles.module.css';
+
+const ComponentName = ({ children }) => (
+  <div className={styles.yourComponent}>
+    {children}
+  </div>
+);
+```
+
+### CSS Modules Guidelines
+
+#### Use camelCase instead of kebab-case for class & variable names
+You'll be importing your styles to JS, so use JS-friendly naming conventions. Writing & reading `styles.myClass` is easier than `styles['my-class']`.
+
+#### Class names should be simple
+BEM and other naming conventions designed to avoid specificity bugs aren't necessary with CSS Modules. Your class names are guaranteed to be unique so you can name classes based on what they mean in the context of your module. You can have 50 components, each with their own `.container` class, and they'll never conflict even if some of those components are nested in others.
+
+Writing classes this way also makes Sass nesting a lot less necssary as you don't have to repeat the same prefixes over and over again.
+
+##### Avoid this:
+```css
+.socialLinks {
+
+} 
+.socialLinks__item {
+
+} 
+.socialLinks__item--facebook {
+
+}
+```
+
+##### Do this instead:
+```css
+.socialLinks {
+
+}
+
+.item {
+
+}
+
+.facebook {
+
+}
+```
+
+#### Overriding Child Components
+If you need to override styles in a child component from a parent component, expose props for passing CSS class names to the element you need to override instead of relying on child element selectors. These selectors lead to hard to debug CSS, as it's not always obvious which parent component is overriding child styles and those parent styles may wind up applying to more components than you intended.
+
+##### Avoid this:
+```css
+.list {
+  background: black;
+}
+.list li {
+  color: white;
+}
+```
+
+```js
+import styles from './styles.module.css';
+import ListItem from 'ListItem';
+
+const MyComponent = ({ items }) => (
+  <ul className={styles.list}>
+    {items.map(item => (
+      <ListItem>    
+        {item}
+      </ListItem>
+    ))}
+  </ul>
+);
+```
+
+##### Do this instead:
+```css
+/* MyComponent/styles.module.css */
+.list {
+  background: black;
+}
+.item {
+  color: white;
+}
+```
+
+```js
+/* MyComponent/index.js */
+import styles from './styles.module.css';
+import ListItem from 'components/layout/ListItem';
+
+const MyComponent = ({ 
+  items, 
+}) => (
+  <ul className={styles.list}>
+    {items.map(item => (
+      <ListItem 
+        className={styles.item}
+      >    
+        {item}
+      </ListItem>
+    ))}
+  </ul>
+);
+```
+```js
+/* ListItem/index.js */
+import styles from './styles.module.css';
+
+const ListItem = ({ 
+  children, 
+  className = null,
+}) => (
+  <li
+    className={[
+      styles.item,
+      className,
+    ]}
+  >
+    {children}
+  </li>
+);
+```
+
+#### Variables
+If you need compile-time variables, don't jump straight to including Sass. CSS Modules allows declaration of variables that you can import into CSS & and JS modules using its `@value` keyword. This is especially handy for sharing things like common media query breakpoints between your styles and conditional rendering tools like `react-media` (which the below example illustrates) or the DOM API's `window.mediaQueryListener`.
+
+```css
+/* variables.module.css */
+@value colorWhite: #fff;
+@value screenSmall: screen and (min-width: 768px);
+```
+
+```css
+/* MyComponent/styles.module.css */
+@value (
+  colorWhite,
+  screenSmall
+) from 'variables.css';
+
+.container {
+  width: 100%;
+  color: colorWhite;
+}
+
+@media screenSmall {
+  .container {
+    width: 80%;
+  }
+}
+```
+
+```js
+/* MyComponent/index.js */
+import { screenSmall } from 'variables.module.css';
+import SmallScreenComponent from 'MobileFriendlyComponent';
+import LargeScreenComponent from 'MobileFriendlyComponent';
+
+import styles from './styles.module.css';
+
+const MyComponent = ({ 
+  children, 
+}) => (
+  <div className={styles.container}>
+    <Media query={screenSmall}>
+      {matches => (
+        <LargeScreenComponent>
+      ) : (
+        <SmallScreenComponent>
+      )}
+    </Media>
+  </div>
+);
+```
+
+#### Conditional classes
+Install the [`classnames` package](https://www.npmjs.com/package/classnames) if you need to apply classes based on JS data as conditional string concatenation can get unwieldy with two or more optional classes. `classnames`'s array syntax makes this a lot easier to write & read. 
+
+```js
+import classNames from 'classnames';
+
+import styles from './styles.module.css';
+
+const MyComponent = ({ 
+  children,
+  conditionA,
+  conditionB,
+  conditionC,
+}) => (
+  <div 
+    className={classNames([
+      styles.myComponent,
+      conditionA && styles.conditionalClassA,
+      conditionB && styles.conditionalClassB,
+      conditionC && styles.conditionalClassC,
+    ])}
+  >
+    {children}
+  </div>
+);
+```
+
+#### Global selectors
+Only use `:global` selectors to override another library's CSS if there are no other ways of doing so. We should try to make use of third-party UI libraries that allow passing classNames to components for style customization. That said, some otherwise very good tools may not support this or we may need to integrate with non-React JS libraries. Avoid using `:global` otherwise as it opts you out of all the local scoping benefits provided by CSS Modules.
+
+A good example is **Semantic UI**. While Semantic provides `className` properties for its components, its heavily specific style of CSS means that built-in styles will often win over yours, particularly if you're trying to style sub-elements like a dropdown menu item. Furthermore, you can't directly target their classes (i.e. `ui.dropdown .menu > .item`) as CSS Modules will modulify those class names.
+
+To overcome this, you can write a selector like below which will tell CSS Modules to modulify `yourDropdown` (and allow you to access it in JS like normal) but print `.ui.dropdown .menu > .item` as is. 
+
+> ⚠️ You should try to always prefix your `:global` rules with a local class, otherwise they'll escape the scope of your module and potentially override styles in other components.
+
+```css
+/* MyDropdown/styles.module.css */
+.myDropdown:global(.ui.dropdown .menu > .item) {
+  background-color: black;
+}
+```
+
+```js
+/* MyDropdown/index.js */
+import Dropdown from 'semantic-ui-react';
+import styles from './styles.module.css';
+
+const MyDropdown = ({
+  items
+}) => (
+  <Dropdown
+    className={styles.myDropdown}
+  >
+  {/* etc... */}
+  </Dropdown>
+);
+```
+
+#### Prefer composable components to the `composes` keyword
+CSS Modules provides the `composes` keyword as a means of adding style rules from one class into another, similar to mixins in Sass. While this is powerful functionality that can make it easier to share styles across semantically different components, we should avoid using it when creating composable components is possible. 
+
+For example, you should avoid creating a `.list` class and composing it with various components that implement a `<ul>`. Instead:
+
+* Create `<List />` and `<ListItem />` components that have their own style modules and accept a `className` for further customization
+* Replace `<ul>`s & `<li>`s elsewhere in your app with your new base components.
+* If you find you're passing similar customizations to various `<List>` instances, move that customization to `<List>`'s CSS module and apply it conditionally using a conditional className like the above example.
+
+You now have a single, explicit defintion of what your app considers a list, and you can update its markup or styles across the entire site in one place.
+
+#### Utilize computed keys to apply modifier classes using props
+If you have a component that has multiple variants, use dynamic property access to make applying these classes easier. You can even organize these variants in a separate CSS file to avoid the need to prefix each variant class.
+ 
+```css
+/* MyComponent/variants.module.css */
+@value colorBrand, colorDanger from 'variables.module.css';
+
+.primary {
+  background-color: colorBrand;
+}
+
+.danger {
+  background-color: colorDanger;
+}
+```
+
+```js
+/* MyComponent/index.js */
+import classNames from 'classnames';
+
+import styles from './styles.module.css';
+import variants from './variants.module.css';
+
+const MyComponent = ({ 
+  children,
+  variant = 'primary',
+}) => (
+  <div 
+    className={classNames([
+      styles.myComponent,
+      variants[variant]
+    ])}
+  >
+    {children}
+  </div>
+);
+
+MyComponent.propTypes = {
+  variant: PropTypes.oneOf([
+    'primary',
+    'danger',
+  ]),
+};
+```
+
+### Sass + CSS Modules
+If you find yourself missing Sass features, make double super sure you can't address the same needs using CSS Modules' built-in fuctionality. If you still need Sass, refer to [CRA's documentation on adding Sass support](https://create-react-app.dev/docs/adding-a-sass-stylesheet). Remember that you'll lose the ability to import variables into JS files if you convert them to Sass variables, so you'll need to re-engineer components accordingly.
 
 ## UI Kits / Frameworks
 - TODO: When they're appropriate?
