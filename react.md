@@ -749,12 +749,143 @@ We use this on a lot of older projects but have had a lot of issues with customi
 ## Testing
 
 ### Unit Testing
+CRA comes with [Jest](https://facebook.github.io/jest/) pre-configured and ready for you to write your first test. Please reference [the CRA documentation](https://create-react-app.dev/docs/running-tests) for the latest info on how to run tests and some basic information on setting them up. Beyond this, we have a few best practices for test writing and organization.
 
-[Jest](https://facebook.github.io/jest/) for unit testing
-https://github.com/react-boilerplate/react-boilerplate/blob/master/docs/testing/unit-testing.md
+#### Place .test.js files next to the component they test
+Jest automatically detects files with a `.test.js` extension and incorporates them into the test suite. The best place for these files is right next to the file they're testing. If your component has any sub components, their test files should be named similarly.
 
-- TODO: Helpful jest plugins (clock, browser API mocking, etc)
-- TODO: Standards/best practices
+```
+MyComponent/
+  index.js
+  index.test.js
+  MySubComponent.js
+  MySubComponent.test.js
+```
+
+#### Organize for better readability
+Jest lets you use `describe` blocks to group tests by functionality or another measure that makes sense for your project. This makes your test suites easier to read and gives Jest metadata to use when displaying test failure feedback in your terminal.
+
+Assuming you're testing a module that contains a single function:
+```js
+/* myModule.test.js */
+import {
+  functionA,
+} from './myModule';
+
+describe('myModule', () => { // the name of the module being tested
+  describe('functionA', () => { // the name of the function being tested 
+    it('should return A', () => { // a specific test case
+      expect(functionA()).toBe('A');
+    });
+
+    it('should not return G', () => { // a different, equally contrived test case
+      expect(functionA()).not.toBe('G');
+    });
+  });
+});
+```
+
+#### Use Enzyme to simulate component rendering
+We need to bring in another package to allow us to simulate the mounting and rendering of React components without a browser. Follow the instructions on the CRA site to add [Enzyme](https://create-react-app.dev/docs/running-tests#option-1-shallow-rendering) to your project and make use of `shallow` and `render` whenever you need to see whether or not a React component behaves the way you expect.
+
+#### Use snapshot tests to detect potential UI regressions
+[Snapshot testing](https://jestjs.io/docs/en/snapshot-testing) makes preventing UI regressions much easier. On first run, Jest takes a "snapshot" (a plain text rendering of your component's output, not an image) and stores it in a snapshots folder alongside your test which is then added to your next git commit. 
+
+On subsequent runs, Jest renders the component and compares the to your stored snapshot. If they don't match, the tests fail. This doesn't necessarily mean your app is broken, it just means that some of your components are now rendering differently. Jest will show you a diff for each failing component. If you see differences you expect, you can update the snapshot using the Jest CLI, otherwise it's time to manually review those components for a regression.
+
+#### Use mocking to test functionality that relies on code or factors you can't control
+Mocking is the process of faking a third-party dependency or a built-in API to create the conditions necessary for your test to run. It can be anything from testing that your app handles API issues by simulating a 500 error from a network request, simulating screen size by overriding `mediaQueryListener`'s behaviour, to mocking `Date` so you don't have to update tests that calculate an age difference every time the current year rolls over. Let's use that last one as an example.
+
+Assuming this test was written in 2019, it will start failing next year even though the tested logic is working correctly:
+```js
+describe('getAge', () => {
+  it("should calculate a user's age", () => {
+    const birthDate = '1990-01-01';
+    expect(getAge(birthDate)).toBe(29);
+  });
+});
+```
+
+This will always work as we're mocking the current date, ensuring `new Date()` always returns January 1, 2019 regardless of what time it currently is:
+```js
+describe('getAge', () => {
+  beforeEach(() => {
+    clock.set('2019-01-01T00:00:00.000Z'); // provided by jest-plugin-clock
+  });
+  
+  it("should calculate a user's age", () => {
+    const birthDate = '1990-01-01';
+    expect(getAge(birthDate)).toBe(29);
+  });
+});
+```
+
+#### Turn your bugs into test cases
+Practicing test driven development (TDD) with UI can be challenging as it's hard to write tests for a potentially complex UI, especially when much of your business logic is happening in an API somewhere. That said, bug stories offer a great opportunity to practice TDD in a React project.
+
+Once you get a handle on the problematic behaviour in question and verify that it's real & replicable, write a test case that simulates it. Then, update your code until the tests pass.
+
+#### Separate complex logic into smaller, easily testable modules whenever possible
+Testing complex logic that relies on React state can be confusing and time consuming. Instead, we can take a more modular approach by refactoring code that isn't directly responsible for presentation and testing that directly.
+
+An example would be a UI element that takes the start and end dates of a user's vacation and displays how long they'll be away, in days. You could embed this date calculation into a React component, possibly as a function that accesses state:
+
+```js
+const MyComponent = () => {
+  const [{ startDate, endDate }, updateDates] = useState({ startDate: null, endDate: null });
+  
+  const calculateDays = () => {
+    return endDate - startDate; // for brevity, let's assume date diff calculation in JS is sensible & easy
+  };
+
+  return (
+    <div>
+      {calculateDays()}
+    </div>
+  );
+};
+```
+
+To test this you'd need to fully mount the component, simulate state changes to set `startDate` and `endDate`, then check the rendered output for the number of days you expect. To make this simpler, we can refactor our date logic into a separate function.
+
+```js
+/* MyComponent/index.js */
+import { calculateDays } from 'utils/date';
+
+const MyComponent = () => {
+  const [{ startDate, endDate }, updateDates] = useState({ startDate: null, endDate: null });
+  return (
+    <div>
+      {calculateDays(startDate, endDate)}
+    </div>
+  );
+};
+```
+
+```js
+/* utils/date.js */
+export calculateDays(startDate, endDate) {
+  return endDate - startDate; // for brevity, let's assume date diff calculation in JS is sensible & easy
+}
+```
+
+```js
+/* utils/date.test.js */
+describe('date', () => {
+  describe('calculateDays', () => {
+    it('should calculate the number of days between two dates', () => {
+      expect(calculateDays(new Date('2019-01-01'), new Date('2019-01-07'))).toBe(6);
+    });
+  });
+});
+```
+
+Now your test is a lot simpler and as a happy side effect you can easily re-use this logic in other components if necessary.
+
+#### Helpful Plugins
+- [jest-plugin-clock](https://www.npmjs.com/package/jest-plugin-clock): Makes mocking JS `Date`s super easy. Essential if you're testing anything time-sensitive.
+- [jest-fetch-mock](https://www.npmjs.com/package/jest-fetch-mock): Mock `fetch` responses and rejections. Enables the testing of API dependent code without hitting a real API or even needing an internet connection.
+- [jest-localstorage-mock](https://www.npmjs.com/package/jest-localstorage-mock): Essential for testing code that touches localStorage or sessionStorage.
 
 ### Integration/Functional Testing
 [Cypress](https://www.cypress.io/)
