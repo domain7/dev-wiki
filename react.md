@@ -466,10 +466,10 @@ Writing classes this way also makes Sass nesting a lot less necssary as you don'
 ```css
 .socialLinks {
 
-} 
+}
 .socialLinks__item {
 
-} 
+}
 .socialLinks__item--facebook {
 
 }
@@ -510,7 +510,7 @@ import ListItem from 'ListItem';
 const MyComponent = ({ items }) => (
   <ul className={styles.list}>
     {items.map(item => (
-      <ListItem>    
+      <ListItem>
         {item}
       </ListItem>
     ))}
@@ -534,14 +534,14 @@ const MyComponent = ({ items }) => (
 import styles from './styles.module.css';
 import ListItem from 'components/layout/ListItem';
 
-const MyComponent = ({ 
-  items, 
+const MyComponent = ({
+  items,
 }) => (
   <ul className={styles.list}>
     {items.map(item => (
-      <ListItem 
+      <ListItem
         className={styles.item}
-      >    
+      >
         {item}
       </ListItem>
     ))}
@@ -552,8 +552,8 @@ const MyComponent = ({
 /* ListItem/index.js */
 import styles from './styles.module.css';
 
-const ListItem = ({ 
-  children, 
+const ListItem = ({
+  children,
   className = null,
 }) => (
   <li
@@ -603,8 +603,8 @@ import LargeScreenComponent from 'MobileFriendlyComponent';
 
 import styles from './styles.module.css';
 
-const MyComponent = ({ 
-  children, 
+const MyComponent = ({
+  children,
 }) => (
   <div className={styles.container}>
     <Media query={screenSmall}>
@@ -619,20 +619,20 @@ const MyComponent = ({
 ```
 
 #### Conditional classes
-Install the [`classnames` package](https://www.npmjs.com/package/classnames) if you need to apply classes based on JS data as conditional string concatenation can get unwieldy with two or more optional classes. `classnames`'s array syntax makes this a lot easier to write & read. 
+Install the [`classnames` package](https://www.npmjs.com/package/classnames) if you need to apply classes based on JS data as conditional string concatenation can get unwieldy with two or more optional classes. `classnames`'s array syntax makes this a lot easier to write & read.
 
 ```js
 import classNames from 'classnames';
 
 import styles from './styles.module.css';
 
-const MyComponent = ({ 
+const MyComponent = ({
   children,
   conditionA,
   conditionB,
   conditionC,
 }) => (
-  <div 
+  <div
     className={classNames([
       styles.myComponent,
       conditionA && styles.conditionalClassA,
@@ -650,7 +650,7 @@ Only use `:global` selectors to override another library's CSS if there are no o
 
 A good example is **Semantic UI**. While Semantic provides `className` properties for its components, its heavily specific style of CSS means that built-in styles will often win over yours, particularly if you're trying to style sub-elements like a dropdown menu item. Furthermore, you can't directly target their classes (i.e. `ui.dropdown .menu > .item`) as CSS Modules will modulify those class names.
 
-To overcome this, you can write a selector like below which will tell CSS Modules to modulify `yourDropdown` (and allow you to access it in JS like normal) but print `.ui.dropdown .menu > .item` as is. 
+To overcome this, you can write a selector like below which will tell CSS Modules to modulify `yourDropdown` (and allow you to access it in JS like normal) but print `.ui.dropdown .menu > .item` as is.
 
 > ⚠️ You should try to always prefix your `:global` rules with a local class, otherwise they'll escape the scope of your module and potentially override styles in other components.
 
@@ -678,7 +678,7 @@ const MyDropdown = ({
 ```
 
 #### Prefer composable components to the `composes` keyword
-CSS Modules provides the `composes` keyword as a means of adding style rules from one class into another, similar to mixins in Sass. While this is powerful functionality that can make it easier to share styles across semantically different components, we should avoid using it when creating composable components is possible. 
+CSS Modules provides the `composes` keyword as a means of adding style rules from one class into another, similar to mixins in Sass. While this is powerful functionality that can make it easier to share styles across semantically different components, we should avoid using it when creating composable components is possible.
 
 For example, you should avoid creating a `.list` class and composing it with various components that implement a `<ul>`. Instead:
 
@@ -690,7 +690,7 @@ You now have a single, explicit defintion of what your app considers a list, and
 
 #### Utilize computed keys to apply modifier classes using props
 If you have a component that has multiple variants, use dynamic property access to make applying these classes easier. You can even organize these variants in a separate CSS file to avoid the need to prefix each variant class.
- 
+
 ```css
 /* MyComponent/variants.module.css */
 @value colorBrand, colorDanger from 'variables.module.css';
@@ -711,11 +711,11 @@ import classNames from 'classnames';
 import styles from './styles.module.css';
 import variants from './variants.module.css';
 
-const MyComponent = ({ 
+const MyComponent = ({
   children,
   variant = 'primary',
 }) => (
-  <div 
+  <div
     className={classNames([
       styles.myComponent,
       variants[variant]
@@ -773,7 +773,7 @@ import {
 } from './myModule';
 
 describe('myModule', () => { // the name of the module being tested
-  describe('functionA', () => { // the name of the function being tested 
+  describe('functionA', () => { // the name of the function being tested
     it('should return A', () => { // a specific test case
       expect(functionA()).toBe('A');
     });
@@ -789,7 +789,7 @@ describe('myModule', () => { // the name of the module being tested
 We need to bring in another package to allow us to simulate the mounting and rendering of React components without a browser. Follow the instructions on the CRA site to add [Enzyme](https://create-react-app.dev/docs/running-tests#option-1-shallow-rendering) to your project and make use of `shallow` and `render` whenever you need to see whether or not a React component behaves the way you expect.
 
 #### Use snapshot tests to detect potential UI regressions
-[Snapshot testing](https://jestjs.io/docs/en/snapshot-testing) makes preventing UI regressions much easier. On first run, Jest takes a "snapshot" (a plain text rendering of your component's output, not an image) and stores it in a snapshots folder alongside your test which is then added to your next git commit. 
+[Snapshot testing](https://jestjs.io/docs/en/snapshot-testing) makes preventing UI regressions much easier. On first run, Jest takes a "snapshot" (a plain text rendering of your component's output, not an image) and stores it in a snapshots folder alongside your test which is then added to your next git commit.
 
 On subsequent runs, Jest renders the component and compares the to your stored snapshot. If they don't match, the tests fail. This doesn't necessarily mean your app is broken, it just means that some of your components are now rendering differently. Jest will show you a diff for each failing component. If you see differences you expect, you can update the snapshot using the Jest CLI, otherwise it's time to manually review those components for a regression.
 
@@ -812,7 +812,7 @@ describe('getAge', () => {
   beforeEach(() => {
     clock.set('2019-01-01T00:00:00.000Z'); // provided by jest-plugin-clock
   });
-  
+
   it("should calculate a user's age", () => {
     const birthDate = '1990-01-01';
     expect(getAge(birthDate)).toBe(29);
@@ -833,7 +833,7 @@ An example would be a UI element that takes the start and end dates of a user's 
 ```js
 const MyComponent = () => {
   const [{ startDate, endDate }, updateDates] = useState({ startDate: null, endDate: null });
-  
+
   const calculateDays = () => {
     return endDate - startDate; // for brevity, let's assume date diff calculation in JS is sensible & easy
   };
@@ -890,12 +890,53 @@ Now your test is a lot simpler and as a happy side effect you can easily re-use 
 ### Integration/Functional Testing
 [Cypress](https://www.cypress.io/)
 
-## Linting Tools
-Linting is *mandatory*
-- TODO: Document this
+## Linting & Coding Style
+We've adopted a standard coding style in order to make our projects easier to onboard and cut down on worries about tabs vs. spaces, casing styles, etc. This coding standard will be documented in brief here, but is fully captured in our [`eslint-config-domain7` NPM package](https://github.com/domain7/eslint-config-domain7). It's *highly recommended* to configure your text editor to automatically lint your React code as you work, as our React projects often have pre-commit & pre-push checks that will fail if your code doesn't pass. It's much easier to learn and adapt a standard when you get feedback in small chunks instead of all at once.
 
-[eslint](#TODO)
-[eslint-airbnb](#TODO)
+Our standard extends [eslint-config-airbnb](https://github.com/airbnb/javascript). Please review their documentation (and the React sub-page.)
+
+### Our customizations
+* We automatically include `jest` as a global and bundle the `react`, `jsx-a11y`, and `filenames` plugins.
+* We allow non-destructuring props assignment in case destructuring would cause name conflicts.
+* We allow dangling underscores (i.e. `const variable__`)
+* We enforce dangling commas in multi-line array, object, and function arguments lists. This makes it easier to re-order lines without causing syntax errors. This is not enforced on single-line lists.
+  ```js
+  // Good:
+  const foo = {
+    a: 1,
+    b: 2,
+  };
+
+  // Bad:
+  const foo = {
+    a: 1,
+    b: 2
+  }
+  ```
+* We enforce a two space indent.
+* We validate `aria-*` attributes.
+* We require `for` attributes on `<label>` components.
+* We require corresponding key events if mouse events are present
+* We disable Airbnb's max line length.
+* We allow multiple `inline.chained().method().calls()`.
+* `console` and `debugger` statements are warnings, not errors, as we need these to not crash CRA's dev server. Your project will often treat these as errors when running pre-commit/pre-push checks, however, so you do have to clean them up eventually.
+* ``${Template} literals`` are preferred to `'string' +  'concatentation'`.
+* We allow `PropTypes.object` even though it's best to define a `PropTypes.shape` when you know the full list of properties your component expects.
+* We ban the `.jsx` extension. Please use `.js` for React components.
+* We warn on deprected functions but don't throw an error because sometimes refactoring isn't feasible at the moment. Try to fix this stuff when you find it though!
+* We allow `this.setState` in `componentDidUpdate`. While this isn't optimal code, it's sometimes necessary.
+* We disable `import/no-extraneous-dependencies` in Jest tests when importing `devDependencies`.
+* We disable `react/prefer-stateless-function` because refactoring functional components to class components when you need to add state can be unnecessarily time consuming. If your project is primarily using class components, feel free to use one when a stateless function would work. While React is moving away from classes, we still support them in older projects.
+
+### Ignore comments & per-project customization
+
+Lint rules are a guideline to provide some consistency, but are **always up for discussion** if they're not meeting our needs or aren't providing value.
+
+ You may need to occasionally override eslint on a case-by-case basis, and this is OK! That said, please check with your lead dev and/or expect PR feedback on whether or not they're necessary.
+
+We sometimes will use a project as an opportunity to try something new, (i.e.,avoid using class components and `this.state` to embrace Hooks and the direction React is going in the future) so individual projects may minimally override or customize our standard. Be sure to check their eslint configuration if something doesn't totally line up with your expectations or the documentation here.
+
+Remember, our linting guidelines are a living document and are **always up for discussion** with your team lead and other team members. Our standard should be an ongoing coversation on what we feel is best practice, not an excuse to stick to what we know.
 
 ## Other JS Tools
 
