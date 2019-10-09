@@ -1,17 +1,17 @@
 ---
 layout: page
-title: Javascript
+title: JavaScript
 permalink: /javascript/
 mainmenu: true
 ---
 
-## Javascript
+## Coding Standards
 
-We follow [Airbnb's Javscript Styleguide](https://github.com/airbnb/javascript) for our javascript coding standards. 
+We follow [our JavaScript Styleguide](https://github.com/domain7/eslint-config-domain7) for our JavaScript coding standards. It's a modification of the [AirBnB JavaScript Styleguide](https://github.com/airbnb/javascript).
 
 ## Modules
 
-  Much like our CSS approach, we split every piece of javascript functionality into separate modules.
+  Much like our CSS approach, we split every piece of JavaScript functionality into separate modules.
 
   - The file should be named with camelCase.
   - Add a method called `noConflict()` that sets the exported module to the previous version and returns this one.
@@ -35,7 +35,7 @@ We follow [Airbnb's Javscript Styleguide](https://github.com/airbnb/javascript) 
       //Some private function
       function onReady(){
         //Do the stuff
-      
+
       }
 
       function toggleIt(){
@@ -47,17 +47,17 @@ We follow [Airbnb's Javscript Styleguide](https://github.com/airbnb/javascript) 
         return toggled;
       }
 
-      //Return a public API that 
+      //Return a public API that
       return {
         toggleIt: toggleIt,
         isToggled: isToggled
       };
-      
+
     }(jQuery));
     ```
 
 ## Tools, Libraries, and Plugins
-  To avoid having 3rd party JS accidentally modified, Vendor JS should be in an isolated directory from the app source directory. Great examples of directory names for this: 
+  To avoid having 3rd party JS accidentally modified, Vendor JS should be in an isolated directory from the app source directory. Great examples of directory names for this:
 
   - /vendor
   - /includes
@@ -65,6 +65,6 @@ We follow [Airbnb's Javscript Styleguide](https://github.com/airbnb/javascript) 
 
   3rd party JS that needs to be modified should idealy be forked on github/bitbucket.
 
-##Angular
+## Angular
 
 For Angular, we use [John Papa's Angular Style Guide](https://github.com/johnpapa/angular-styleguide) as our coding reference.
