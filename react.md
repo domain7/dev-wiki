@@ -951,8 +951,17 @@ While designed to bring these powerful functional concepts to JavaScript, it pre
 ```
 
 ## Code Editor Config
-- TODO: Recommend a couple editors for onboarding
-- TODO: Essential plugins (editorconfig, eslint)
+We believe in letting developers choose the best tools for themselves. When working on React projects, we recommend a modern text editor with good ES6+ syntax support. A few suggestions are:
+
+* [VSCode](https://code.visualstudio.com/)
+* [Atom](https://atom.io)
+* [WebStorm](https://www.jetbrains.com/webstorm/)
+
+While we're not prescriptive about text editors, there are a few essential editor plugins that you'll need to install to best work on our codebases. (Since we support many editors, we're not linking specific plugins here. You'll need to search for the plugin for your editor yourself.)
+
+* [editorconfig](https://editorconfig.org/) provides a standard way to share text editor configuration settings like which line endings to use and how many spaces are in an indent. Our projects all have an `.editorconfig` and installing this plugin will make your editor automatically adapt those settings.
+* [eslint](https://eslint.org/) will automatically run your changes against our ESLint standard and provide helpful inline feedback. Many ESLint plugins support automatically fixing lint errors on save, which we recommend enabling.
+* [stylelint](https://github.com/stylelint/stylelint) provides syntax checking and linting for CSS. You may additionally need [sass-lint](https://github.com/sasstools/sass-lint) if your project is using SCSS.
 
 ## Browser developer tools
 - [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) - inspect react component tree (state, props), debug rerenderings
