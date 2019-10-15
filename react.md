@@ -290,18 +290,302 @@ Contains Jest configuration. If you're adding Jest plugins or configuring Enzyme
 - TODO: What component styles to use, when to use local state vs global state
 
 ## State Management
+Our preferred solution for state management is the popular [Redux](https://redux.js.org) library. Redux provides a means of describing the nouns and verbs that make up our state that promotes re-use and testability. That said, this is React, so there's no one "right" way to use Redux. We need to tweak our approach depending on the scope of our application and the complexity of it's business logic. Therefore we're going to describe a couple recommended approaches to organizing your Redux state: simple & complex. Whether or not your app is simple or complex is up to you (or the lead developer on your project.)
 
-### Simple
-- TODO: Describe what simple state needs are
-- TODO: React Hooks / useReducer / etc
+### Conventions
+Regardless of your approach to state management, there are a few naming and formatting conventions we should always follow:
 
-### Complex
-- TODO: Describe what complex state needs are (am I over-engineering?)
+#### Namespace actions
+Actions should always be prefixed with a namespace for clarity and to avoid accidental action name collision. They should always be declared as `SCREAMING_SNAKE_CASE` constants and exported for use in other modules.
 
-#### Redux
-- TODO: Links to Redux documentation (get up to speed, not super detailed)
-- TODO: Standard Redux practices, ie. action names, organization, format of action bodies
-- TODO: How do we handle redux & async? redux-saga, redux-thunk, plain ol' async/await
+##### Bad:
+```js
+export const MY_ACTION = 'MY_ACTION';
+```
+
+##### Good:
+```js
+export const MY_ACTION = 'myApp/MY_ACTION';
+```
+
+#### Use action creators
+It's tempting to just `dispatch` objects to your store but because we don't like repeating ourselves and we do like writing code that's easy to refactor, we should encapsulate actions in functions.
+
+##### Bad:
+```js
+import { MY_ACTION } from 'state/actions';
+
+dispatch({
+  type: MY_ACTION,
+  myValue,
+});
+```
+
+##### Good:
+```js
+// actions.js
+export const MY_ACTION = 'myApp/MY_ACTION';
+
+export const myAction = myValue => ({
+  type: MY_ACTION,
+  myValue,
+});
+
+// MyComponent/index.js
+import { myAction } from 'state/actions';
+
+dispatch(myAction(myValue));
+```
+
+#### Use a consistent action object format
+`{ type, payload, meta }`
+
+Sticking to a standard action format leads to code that's easier to learn and less surprising. This format is loosely adapted from [Flux Standard Action](https://github.com/redux-utilities/flux-standard-action) but opts to keep errors in `meta` to preserve the expectation that payload is an object of data.
+
+* `type` is always a string action name.
+* `payload` is optional, but when present is data that's meant to be persisted to the store.
+* `meta` is any additional information, like errors, HTTP status, etc. This can be standardized further on a per-application basis.
+
+##### Bad:
+It's not clear from this action what data is persisted to the store and what's just extra metadata.
+
+```js
+// actions.js
+export const MY_ACTION = 'myApp/MY_ACTION';
+
+export const myAction = myValue => ({
+  type: MY_ACTION,
+  myValue,
+  extraDataNotInStore: 'foo',
+});
+```
+
+##### Good:
+Every action uses the same format so other developers can have clear expectations on what's dispatched to reducers. Setting some standards around error formatting, i.e adapting a standard `meta.errors` property, can make it easier to write code like a reducer for global error state handling.
+
+```js
+// actions.js
+export const MY_ACTION = 'myApp/MY_ACTION';
+
+export const myAction = myValue => ({
+  type: MY_ACTION,
+  payload: {
+    myValue,
+  },
+  meta: {
+    extraDataNotInStore: 'foo',
+  }
+});
+```
+
+#### Reducers
+Reducers should:
+
+* Make use of ES6 features like default parameters, destructuring & object spread to reduce boilerplate code.
+* Use `switch` statements to model action branches, not `if/else` object key/value access, or other clever abstractions. While there's a bit more typing involved with `switch`es, it's obvious what they're doing at first glance. Remember, you'll spend more time reading code than writing it.
+
+```js
+import { MY_ACTION } from 'state/actions';
+
+const initialState = {
+  myValue: null,
+  anotherValue: null,
+};
+
+export const myReducer = (state = initialState, { type, payload, meta }) => {
+  switch (type) {
+    case MY_ACTION: {
+      return {
+        // Remember to always destructure the current state first ...
+        ...state,
+        // before updating properties
+        myValue: payload.myValue,
+        // Declare initialState in a variable to allow easy resets of individual properties
+        anotherValue: initialState.anotherValue,
+      };
+    }
+    case default: {
+      return state;
+    }
+  }
+}
+```
+
+### Simple State
+A simple state use case would be something like a multi-step registration & purchase flow, or a React app embedded inside a traditional web app that's only responsible for a small subset of functionality.
+
+#### File structure
+If your app's state needs are relatively simple, you can group state code by what type of functionality it is. All actions in one file, all reducers in one file, etc.
+
+```
+state/
+  actions.js
+  reducers.js
+  selectors.js
+```
+
+### Complex State
+Complex state use cases include fully featured web applications, advanced content workflows, and other applications where a significant amount of state needs to be loaded, manipulated, and saved. Data objects in these scenarios may be deeply nested or interrelated.
+
+#### File structure
+In this situation, you'll want to break up your state functionality around specific business objects. Think of these state modules similarly to a model in an MVC framework. If you've worked with Redux before, you may be familiar with this way of organizing state as [the ducks pattern](https://github.com/erikras/ducks-modular-redux).
+
+Each module:
+
+* Includes a reducer
+* Includes actions & action creators
+* May include async actions and selectors
+* May export action names as `const`s so other reducers can listen for them
+
+Collaborating with your project's API team when designing a complex state model is essential, and you can often follow their lead on how to organize things (i.e. if you have a set of CRUD `project` endpoints, you probably need a `projects` state module.) You won't always want to match your API's data model 1:1, but it's not a bad place to start organizing your state.
+
+As an example, these could be a few basic state modules for a project task management system:
+
+```
+state/
+  projects.js
+  todos.js
+  users.js
+```
+
+These are all kept separate in the filesystem, they're eventually merged into a single reducer, so state modules can optionally import actions from other state modules for use in their reducers.
+
+The following is an example of a `users` duck that can try to load data from an API and either add users to the store on success, or log an error on failure. You can use this as a starting point for your ducks, but a more robust error handling solution is probably necessary.
+
+Take note of how we model the act of getting users from the server as three distinct actions: `REQUEST`, `SUCCESS`, and `ERROR`. We've found this convention useful for modeling asynchronous logic as it allows us to update state both when an async action completes as well as when it starts.
+
+```js
+import { createSelector } from 'reselect'; // see Additional Libraries below
+
+// Actions
+const LOAD_REQUEST = 'myApp/users/LOAD_REQUEST';
+const LOAD_SUCCESS = 'myApp/users/LOAD_SUCCESS';
+const LOAD_ERROR = 'myApp/users/LOAD_ERROR';
+
+// Action creators
+export const usersLoadRequest = () => ({
+  type: LOAD_REQUEST,
+});
+
+export const usersLoadSuccess = (users) => ({
+  type: LOAD_SUCCESS,
+  payload: {
+    users,
+  },
+});
+
+export const usersLoadError = (error) => ({
+  type: LOAD_ERROR,
+  meta: {
+    error,
+  },
+});
+
+// Async action creators, or thunks (see Async section below)
+export const getUsers = () => async (dispatch) => {
+  dispatch(usersLoadRequest());
+
+  try {
+    const response = await fetch('/users');
+    const users = await response.json();
+
+    dispatch(usersLoadSuccess(users));
+  } catch (error) {
+    dispatch(usersLoadError(error));
+  }
+};
+
+// Selectors
+export const selectAllUsers = state => state.users;
+export const selectAllActiveUsers = createSelector(
+  selectAllUsers(),
+  users => users.filter(user => user.active),
+);
+
+// Reducer
+const initialState = {
+  users: [],
+  isLoading: false,
+  error: null,
+};
+
+export default (state = initialState, { type, payload, meta }) => {
+  switch (type) {
+    case LOAD_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case LOAD_SUCCESS: {
+      return {
+        ...state,
+        isLoading: initialState.isLoading,
+        users: payload.users,
+        error: initialState.error,
+      };
+    }
+    case LOAD_ERROR: {
+      return {
+        ...state,
+        isLoading: initialState.isLoading,
+        error: meta.error,
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};
+```
+
+Each of these state modules will be merged together using Redux's `combineReducers` function, ensuring they're all part of a single store.
+
+```js
+import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import projects from 'state/projects';
+import todos from 'state/todos';
+import users from 'state/users';
+
+import App from './App'; // or wherever your "root" component is
+
+const rootReducer = combineReducers({
+  projects,
+  todos,
+  users,
+});
+
+const store = createStore(rootReducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
+```
+
+### Redux + Async
+As Redux is synchronous, we need to add a library for handling asynchronous actions like requesting data from an API and placing it in the store.
+
+For simplicity's sake, **most applications will be fine** with [redux-thunk](https://github.com/reduxjs/redux-thunk) and `async`/`await`. If you understand promises you can work with thunks as they are just actions that return a function that'll eventually resolve.
+
+If you need more fine grained control over async actions than promises allow, [redux-saga](https://redux-saga.js.org/) is your answer. In addition to handling async logic like thunks, sagas give developers the ability to pause, cancel, and resume async actions. Consult with your project's dev lead before jumping into `redux-saga` as its added power comes with some complexity. As `redux-saga` uses [ES6 generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) instead of `async`/`await`, knowledge of how they work is required to fully take advantage of the flexibility sagas provide.
+
+### Additional libraries
+
+#### normalizr
+[normalizr](https://github.com/paularmstrong/normalizr) takes deeply nested data and extracts it into flat stores based on a schema definition. Most apps won't need this, but if you're working with an API that provides deeply nested data (especially if it provides it in a way where there could be multiple sources of truth for a given object) normalizr can make it more manageable.
+
+#### reselect
+[reselect](https://github.com/reduxjs/reselect) makes it easy to create performant, testable, and reusable views into your store. We often need to compute derived data from what's in Redux, and reselect handles all the hard stuff around performance optimization so you don't have to.
+
+### Freactal
+If you're working on an older project, you may encounter state managed with Formidable Labs' [Freactal](https://github.com/FormidableLabs/freactal). Freactal is conceptually similar to Redux in that you have state, actions that transform state, and functions that can derive data from state, but differs quite a bit in implementation.
+
+Freactal is quite a bit simpler to pick up than Redux as it's a bit less indirect (i.e. instead of defining actions and reducers separately, Freactal bundles them together as `effects`) but as it's somewhat buggy & no longer actively maintained, we **do not recommend** using it for new work.
 
 ## Forms & Validation
 Nearly every React application has to deal with forms & form state management at some point. Building forms with React's built-in component state works great for many simple use cases, but we've found that delivering robust forms with client side validation can quickly outgrow the state management tools.
