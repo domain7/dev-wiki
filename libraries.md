@@ -47,7 +47,21 @@ If you need something a bit more simpler and lighter, [Owl Carousel](https://owl
 
 ## Lightboxes
 
-### Magnific Popup
+### Recommended: Lity
+
+[Lity](https://sorgalla.com/lity/) is a responsive lightbox plugin which supports images, iframes and inline content. 
+- Pro: It's great for accessibility and use with a keyboard
+- Con: It doesn't offer galleries, only single image/video
+
+### Other Option: Fresco
+
+[Fresco.js](http://www.frescojs.com/) is an image and video responsive lightbox. It supports single image popups, image gallery popups, overflow image popups and a video popup. You need a pro license to use every feature so be sure to check Keypunch for login information. Its strength is how easy it is to implement a video lightbox for youtube and vimeo. 
+
+    <a href="http://www.youtube.com/watch?v=c0KYU2j0TM4" class="fresco">Youtube</a>
+- Pro: It does offer gallery options
+- Con: Not as great for accessibility
+
+### Other Option: Magnific Popup
 
 [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/) is a responsive jQuery lightbox that can do single image, image gallery, zomm gallery, video popup with youtube/vimeo and a map popup. It can also do a modal poup with basic content or a form.
 
@@ -56,11 +70,6 @@ If you need something a bit more simpler and lighter, [Owl Carousel](https://owl
       // other options
     });
 
-### Fresco
-
-[Fresco.js](http://www.frescojs.com/) is an image and video responsive lightbox. It supports single image popups, image gallery popups, overflow image popups and a video popup. You need a pro license to use every feature so be sure to check Keypunch for login information. Its strength is how easy it is to implement a video lightbox for youtube and vimeo. 
-
-    <a href="http://www.youtube.com/watch?v=c0KYU2j0TM4" class="fresco">Youtube</a>
 
 ## Media Query
 
@@ -73,3 +82,20 @@ If you need something a bit more simpler and lighter, [Owl Carousel](https://owl
       on: on_function, // called each time the query is activated
       off: off_function // called each time the query is deactivated
     });
+
+
+## iFrames
+
+### Recommended: Responsive iFRAMEs
+
+For some institutional projects, we still need to implement iFrames with responsive layouts. [Responsive iFRAMEs](https://benmarshall.me/responsive-iframes/) can be a solution for this problem.
+
+
+## Tables
+
+### Recommended: ListJS
+
+[ListJS](https://listjs.com) is a library for adding responsive tables to HTML, often for a CMS. 
+- Pro: You can put responsive tables into a CMS RichText Editor, or plain HTML lists, tables, or anything.
+- Pro: Comes with search, filter, and sort features
+- Con: Not as many styling options
