@@ -231,6 +231,9 @@ You will need to add the `main-menu` and `main-content` to the proper containers
 
 ## Tools
 
+### Site Improve Chrome Extension
+The [Site Improve Chrome Extension](https://chrome.google.com/webstore/detail/siteimprove-accessibility/efcfolpjihicnikpmhnmphjhhpiclljc) allows you to run an audit on the current page you're viewing and will give a report on various accessibility issues.
+
 ### Tota11y Plugin 
 
 The [Tota11y Chrome Extension](https://chrome.google.com/webstore/detail/tota11y-plugin-from-khan/oedofneiplgibimfkccchnimiadcmhpe) allows you to inspect a website, including a locally run app, in Chrome & see at a glance accessibility issues to fix. 
