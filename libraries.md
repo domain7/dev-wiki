@@ -93,7 +93,11 @@ For some institutional projects, we still need to implement iFrames with respons
 
 ## Tables
 
-### Recommended: ListJS
+### Recommended: Base tables created in wysiwyg
+
+Our recommended approach for tables within wysiwyg is demonstrated [Here](https://library.domain7.com/#modules-tables).
+
+### Other Option: ListJS for more advanced needs
 
 [ListJS](https://listjs.com) is a library for adding responsive tables to HTML, often for a CMS. 
 - Pro: You can put responsive tables into a CMS RichText Editor, or plain HTML lists, tables, or anything.
