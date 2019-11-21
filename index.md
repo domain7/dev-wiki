@@ -8,7 +8,7 @@ description: A repository for Domain7 front end developers & sub contractors to 
 
 Internal reference guides to the major languages we work in. 
 
-### [Drupal](./Drupal) 
+### [Drupal](./drupal) 
 - Modules
 - Media
 - Naming Conventions
