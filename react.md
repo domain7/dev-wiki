@@ -91,8 +91,6 @@ Container components differ in that they're directly connected to a data store (
 
 For more details on the difference between container & presentational components, refer to [this article by Dan Abramov](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).
 
-TODO: More here
-
 ### Components
 While it's tempting to use React as an HTML template engine, it offers more powerful ways for us to develop a set of re-usable & composable components that aren't tied to a specific view or use case. Remember, DRY (**D**on't **R**epeat **Y**ourself) applies to markup and styling as well. This is your opportunity to define a domain-specific markup language for your project, so be descriptive in naming. If you're thorough about building components for all the basic building blocks of your application, you'll find yourself rarely writing raw HTML in your page components. This can feel counter-intuitive at first, but the end result is code that's easier to understand at a glance as you're looking at components that describe what they do instead of large blocks of HTML.
 
@@ -285,12 +283,8 @@ This is a CSS file that's not imported as a module. This is a great place to inc
 #### setupTests.js
 Contains Jest configuration. If you're adding Jest plugins or configuring Enzyme, this is where that code goes. CRA doesn't include this file by default but will load it if it exists. **You don't need to eject from CRA just to customize Jest.**
 
-### Design Patterns
-- TODO: PropTypes best practices?
-- TODO: What component styles to use, when to use local state vs global state
-
 ## State Management
-Our preferred solution for state management is the popular [Redux](https://redux.js.org) library. Redux provides a means of describing the nouns and verbs that make up our state that promotes re-use and testability. That said, this is React, so there's no one "right" way to use Redux. We need to tweak our approach depending on the scope of our application and the complexity of it's business logic. Therefore we're going to describe a couple recommended approaches to organizing your Redux state: simple & complex. Whether or not your app is simple or complex is up to you (or the lead developer on your project.)
+Our preferred solution for state management is the popular [Redux](https://redux.js.org) library. Redux provides a means of describing the nouns and verbs that make up our state that promotes re-use and testability. That said, this is React, so there's no one "right" way to use Redux. We need to tweak our approach depending on the scope of our application and the complexity of its business logic. Therefore we're going to describe a couple recommended approaches to organizing your Redux state: simple & complex. Whether or not your app is simple or complex is up to you (or the lead developer on your project.)
 
 ### Conventions
 Regardless of your approach to state management, there are a few naming and formatting conventions we should always follow:
@@ -1018,17 +1012,46 @@ MyComponent.propTypes = {
 ```
 
 ### Sass + CSS Modules
-If you find yourself missing Sass features, make double super sure you can't address the same needs using CSS Modules' built-in fuctionality. If you still need Sass, refer to [CRA's documentation on adding Sass support](https://create-react-app.dev/docs/adding-a-sass-stylesheet). Remember that you'll lose the ability to import variables into JS files if you convert them to Sass variables, so you'll need to re-engineer components accordingly.
+If you find yourself missing Sass features and you're **double super sure** you can't address your needs using CSS Modules' built-in fuctionality, refer to [CRA's documentation on adding Sass support](https://create-react-app.dev/docs/adding-a-sass-stylesheet). Remember that you'll lose the ability to import variables into JS files if you convert them to Sass variables, so you'll need to re-engineer components accordingly.
 
-## UI Kits / Frameworks
-- TODO: When they're appropriate?
-  - ie. when building a back-end system that won't require heavy custom design
--TODO: When to just build your own
-  - ie. consumer-facing apps with custom design
+## UI Libraries + Frameworks
+There are an assortment of popular React UI libraries/kits/frameworks that aim to speed up development by providing basic UI components so you don't have to build everything from scratch. We believe these tools have a place in our development workflow, but they should only be chosen if they actually save us more time across the span of the project. These tools should only be chosen after a discussion with your team lead or a senior front-end developer.
 
-### Aside on Semantic UI React
-We use this on a lot of older projects but have had a lot of issues with customizing. It's good to be familiar, but do not use this on new work.
-- TODO: Documentation
+### When is a UI library appropriate?
+* Your project is a back-end/line of business system that doesn't need to be heavily customized to match the client's brand.
+* You need a large variety of components quickly, and your project team has agreed ahead of time that a UI library's general look and feel is adequate.
+* The client is already using a UI library as a basis for their web presence and it's already React friendly.
+* The library you've chosen provides good accessibility features (it's screen reader friendly, allows users to control all components without a pointing device, etc.)
+
+### When is a UI library inappropriate?
+* Your project is a customer-facing or otherwise heavily branded experience, requiring significant customization to a UI library's CSS or behaviour. This is a lot of our projects, meaning **you should probably build custom components in most cases**.
+* You only need a couple components from the library. Remember, it's simpler in the long term to build & maintain some basic form components than to integrate a large third party dependency.
+* Your project team lacks a front-end developer and this is the quickest way to get going. This is addressing a short-term resourcing issue with a long-term engineering solution we have to live with for the entire lifespan of the application, and a conversation with your team should happen before making this call.
+
+### Aside on Semantic UI
+We use this on a lot of older projects but have had a lot of issues with customizing their styles and functionality. It's good to be familiar with this library if you're maintaining older projcets, but **do not use Semantic UI** on new work.
+
+## Other helpful libraries
+Just because you've made the call to build your application's components from scratch it doesn't mean you have to do *everything* yourself. Through usage on previous projects we've found these tools to be extremely helpful for building common but complex UI components:
+
+### Dropdowns & autocompletes
+* [downshift](https://github.com/downshift-js/downshift) provides everything you need to build custom dropdown & autocomplete components.
+
+### Datepickers
+* [react-dates](https://github.com/airbnb/react-dates) AirBnB's datepicker component as a library. Supports single dates & ranges.
+* [react-datepicker](https://reactdatepicker.com) provides basic date & time pickers. Range pickers aren't included, but examples are provided in their documentation.
+
+### Tooltips/popovers
+* [tippy.js-react](https://atomiks.github.io/tippyjs/) provides primatives for building tooltips, popovers, and other components that overlay inline content.
+
+### Scroll position control & animation
+* [react-scroll](https://github.com/fisshy/react-scroll)
+
+### General UI animation
+* [react-transition-group](https://reactcommunity.org/react-transition-group/) basic hooks for component enter/leave transitions. Bring your own CSS animations.
+* [react-motion](https://github.com/chenglou/react-motion) provides physics based animation primatives for React components. Reach for this when `react-transition-group` isn't enough.
+
+Refer to this dev wiki's [Libraries]({% link libraries.md %}) page for non-React specific JS tools.
 
 ## Testing
 
@@ -1216,23 +1239,11 @@ Our standard extends [eslint-config-airbnb](https://github.com/airbnb/javascript
 
 Lint rules are a guideline to provide some consistency, but are **always up for discussion** if they're not meeting our needs or aren't providing value.
 
- You may need to occasionally override eslint on a case-by-case basis, and this is OK! That said, please check with your lead dev and/or expect PR feedback on whether or not they're necessary.
+You may need to occasionally override eslint on a case-by-case basis, and this is OK! That said, please check with your lead dev and/or expect PR feedback on whether or not they're necessary.
 
 We sometimes will use a project as an opportunity to try something new, (i.e.,avoid using class components and `this.state` to embrace Hooks and the direction React is going in the future) so individual projects may minimally override or customize our standard. Be sure to check their eslint configuration if something doesn't totally line up with your expectations or the documentation here.
 
 Remember, our linting guidelines are a living document and are **always up for discussion** with your team lead and other team members. Our standard should be an ongoing coversation on what we feel is best practice, not an excuse to stick to what we know.
-
-## Other JS Tools
-
-### ImmutableJS
-- TODO: Document why this is useful and when it's useful
-- TODO: Writing React with ImmutableJS: prop types, effects on component render diffing, etc
-
-```
-Immutable data encourages pure functions (data-in, data-out) and lends itself to much simpler application development and enabling techniques from functional programming such as lazy evaluation.
-
-While designed to bring these powerful functional concepts to JavaScript, it presents an Object-Oriented API familiar to Javascript engineers and closely mirroring that of Array, Map, and Set. It is easy and efficient to convert to and from plain Javascript types.
-```
 
 ## Code Editor Config
 We believe in letting developers choose the best tools for themselves. When working on React projects, we recommend a modern text editor with good ES6+ syntax support. A few suggestions are:
