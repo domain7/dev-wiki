@@ -694,9 +694,261 @@ const SignupSchema = yup.object({
 - [Official Yup Docs](https://github.com/jquense/yup)
 
 ## Routing
+We employ [react-router](https://reacttraining.com/react-router/web/guides/quick-start) for page routing and conditional rendering of components.
 
-### React Router
-- TODO: Docs/standards
+### Basic Pattern
+While React Router supports a variety of routing schemes for familiarity and ease of use we employ a pattern where each route corresponds to a page container component. React Router's `<Switch />` component makes this easy by only rendering the first matching `<Route />` it finds.
+
+Here's a basic example of a Home page and a set of user CRUD routes. Note that we put the most specific routes first. This is because `<Switch />` matches from top to bottom. We can take advantage of this behaviour, notice how our final route lacks a `path` param. This means this route will only render when nothing else matches, giving us an easy way to implement a generic 404 page.
+
+```js
+// App/index.js
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+
+export const App = () => (
+  <Router>
+    <Switch>
+      <Route
+        path="/users/:id/edit"
+        component={UserEdit}
+      />
+      <Route
+        path="/users/:id"
+        component={UserView}
+      />
+      <Route
+        path="/users/new"
+        component={UserCreate}
+      />
+      <Route
+        path="/users"
+        component={UserList}
+      />
+      <Route
+        path="/"
+        component={Home}
+      />
+      <Route
+        component={NotFound}
+      >
+    </Switch>
+  </Router>
+);
+```
+
+### Use route constants & generatePath
+That works pretty well, but we want to DRY this up to avoid easy to write & hard to notice bugs like route typos, as well as make future route refactoring easier.
+
+```js
+// utils/routes.js
+export default {
+  users: {
+    edit: '/users/:id/edit',
+    view: '/users/:id',
+    create: '/users/new',
+    list: '/users',
+  },
+}
+```
+
+```js
+// App/index.js
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+
+import {
+  users,
+} from 'utils/routes';
+
+export const App = () => (
+  <Router>
+    <Switch>
+      <Route
+        path={users.edit}
+        component={UserEdit}
+      />
+      <Route
+        path={users.view}
+        component={UserView}
+      />
+      <Route
+        path={users.create}
+        component={UserCreate}
+      />
+      <Route
+        path={users.list}
+        component={UserList}
+      />
+      <Route
+        path="/"
+        component={Home}
+      />
+      <Route
+        component={NotFound}
+      >
+    </Switch>
+  </Router>
+);
+```
+
+```js
+// SomeComponent.js
+import {
+  Link
+} from 'react-router-dom';
+
+import {
+  users,
+} from 'utils/routes';
+
+export const SomeComponent = () => (
+  <Link
+    to={users.list}
+  >
+    Users
+  </Link>
+);
+```
+
+Now we've only defined our routes in a single place & made it easy to import into other components. That said, how do we link to routes with dynamic parameters when they're stored in a string constant in a different module? React Router helpfully provides a `generatePath` function that uses our route definition and a parameter object to generate a URL:
+
+```js
+// SomeOtherComponent.js
+import {
+  Link,
+} from 'react-router-dom';
+
+import {
+  generatePath,
+} from 'react-router';
+
+import {
+  users,
+} from 'utils/routes';
+
+export const SomeOtherComponent = ({ user }) => (
+  <Link
+    to={generatePath(users.edit, { id: user.id })}
+  >
+    Edit {user.name}
+  </Link>
+);
+```
+
+We can also use this function when navigating programmatically:
+```js
+history.push(generatePath(users.edit, { id: user.id }));
+```
+
+### Use Link & NavLink components for internal links
+Remember to take advantage of React Router's helper components when implementing navigation. `<Link />` provides some helpful props for inline links, and `<NavLink />` is aware of the current route and can take care of applying active styling to your navigation items.
+
+### Using routes for conditional display
+Your application may have global UI elements like a header or footer that need to display different content based on the current route. You can also employ React Router to handle these checks instead of building them yourself.
+
+For example, let's say you want to build a component that will display a different heading depending on which resource the user is currently accessing.
+
+```js
+// PageTitle.js
+import {
+  Route,
+  Switch,
+} from 'react-router-dom';
+import {
+  users,
+  tasks,
+} from 'utils/routes';
+
+export const PageTitle = () => (
+  <Switch>
+    <Route
+      path={users.list}
+    >
+      <h1>Users</h1>
+    </Route>
+    <Route
+      path={tasks.list}
+    >
+      <h1>Tasks</h1>
+    </Route>
+  </Switch>
+);
+```
+
+Notice we're matching on each resource's `list` route. This makes sure each route matches *any* route that starts with `/users` or `/tasks`, respectively.
+
+#### Testing with MemoryRouter
+While writing component tests, you may run into React Router warnings and errors when rendering any components that include a Route component or are otherwise aware of their current location.
+
+React Router provides a `<MemoryRouter />` component to help us out. All we need to do is wrap it around the component we're rendering for testing.
+
+```js
+// components/PageTitle/test/index.test.js
+import {
+  MemoryRouter,
+} from 'react-router';
+import { shallow, mount } from 'enzyme';
+
+import PageTitle from '..';
+
+describe('PageTitle', () => {
+   it('should render', () => {
+    const wrapper = mount(
+      <MemoryRouter>
+        <PageTitle />
+      </MemoryRouter>
+    );
+
+    expect(wrapper).toMatchSnapshot();
+  });
+});
+```
+
+Now your test errors are suppressed, but the component is probably rendering an empty div. By default, `<MemoryRouter />` is set to the base `/` route, so this component won't render at all. Thankfully, we can pass in a history stack to simulate different routes and ensure our components are responding to them correctly.
+
+```js
+// components/PageTitle/test/index.test.js
+import {
+  MemoryRouter,
+} from 'react-router';
+import { shallow, mount } from 'enzyme';
+import {
+  users,
+} from 'utils/routes';
+
+import PageTitle from '..';
+
+describe('PageTitle', () => {
+  it('should render', () => {
+    const wrapper = mount(
+      <MemoryRouter>
+        <PageTitle />
+      </MemoryRouter>
+    );
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render "Users" on user pages', () => {
+    const wrapper = mount(
+      <MemoryRouter
+        initialEntries={[users.list]}
+      >
+        <PageTitle />
+      </MemoryRouter>
+    );
+
+    expect(wrapper.find('h1').text()).toBe('Users');
+  });
+});
+```
 
 ## Styling
 We recognize that a one-size-fits-all approach to CSS isn't really possible and that overcomplicating styling for smaller apps can lead to unnecessary complexity. Knowing that, we make use of two approaches for styling: vanilla CSS, and CSS Modules.
@@ -841,7 +1093,7 @@ const ListItem = ({
     ]}
   >
     {children}
-  </li>
+  </Link>
 );
 ```
 
