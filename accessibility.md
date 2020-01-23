@@ -231,9 +231,19 @@ You will need to add the `main-menu` and `main-content` to the proper containers
 
 ## Tools
 
+### Site Improve Chrome Extension
+The [Site Improve Chrome Extension](https://chrome.google.com/webstore/detail/siteimprove-accessibility/efcfolpjihicnikpmhnmphjhhpiclljc) allows you to run an audit on the current page you're viewing and will give a report on various accessibility issues.
+
+### Tota11y Plugin 
+
+The [Tota11y Chrome Extension](https://chrome.google.com/webstore/detail/tota11y-plugin-from-khan/oedofneiplgibimfkccchnimiadcmhpe) allows you to inspect a website, including a locally run app, in Chrome & see at a glance accessibility issues to fix. 
+
 ### Wave
 
 The [Wave](http://wave.webaim.org/) tool allows you the enter a URL and get an accessibility report on your page. It features a sidebar with various options as you navigate your website and will alert you with any accessibility errors on your site. 
 
+### Accessible Colors
+
+[Accessible Colors](https://accessible-colors.com/) is a site that will suggest alternate minor changes to your colors, to meet either AA or AAA accessibility standards in an easy to use interface. 
 
 

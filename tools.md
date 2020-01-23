@@ -11,36 +11,234 @@ mainmenu: true
 .README files are extremely important to have. They should provide all the information necessary for a new developer to jump into the project and start coding and deploying to staging/production. Here's a high-level boilerplate:
 
 ```
-# Name of project
-Short description
 
-# Team
-Name, Role, Email
+# [Project Name]
 
-# Setup
-How to setup local
-How to sync up local database from staging/production
-How to sync up files from staging/production
+## Table of Contents
 
-# Run
-How to run it locally
-How to run it in docker
+1. [Introduction](#introduction)
+2. [Team](#team)
+3. [System Requirements](#system-requirements)
+4. [Local Setup](#local-setup)
+5. [Environments](#environments)
+6. [Related Repositories](#related-repositories)
+7. [Related Documentation](#related-documentation)
+8. [KeyPunch Information](#keyPunch-information)
+9. [Application Stack](#application-stack)
+10. [Running Tests](#running-tests)
+11. [Linting Information](#linting-information)
+12. [Common Commands](#common-commands)
+13. [Git WorkFlow](#git-workFlow)
+14. [Architecture](#architecture)
+15. [FAQ](#faq)
+16. [Help](#help)
 
-# Deploy
-Deploy to Staging
-Staging Link
-Deploy to Production
-Production Link
 
-# Routine tasks
-How to add translations
-How to create new routes
+## Introduction
 
-# ACF workflow (WordPress)
-Link to wiki
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 
+the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley 
+of type and scrambled it to make a type specimen book. It has survived not only five centuries, 
+but also the leap into electronic typesetting, remaining essentially unchanged. It was 
+popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+and more recently with desktop publishing software like Aldus PageMaker including versions of 
+Lorem Ipsum.
 
-# API Keys
-Google Maps api key - Project Owner: sam@jones-company.com
+## Team
+
+1. Internal Team Members
+
+| Name            | Role          | Email         |
+| ----------------|:-------------:| -------------:|
+| Internal 1      | Developer     | test@mail.com |
+| Internal 2      | Manager       | test@mail.com |
+| Internal 3      | Front-End     | test@mail.com |
+
+2. External Team Members
+
+| Name            | Role          | Email         |
+| ----------------|:-------------:| -------------:|
+| External 1      | Developer     | test@mail.com |
+| External 2      | Manager       | test@mail.com |
+| External 3      | Front-End     | test@mail.com |
+
+## System Requirements
+
+* Lando (minimum: v3.0.0-rc17+)
+* Git
+* Composer
+* PHP 7.3+
+
+And any minimum requirements needed for the items listed above...
+
+## Local Setup
+
+1. Copy SAML configs:
+
+    ```
+    $ lando blt source:build:simplesamlphp-config
+    ```
+    
+2. Copy staging database to local and import local config
+
+    ```
+    $ lando sync
+    ```
+
+3. Install Drupal:
+
+    ```
+    $ lando blt drupal:install --no-interaction -vvv --site=default --environment=local
+    ```
+
+4. Build frontend assets:
+
+    ```
+    $ lando frontend
+    ```
+
+5. Login as Drupal UID 1 or access the site at: `http://local-edit.umanitoba.ca/`
+
+    ```bash
+    $ lando drush @umanitoba.local uli
+  
+## Environments
+
+| Name            | Url          | Access         |
+| ----------------|:-------------:| -------------:|
+| Local      | www.local.com     | username/password |
+| Stage      | www.stage.com     | username/password |
+| Prod       | www.prod.com      | username/password |
+
+## Related Repositories
+
+1. [Drupal](https://github.com/drupal/drupal) - Drupal is a free and open-source 
+    content management framework written in PHP and distributed under the GNU General 
+    Public License. Drupal provides a back-end framework for at least 2.3% of all 
+    websites worldwide – ranging from personal blogs to corporate, political, and 
+    government sites.
+
+2. [React](https://github.com/drupal/drupal) - Drupal is a free and open-source 
+    content management framework written in PHP and distributed under the GNU 
+    General Public License.
+
+3. [Wordpress](https://github.com/drupal/drupal) - Drupal is a free and open-source 
+    content management framework written in PHP and distributed under the GNU 
+    General Public License.
+
+4. [NodeJS](https://github.com/drupal/drupal) - Drupal is a free and open-source 
+    content management framework written in PHP and distributed under the GNU 
+    General Public License.
+
+## Related Documentation
+
+1. JIRA - [Link](https://github.com/drupal/drupal)
+
+2. BugHerd - [Link](https://github.com/drupal/drupal)
+
+3. Basecamp - [Link](https://github.com/drupal/drupal)
+
+4. Confluence - [Link](https://github.com/drupal/drupal)
+
+## KeyPunch Information
+
+1. [Amazon S3 Key](https://github.com/drupal/drupal)
+
+2. [Drupal Login Password](https://github.com/drupal/drupal)
+
+3. [News and Events API Key](https://github.com/drupal/drupal)
+
+## Application Stack
+
+#### Stack 1
+
+- [CSS Modules](https://github.com/css-modules/css-modules)
+  - Namespaces CSS to specific components & provides basic variable support.
+- [Freactal](https://github.com/FormidableLabs/freactal/)
+  - State management similar to Redux or MobX, but simpler.
+- [React Router v4](https://reacttraining.com/react-router/web)
+  - Maps URLs to page components
+- [yup.js](https://github.com/jquense/yup/)
+  - Provides validation schemas for form inputs as well as POST request bodies.
+​
+#### Stack 2
+
+- [Webpack 4](https://webpack.js.org/)
+- [PostCSS](https://github.com/postcss/postcss)
+  - [Autoprefixer](https://github.com/postcss/autoprefixer)
+  
+## Running Tests
+
+1. Before commiting the code, please run 
+
+    ```
+    vendor/bin/blt validate:phpcs
+    ```
+
+## Linting Information
+
+Enter any linting information you wish to add for the project audience.
+
+## Common Commands
+
+* `npm run build`: This will rebuild all the Pattern Lab assets.
+
+* `npm run serve`: This will run Pattern Lab on your Localhost. It should open a new tab 
+   in your browser. This site can also take advantage of Live Reload.
+
+## Git WorkFlow
+
+1. Clean your environment:
+
+    ```
+    git checkout develop
+    lando composer update --lock
+    lando blt drupal:install --no-interaction -vvv --site=default
+    git checkout -b feature/feature-name-NGWE-1234
+    ```
+
+2. Commit code
+
+    ```
+    lando drush @umanitoba.local cex sync --yes
+    git add config/default/default
+    git commit
+    ```
+
+## Architecture
+
+Enter information about the application architecture here.
+
+## FAQ
+
+#### How do I switch from packagist.drupal-composer.org to packages.drupal.org?
+
+1. Follow the instructions in the [documentation on drupal.org]
+   (https://www.drupal.org/docs/develop/using-composer/using-packagesdrupalorg).
+
+#### How do I specify a PHP version ?
+
+2. Currently Drupal 8 supports PHP 5.5.9 as minimum version (see [Drupal 8 PHP requirements]
+   (https://www.drupal.org/docs/8/system-requirements/drupal-8-php-requirements)), however 
+   it's possible that a `composer update` will upgrade some package that will then require PHP 7+.
+
+    To prevent this you can add this code to specify the PHP version you want to use in 
+    the `config` section of `composer.json`:
+    ```json
+    "config": {
+        "sort-packages": true,
+        "platform": {"php": "5.5.9"}
+    },
+    ```
+
+## Help
+
+1. Do you think the reader can get help any from any other sources ? Like external links, point 
+   of contact, etc.
+
+
+
+
 
 ```
 
